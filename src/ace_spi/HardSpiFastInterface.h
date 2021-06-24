@@ -22,14 +22,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef ACE_SEGMENT_HARD_SPI_FAST_INTERFACE_H
-#define ACE_SEGMENT_HARD_SPI_FAST_INTERFACE_H
+#ifndef ACE_SPI_HARD_SPI_FAST_INTERFACE_H
+#define ACE_SPI_HARD_SPI_FAST_INTERFACE_H
 
 #include <stdint.h>
 #include <Arduino.h>
 #include <SPI.h>
 
-namespace ace_segment {
+namespace ace_spi {
 
 /**
  * Hardware SPI interface to talk to one or two 74HC595 Shift Register chip(s),
@@ -129,6 +129,6 @@ class HardSpiFastInterface {
     T_SPI& mSpi;
 };
 
-} // ace_segment
+} // ace_spi
 
 #endif

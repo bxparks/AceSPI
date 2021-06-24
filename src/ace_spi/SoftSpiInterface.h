@@ -22,13 +22,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef ACE_SEGMENT_SOFT_SPI_INTERFACE_H
-#define ACE_SEGMENT_SOFT_SPI_INTERFACE_H
+#ifndef ACE_SPI_SOFT_SPI_INTERFACE_H
+#define ACE_SPI_SOFT_SPI_INTERFACE_H
 
 #include <stdint.h>
 #include <Arduino.h>
 
-namespace ace_segment {
+namespace ace_spi {
 
 /** Software SPI using shiftOut(). */
 class SoftSpiInterface {
@@ -83,6 +83,6 @@ class SoftSpiInterface {
     uint8_t const mClockPin;
 };
 
-} // ace_segment
+} // ace_spi
 
 #endif

@@ -22,8 +22,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef ACE_SEGMENT_SOFT_SPI_FAST_INTERFACE_H
-#define ACE_SEGMENT_SOFT_SPI_FAST_INTERFACE_H
+#ifndef ACE_SPI_SOFT_SPI_FAST_INTERFACE_H
+#define ACE_SPI_SOFT_SPI_FAST_INTERFACE_H
 
 // This header file requires the digitalWriteFast library on AVR, or the
 // EpoxyMockDigitalWriteFast library on EpoxyDuino.
@@ -32,7 +32,7 @@ SOFTWARE.
 #include <stdint.h>
 #include <Arduino.h> // OUTPUT, INPUT
 
-namespace ace_segment {
+namespace ace_spi {
 
 /**
  * Software SPI using pinModeFast(), digitalWriteFast() and shiftOutFast()
@@ -97,7 +97,7 @@ class SoftSpiFastInterface {
     }
 };
 
-} // ace_segment
+} // ace_spi
 
 #endif // defined(ARDUINO_ARCH_AVR)
 
