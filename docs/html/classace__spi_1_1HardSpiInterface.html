@@ -82,14 +82,15 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a6c5ac4c35d179c28379198c491fd60cd"><td class="memItemLeft" align="right" valign="top"><a id="a6c5ac4c35d179c28379198c491fd60cd"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>HardSpiInterface</b> (T_SPI &amp;spi, uint8_t latchPin)</td></tr>
+<tr class="memitem:a6c5ac4c35d179c28379198c491fd60cd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classace__spi_1_1HardSpiInterface.html#a6c5ac4c35d179c28379198c491fd60cd">HardSpiInterface</a> (T_SPI &amp;spi, uint8_t latchPin)</td></tr>
+<tr class="memdesc:a6c5ac4c35d179c28379198c491fd60cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="classace__spi_1_1HardSpiInterface.html#a6c5ac4c35d179c28379198c491fd60cd">More...</a><br /></td></tr>
 <tr class="separator:a6c5ac4c35d179c28379198c491fd60cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f51b0e35638fefba189f8c38950cad0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classace__spi_1_1HardSpiInterface.html#a9f51b0e35638fefba189f8c38950cad0">begin</a> () const</td></tr>
 <tr class="memdesc:a9f51b0e35638fefba189f8c38950cad0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the <a class="el" href="classace__spi_1_1HardSpiInterface.html" title="Hardware SPI interface to talk to one or two 74HC595 Shift Register chip(s), using the predefined SPI...">HardSpiInterface</a>.  <a href="classace__spi_1_1HardSpiInterface.html#a9f51b0e35638fefba189f8c38950cad0">More...</a><br /></td></tr>
 <tr class="separator:a9f51b0e35638fefba189f8c38950cad0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aabd9d6028f61a684e8c41bebb21556bf"><td class="memItemLeft" align="right" valign="top"><a id="aabd9d6028f61a684e8c41bebb21556bf"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> () const</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classace__spi_1_1HardSpiInterface.html#aabd9d6028f61a684e8c41bebb21556bf">end</a> () const</td></tr>
+<tr class="memdesc:aabd9d6028f61a684e8c41bebb21556bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clean up the object. <br /></td></tr>
 <tr class="separator:aabd9d6028f61a684e8c41bebb21556bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7afc4ed403409920e2694702b69b7477"><td class="memItemLeft" align="right" valign="top"><a id="a7afc4ed403409920e2694702b69b7477"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classace__spi_1_1HardSpiInterface.html#a7afc4ed403409920e2694702b69b7477">send8</a> (uint8_t value) const</td></tr>
@@ -120,7 +121,57 @@ class ace_spi::HardSpiInterface&lt; T_SPI &gt;</h3>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="HardSpiInterface_8h_source.html#l00054">54</a> of file <a class="el" href="HardSpiInterface_8h_source.html">HardSpiInterface.h</a>.</p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a6c5ac4c35d179c28379198c491fd60cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c5ac4c35d179c28379198c491fd60cd">&#9670;&nbsp;</a></span>HardSpiInterface()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T_SPI &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classace__spi_1_1HardSpiInterface.html">ace_spi::HardSpiInterface</a>&lt; T_SPI &gt;::<a class="el" href="classace__spi_1_1HardSpiInterface.html">HardSpiInterface</a> </td>
+          <td>(</td>
+          <td class="paramtype">T_SPI &amp;&#160;</td>
+          <td class="paramname"><em>spi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>latchPin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">spi</td><td>instance of the <code>T_SPI</code> class. If the pre-installed <code>&lt;SPI.h&gt;</code> is used, <code>T_SPI</code> is <code>SPIClass</code> and <code>spi</code> will be the pre-defined <code>SPI</code> object. </td></tr>
+    <tr><td class="paramname">latchPin</td><td>the pin that controls the CS/SS pin of the slave device </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="HardSpiInterface_8h_source.html#l00082">82</a> of file <a class="el" href="HardSpiInterface_8h_source.html">HardSpiInterface.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="a9f51b0e35638fefba189f8c38950cad0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9f51b0e35638fefba189f8c38950cad0">&#9670;&nbsp;</a></span>begin()</h2>
 
@@ -149,7 +200,7 @@ template&lt;typename T_SPI &gt; </div>
 <p>Initialize the <a class="el" href="classace__spi_1_1HardSpiInterface.html" title="Hardware SPI interface to talk to one or two 74HC595 Shift Register chip(s), using the predefined SPI...">HardSpiInterface</a>. </p>
 <p>The hardware SPI object must be initialized using <code>SPI.begin()</code> as well. </p>
 
-<p class="definition">Definition at line <a class="el" href="HardSpiInterface_8h_source.html#l00083">83</a> of file <a class="el" href="HardSpiInterface_8h_source.html">HardSpiInterface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="HardSpiInterface_8h_source.html#l00091">91</a> of file <a class="el" href="HardSpiInterface_8h_source.html">HardSpiInterface.h</a>.</p>
 
 </div>
 </div>

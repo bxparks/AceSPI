@@ -82,14 +82,16 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8ea61664bf03ee82c3bf1131e7cf67b1"><td class="memItemLeft" align="right" valign="top"><a id="a8ea61664bf03ee82c3bf1131e7cf67b1"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>SoftSpiInterface</b> (uint8_t latchPin, uint8_t dataPin, uint8_t clockPin)</td></tr>
+<tr class="memitem:a8ea61664bf03ee82c3bf1131e7cf67b1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classace__spi_1_1SoftSpiInterface.html#a8ea61664bf03ee82c3bf1131e7cf67b1">SoftSpiInterface</a> (uint8_t latchPin, uint8_t dataPin, uint8_t clockPin)</td></tr>
+<tr class="memdesc:a8ea61664bf03ee82c3bf1131e7cf67b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="classace__spi_1_1SoftSpiInterface.html#a8ea61664bf03ee82c3bf1131e7cf67b1">More...</a><br /></td></tr>
 <tr class="separator:a8ea61664bf03ee82c3bf1131e7cf67b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26f88d0c86744c128bbef255055ab3a4"><td class="memItemLeft" align="right" valign="top"><a id="a26f88d0c86744c128bbef255055ab3a4"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> () const</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classace__spi_1_1SoftSpiInterface.html#a26f88d0c86744c128bbef255055ab3a4">begin</a> () const</td></tr>
+<tr class="memdesc:a26f88d0c86744c128bbef255055ab3a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the various pins. <br /></td></tr>
 <tr class="separator:a26f88d0c86744c128bbef255055ab3a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5c7b8bf2f3d957a113eec50b42a604f9"><td class="memItemLeft" align="right" valign="top"><a id="a5c7b8bf2f3d957a113eec50b42a604f9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> () const</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classace__spi_1_1SoftSpiInterface.html#a5c7b8bf2f3d957a113eec50b42a604f9">end</a> () const</td></tr>
+<tr class="memdesc:a5c7b8bf2f3d957a113eec50b42a604f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the various pins. <br /></td></tr>
 <tr class="separator:a5c7b8bf2f3d957a113eec50b42a604f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abac84e3d4c82b13efbdbd330a589326a"><td class="memItemLeft" align="right" valign="top"><a id="abac84e3d4c82b13efbdbd330a589326a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classace__spi_1_1SoftSpiInterface.html#abac84e3d4c82b13efbdbd330a589326a">send8</a> (uint8_t value) const</td></tr>
@@ -108,7 +110,62 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <div class="textblock"><p>Software SPI using shiftOut(). </p>
 
 <p class="definition">Definition at line <a class="el" href="SoftSpiInterface_8h_source.html#l00034">34</a> of file <a class="el" href="SoftSpiInterface_8h_source.html">SoftSpiInterface.h</a>.</p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a8ea61664bf03ee82c3bf1131e7cf67b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ea61664bf03ee82c3bf1131e7cf67b1">&#9670;&nbsp;</a></span>SoftSpiInterface()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ace_spi::SoftSpiInterface::SoftSpiInterface </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>latchPin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>dataPin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>clockPin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">latchPin</td><td>the latch pin (CS) </td></tr>
+    <tr><td class="paramname">dataPin</td><td>the data pin (MOSI) </td></tr>
+    <tr><td class="paramname">clockPin</td><td>the clock pin (CLK) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="SoftSpiInterface_8h_source.html#l00043">43</a> of file <a class="el" href="SoftSpiInterface_8h_source.html">SoftSpiInterface.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>/home/brian/src/AceSPI/src/ace_spi/<a class="el" href="SoftSpiInterface_8h_source.html">SoftSpiInterface.h</a></li>
 </ul>
 </div><!-- contents -->

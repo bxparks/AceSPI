@@ -75,21 +75,22 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Hardware SPI interface to talk to one or two 74HC595 Shift Register chip(s), using the predefined <code>SPI</code> global instance.  
+<p>This class is functionally identical to <a class="el" href="classace__spi_1_1HardSpiInterface.html" title="Hardware SPI interface to talk to one or two 74HC595 Shift Register chip(s), using the predefined SPI...">HardSpiInterface</a> except that the GPIO pins are controlled by digitalWriteFast() and pinModeFast() methods.  
  <a href="classace__spi_1_1HardSpiFastInterface.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="HardSpiFastInterface_8h_source.html">HardSpiFastInterface.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aab787b4497d5b20cad6860fce1ef1854"><td class="memItemLeft" align="right" valign="top"><a id="aab787b4497d5b20cad6860fce1ef1854"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>HardSpiFastInterface</b> (T_SPI &amp;spi)</td></tr>
+<tr class="memitem:aab787b4497d5b20cad6860fce1ef1854"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classace__spi_1_1HardSpiFastInterface.html#aab787b4497d5b20cad6860fce1ef1854">HardSpiFastInterface</a> (T_SPI &amp;spi)</td></tr>
+<tr class="memdesc:aab787b4497d5b20cad6860fce1ef1854"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="classace__spi_1_1HardSpiFastInterface.html#aab787b4497d5b20cad6860fce1ef1854">More...</a><br /></td></tr>
 <tr class="separator:aab787b4497d5b20cad6860fce1ef1854"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae6f88387ef24e6dd5ae02da401707c81"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classace__spi_1_1HardSpiFastInterface.html#ae6f88387ef24e6dd5ae02da401707c81">begin</a> () const</td></tr>
-<tr class="memdesc:ae6f88387ef24e6dd5ae02da401707c81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the <a class="el" href="classace__spi_1_1HardSpiInterface.html" title="Hardware SPI interface to talk to one or two 74HC595 Shift Register chip(s), using the predefined SPI...">HardSpiInterface</a>.  <a href="classace__spi_1_1HardSpiFastInterface.html#ae6f88387ef24e6dd5ae02da401707c81">More...</a><br /></td></tr>
+<tr class="memdesc:ae6f88387ef24e6dd5ae02da401707c81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the <a class="el" href="classace__spi_1_1HardSpiFastInterface.html" title="This class is functionally identical to HardSpiInterface except that the GPIO pins are controlled by ...">HardSpiFastInterface</a>.  <a href="classace__spi_1_1HardSpiFastInterface.html#ae6f88387ef24e6dd5ae02da401707c81">More...</a><br /></td></tr>
 <tr class="separator:ae6f88387ef24e6dd5ae02da401707c81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4dd6894fa6784fe3e0c841513a3b8264"><td class="memItemLeft" align="right" valign="top"><a id="a4dd6894fa6784fe3e0c841513a3b8264"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> () const</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classace__spi_1_1HardSpiFastInterface.html#a4dd6894fa6784fe3e0c841513a3b8264">end</a> () const</td></tr>
+<tr class="memdesc:a4dd6894fa6784fe3e0c841513a3b8264"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clean up the object. <br /></td></tr>
 <tr class="separator:a4dd6894fa6784fe3e0c841513a3b8264"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3db0fea6346573036d81467e722369ae"><td class="memItemLeft" align="right" valign="top"><a id="a3db0fea6346573036d81467e722369ae"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classace__spi_1_1HardSpiFastInterface.html#a3db0fea6346573036d81467e722369ae">send8</a> (uint8_t value) const</td></tr>
@@ -100,17 +101,16 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memdesc:a12d7475c8f497c91621edfd97561f65f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send 16 bits, including latching LOW and HIGH. <br /></td></tr>
 <tr class="separator:a12d7475c8f497c91621edfd97561f65f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5b8b088681ce2e30ed7312abadb6675e"><td class="memItemLeft" align="right" valign="top"><a id="a5b8b088681ce2e30ed7312abadb6675e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>send16</b> (uint8_t msb, uint8_t lsb) const</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classace__spi_1_1HardSpiFastInterface.html#a5b8b088681ce2e30ed7312abadb6675e">send16</a> (uint8_t msb, uint8_t lsb) const</td></tr>
+<tr class="memdesc:a5b8b088681ce2e30ed7312abadb6675e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send 2 bytes as 16-bit stream, including latching LOW and HIGH. <br /></td></tr>
 <tr class="separator:a5b8b088681ce2e30ed7312abadb6675e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename T_SPI, uint8_t T_LATCH_PIN&gt;<br />
 class ace_spi::HardSpiFastInterface&lt; T_SPI, T_LATCH_PIN &gt;</h3>
 
-<p>Hardware SPI interface to talk to one or two 74HC595 Shift Register chip(s), using the predefined <code>SPI</code> global instance. </p>
-<p>This is currently not meant to be general-purpose SPI interface. For different SPI configurations, it is probably easiest to just copy this file, make the necessary changes, then substitute the new class in places where this class is used.</p>
-<p>The maximum speed of MAX7219 is 16MHz so this class sets the SPI speed to 8MHz. It's not clear if the SPI speed is worth making into a configurable parameter. Such a change needs to done a bit carefully, because it should be a template parameter so that <code>SPISettings</code> is a compile-time constant which allows compile-time optimizations to happen.</p>
-<p>This class is functionally identical to <a class="el" href="classace__spi_1_1HardSpiInterface.html" title="Hardware SPI interface to talk to one or two 74HC595 Shift Register chip(s), using the predefined SPI...">HardSpiInterface</a> except that the GPIO pins are controlled by digitalWriteFast() and pinModeFast() methods. This decreases flash memory consumption by 70 bytes (HybridModule) to 250 (Max7219Module, Hc595Module) bytes. However, if multiple LED modules are used, using different LatchPins, the <a class="el" href="classace__spi_1_1HardSpiInterface.html" title="Hardware SPI interface to talk to one or two 74HC595 Shift Register chip(s), using the predefined SPI...">HardSpiInterface</a> might ultimately consume less flash memory because it avoids generating different template instantiations of the HybridModule, Max7219Module, or Hc595Module classes. Users are advised to try both and compare the difference.</p>
+<p>This class is functionally identical to <a class="el" href="classace__spi_1_1HardSpiInterface.html" title="Hardware SPI interface to talk to one or two 74HC595 Shift Register chip(s), using the predefined SPI...">HardSpiInterface</a> except that the GPIO pins are controlled by digitalWriteFast() and pinModeFast() methods. </p>
+<p>This decreases flash memory consumption by 70 bytes (HybridModule) to 250 (Max7219Module, Hc595Module) bytes. However, if multiple LED modules are used, using different LatchPins, the <a class="el" href="classace__spi_1_1HardSpiInterface.html" title="Hardware SPI interface to talk to one or two 74HC595 Shift Register chip(s), using the predefined SPI...">HardSpiInterface</a> might ultimately consume less flash memory because it avoids generating different template instantiations of the HybridModule, Max7219Module, or Hc595Module classes. Users are advised to try both and compare the difference.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T_SPI</td><td>the class of the hardware SPI instance, usually SPIClass </td></tr>
@@ -119,8 +119,47 @@ class ace_spi::HardSpiFastInterface&lt; T_SPI, T_LATCH_PIN &gt;</h3>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="HardSpiFastInterface_8h_source.html#l00060">60</a> of file <a class="el" href="HardSpiFastInterface_8h_source.html">HardSpiFastInterface.h</a>.</p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+<p class="definition">Definition at line <a class="el" href="HardSpiFastInterface_8h_source.html#l00048">48</a> of file <a class="el" href="HardSpiFastInterface_8h_source.html">HardSpiFastInterface.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aab787b4497d5b20cad6860fce1ef1854"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab787b4497d5b20cad6860fce1ef1854">&#9670;&nbsp;</a></span>HardSpiFastInterface()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T_SPI , uint8_t T_LATCH_PIN&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classace__spi_1_1HardSpiFastInterface.html">ace_spi::HardSpiFastInterface</a>&lt; T_SPI, T_LATCH_PIN &gt;::<a class="el" href="classace__spi_1_1HardSpiFastInterface.html">HardSpiFastInterface</a> </td>
+          <td>(</td>
+          <td class="paramtype">T_SPI &amp;&#160;</td>
+          <td class="paramname"><em>spi</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">spi</td><td>instance of the <code>T_SPI</code> class. If the pre-installed <code>&lt;SPI.h&gt;</code> is used, <code>T_SPI</code> is <code>SPIClass</code> and <code>spi</code> will be the pre-defined <code>SPI</code> object. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="HardSpiFastInterface_8h_source.html#l00075">75</a> of file <a class="el" href="HardSpiFastInterface_8h_source.html">HardSpiFastInterface.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="ae6f88387ef24e6dd5ae02da401707c81"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae6f88387ef24e6dd5ae02da401707c81">&#9670;&nbsp;</a></span>begin()</h2>
 
@@ -146,10 +185,10 @@ template&lt;typename T_SPI , uint8_t T_LATCH_PIN&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Initialize the <a class="el" href="classace__spi_1_1HardSpiInterface.html" title="Hardware SPI interface to talk to one or two 74HC595 Shift Register chip(s), using the predefined SPI...">HardSpiInterface</a>. </p>
+<p>Initialize the <a class="el" href="classace__spi_1_1HardSpiFastInterface.html" title="This class is functionally identical to HardSpiInterface except that the GPIO pins are controlled by ...">HardSpiFastInterface</a>. </p>
 <p>The hardware SPI object must be initialized using <code>SPI.begin()</code> as well. </p>
 
-<p class="definition">Definition at line <a class="el" href="HardSpiFastInterface_8h_source.html#l00086">86</a> of file <a class="el" href="HardSpiFastInterface_8h_source.html">HardSpiFastInterface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="HardSpiFastInterface_8h_source.html#l00081">81</a> of file <a class="el" href="HardSpiFastInterface_8h_source.html">HardSpiFastInterface.h</a>.</p>
 
 </div>
 </div>
