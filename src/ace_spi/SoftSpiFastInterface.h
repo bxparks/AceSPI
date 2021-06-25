@@ -25,10 +25,6 @@ SOFTWARE.
 #ifndef ACE_SPI_SOFT_SPI_FAST_INTERFACE_H
 #define ACE_SPI_SOFT_SPI_FAST_INTERFACE_H
 
-// This header file requires the digitalWriteFast library on AVR, or the
-// EpoxyMockDigitalWriteFast library on EpoxyDuino.
-#if defined(ARDUINO_ARCH_AVR) || defined(EPOXY_DUINO)
-
 #include <stdint.h>
 #include <Arduino.h> // OUTPUT, INPUT
 
@@ -98,7 +94,5 @@ class SoftSpiFastInterface {
 };
 
 } // ace_spi
-
-#endif // defined(ARDUINO_ARCH_AVR)
 
 #endif
