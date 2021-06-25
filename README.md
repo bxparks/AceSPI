@@ -13,7 +13,7 @@ This library provides the following C++ class templates:
 * `SoftSpiInterface`
 * `HardSpiFastInterface`
 
-**Version**: 0.1 (2021-06-24)
+**Version**: 0.1 (2021-06-25)
 
 **Changelog**: [CHANGELOG.md](CHANGELOG.md)
 
