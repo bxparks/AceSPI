@@ -71,6 +71,14 @@ class HardSpiInterface {
     static const uint8_t kSpiMode = SPI_MODE0;
 
   public:
+    /**
+     * Constructor.
+     *
+     * @param spi instance of the `T_SPI` class. If the pre-installed `<SPI.h>`
+     *    is used, `T_SPI` is `SPIClass` and `spi` will be the pre-defined `SPI`
+     *    object.
+     * @param latchPin the pin that controls the CS/SS pin of the slave device
+     */
     HardSpiInterface(T_SPI& spi, uint8_t latchPin) :
         mSpi(spi),
         mLatchPin(latchPin)
@@ -95,6 +103,7 @@ class HardSpiInterface {
       pinMode(mLatchPin, OUTPUT);
     }
 
+    /** Clean up the object. */
     void end() const {
       pinMode(mLatchPin, INPUT);
     }

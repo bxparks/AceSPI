@@ -33,6 +33,13 @@ namespace ace_spi {
 /** Software SPI using shiftOut(). */
 class SoftSpiInterface {
   public:
+    /**
+     * Constructor.
+     *
+     * @param latchPin the latch pin (CS)
+     * @param dataPin the data pin (MOSI)
+     * @param clockPin the clock pin (CLK)
+     */
     SoftSpiInterface(
         uint8_t latchPin,
         uint8_t dataPin,
@@ -43,12 +50,14 @@ class SoftSpiInterface {
         mClockPin(clockPin)
     {}
 
+    /** Initialize the various pins. */
     void begin() const {
       pinMode(mLatchPin, OUTPUT);
       pinMode(mDataPin, OUTPUT);
       pinMode(mClockPin, OUTPUT);
     }
 
+    /** Reset the various pins. */
     void end() const {
       pinMode(mLatchPin, INPUT);
       pinMode(mDataPin, INPUT);

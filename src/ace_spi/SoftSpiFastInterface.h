@@ -43,12 +43,14 @@ class SoftSpiFastInterface {
   public:
     SoftSpiFastInterface() = default;
 
+    /** Initialize the various pins. */
     void begin() const {
       pinModeFast(T_LATCH_PIN, OUTPUT);
       pinModeFast(T_DATA_PIN, OUTPUT);
       pinModeFast(T_CLOCK_PIN, OUTPUT);
     }
 
+    /** Reset the various pins. */
     void end() const {
       pinModeFast(T_LATCH_PIN, INPUT);
       pinModeFast(T_DATA_PIN, INPUT);
