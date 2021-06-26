@@ -2,16 +2,25 @@
 
 Unified interface for selecting hardware or software SPI implementations on
 Arduino platforms. Uses C++ templates to achieve minimal or zero-cost runtime
-overhead for the abstraction. The code was initially part of the
+overhead for the abstraction. In more technical terms, the library provides
+compile-time polymorphism instead of runtime polymorphism to avoid the overhead
+of the `virtual` keyword.
+
+The code was initially part of the
 [AceSegment](https://github.com/bxparks/AceSegment) library, but was extracted
-into a separate library so that it can be shared with other projects.
+into a separate library so that it can be shared with other projects. It
+provides the following implementations:
 
-This library provides the following C++ class templates:
-
-* `HardSpiInterface`
-* `HardSpiFastInterface`
-* `SoftSpiInterface`
-* `HardSpiFastInterface`
+* `HardSpiInterface.h`
+    * Hardware SPI using `digitalWrite()` to control the latch pin.
+    * Depends on `<SPI.h>`.
+* `HardSpiFastInterface.h`
+    * Hardware SPI using `digitalWriteFast()` to control the latch pin.
+    * Depends on `<SPI.h>`.
+* `SoftSpiInterface.h`
+    * Software SPI using `shiftOut()`
+* `SoftSpiFastInterface.h`
+    * Software SPI using `digitalWriteFast()` on AVR processors
 
 **Version**: 0.1 (2021-06-25)
 
@@ -75,6 +84,9 @@ depend on one of the digitalWriteFast libraries, for example:
 * this `README.md` file.
 * [Doxygen docs](https://bxparks.github.io/AceSPI/html)
     * On Github pages.
+* Examples:
+    * https://github.com/bxparks/AceSegment/tree/develop/examples/Hc595Demo
+    * https://github.com/bxparks/AceSegment/tree/develop/examples/Max7219Demo
 
 <a name="HeaderAndNamespace"></a>
 ### Include Header and Namespace
