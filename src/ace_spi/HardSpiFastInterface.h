@@ -122,6 +122,10 @@ class HardSpiFastInterface {
       send16(value);
     }
 
+    // Use default copy constructor and assignment operator.
+    HardSpiFastInterface(const HardSpiFastInterface&) = default;
+    HardSpiFastInterface& operator=(const HardSpiFastInterface&) = default;
+
   private:
     T_SPI& mSpi;
 };

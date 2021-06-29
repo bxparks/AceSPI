@@ -79,6 +79,10 @@ class SoftSpiFastInterface {
       digitalWriteFast(T_LATCH_PIN, HIGH);
     }
 
+    // Use default copy constructor and assignment operator.
+    SoftSpiFastInterface(const SoftSpiFastInterface&) = default;
+    SoftSpiFastInterface& operator=(const SoftSpiFastInterface&) = default;
+
   private:
     static void shiftOutFast(uint8_t output) {
       uint8_t mask = 0x80; // start with the MSB

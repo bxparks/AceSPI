@@ -86,6 +86,10 @@ class SoftSpiInterface {
       digitalWrite(mLatchPin, HIGH);
     }
 
+    // Use default copy constructor and assignment operator.
+    SoftSpiInterface(const SoftSpiInterface&) = default;
+    SoftSpiInterface& operator=(const SoftSpiInterface&) = default;
+
   private:
     uint8_t const mLatchPin;
     uint8_t const mDataPin;

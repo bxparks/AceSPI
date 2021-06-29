@@ -135,6 +135,10 @@ class HardSpiInterface {
       send16(value);
     }
 
+    // Use default copy constructor and assignment operator.
+    HardSpiInterface(const HardSpiInterface&) = default;
+    HardSpiInterface& operator=(const HardSpiInterface&) = default;
+
   private:
     T_SPI& mSpi;
     uint8_t const mLatchPin;
