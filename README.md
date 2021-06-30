@@ -30,8 +30,6 @@ provides the following implementations:
 * https://github.com/bxparks/AceTMI
 * https://github.com/bxparks/AceWire
 
-**Status**: Works, but needs documentation.
-
 ## Table of Contents
 
 * [Installation](#Installation)
@@ -40,6 +38,7 @@ provides the following implementations:
 * [Documentation](#Documentation)
 * [Usage](#Usage)
     * [Include Header and Namespace](#HeaderAndNamespace)
+    * [Unified Interface](#UnifiedInterface)
     * [HardSpiInterface](#HardSpiInterface)
     * [HardSpiFastInterface](#HardSpiFastInterface)
     * [SoftSpiInterface](#SoftSpiInterface)
@@ -136,6 +135,26 @@ library. To use the "Fast" versions, use something like the following:'
 #endif
 ```
 
+<a name="UnifiedInterface"></a>
+### Unified Interface
+
+The classes in this library provide the following unified interface for handling
+SPI communication. Downstream classes can code against this unified interface
+using C++ templates so that different implementations can be selected at
+compile-time.
+
+```C++
+class XxxInterface {
+  public:
+    void begin();
+    void end();
+
+    void send8(uint8_t value);
+    void send16(uint16_t value);
+    void send16(uint8_t msb, uint8_t lsb);
+};
+```
+
 <a name="HardSpiInterface"></a>
 ### HardSpiInterface
 
@@ -151,7 +170,7 @@ using ace_spi::HardSpiInterface;
 
 const uint8_t LATCH_PIN = SS;
 
-template <T_SPII>
+template <typename T_SPII>
 class MyClass {
   public:
     MyClass(T_SPII& spi)
@@ -194,7 +213,7 @@ consumption on AVR processors.
 
 const uint8_t LATCH_PIN = SS;
 
-template <T_SPII>
+template <typename T_SPII>
 class MyClass {
   public:
     MyClass(T_SPII& spi)
@@ -236,7 +255,7 @@ const uint8_t DATA_PIN = MOSI;
 const uint8_t CLOCK_PIN = SCK;
 const uint8_t LATCH_PIN = SS;
 
-template <T_SPII>
+template <typename T_SPII>
 class MyClass {
   public:
     MyClass(T_SPII& spi)
@@ -279,7 +298,7 @@ const uint8_t DATA_PIN = MOSI;
 const uint8_t CLOCK_PIN = SCK;
 const uint8_t LATCH_PIN = SS;
 
-template <T_SPII>
+template <typename T_SPII>
 class MyClass {
   public:
     MyClass(T_SPII& spi)
