@@ -146,15 +146,19 @@ $(function() {
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;      digitalWrite(mLatchPin, HIGH);</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    }</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    uint8_t <span class="keyword">const</span> mLatchPin;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    uint8_t <span class="keyword">const</span> mDataPin;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    uint8_t <span class="keyword">const</span> mClockPin;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;};</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;} <span class="comment">// ace_spi</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="comment">// Use default copy constructor and assignment operator.</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <a class="code" href="classace__spi_1_1SoftSpiInterface.html#a8ea61664bf03ee82c3bf1131e7cf67b1">SoftSpiInterface</a>(<span class="keyword">const</span> <a class="code" href="classace__spi_1_1SoftSpiInterface.html">SoftSpiInterface</a>&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <a class="code" href="classace__spi_1_1SoftSpiInterface.html">SoftSpiInterface</a>&amp; operator=(<span class="keyword">const</span> <a class="code" href="classace__spi_1_1SoftSpiInterface.html">SoftSpiInterface</a>&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    uint8_t <span class="keyword">const</span> mLatchPin;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    uint8_t <span class="keyword">const</span> mDataPin;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    uint8_t <span class="keyword">const</span> mClockPin;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;};</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;} <span class="comment">// ace_spi</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclassace__spi_1_1SoftSpiInterface_html_a5c7b8bf2f3d957a113eec50b42a604f9"><div class="ttname"><a href="classace__spi_1_1SoftSpiInterface.html#a5c7b8bf2f3d957a113eec50b42a604f9">ace_spi::SoftSpiInterface::end</a></div><div class="ttdeci">void end() const</div><div class="ttdoc">Reset the various pins.</div><div class="ttdef"><b>Definition:</b> <a href="SoftSpiInterface_8h_source.html#l00061">SoftSpiInterface.h:61</a></div></div>
 <div class="ttc" id="aclassace__spi_1_1SoftSpiInterface_html_a8ea61664bf03ee82c3bf1131e7cf67b1"><div class="ttname"><a href="classace__spi_1_1SoftSpiInterface.html#a8ea61664bf03ee82c3bf1131e7cf67b1">ace_spi::SoftSpiInterface::SoftSpiInterface</a></div><div class="ttdeci">SoftSpiInterface(uint8_t latchPin, uint8_t dataPin, uint8_t clockPin)</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition:</b> <a href="SoftSpiInterface_8h_source.html#l00043">SoftSpiInterface.h:43</a></div></div>
