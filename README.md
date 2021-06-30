@@ -26,6 +26,10 @@ provides the following implementations:
 
 **Changelog**: [CHANGELOG.md](CHANGELOG.md)
 
+**See Also**:
+* https://github.com/bxparks/AceTMI
+* https://github.com/bxparks/AceWire
+
 **Status**: Works, but needs documentation.
 
 ## Table of Contents
@@ -36,6 +40,13 @@ provides the following implementations:
 * [Documentation](#Documentation)
 * [Usage](#Usage)
     * [Include Header and Namespace](#HeaderAndNamespace)
+    * [HardSpiInterface](#HardSpiInterface)
+    * [HardSpiFastInterface](#HardSpiFastInterface)
+    * [SoftSpiInterface](#SoftSpiInterface)
+    * [SoftSpiFastInterface](#SoftSpiFastInterface)
+    * [Multiple SPI Buses](#MultipleSpiBuses)
+        * [STM32](#MultipleSpiBusesSTM32)
+        * [ESP32](#MultipleSpiBusesESP32)
 * [System Requirements](#SystemRequirements)
     * [Hardware](#Hardware)
     * [Tool Chain](#ToolChain)
@@ -88,9 +99,6 @@ depend on one of the digitalWriteFast libraries, for example:
     * https://github.com/bxparks/AceSegment/tree/develop/examples/Hc595Demo
     * https://github.com/bxparks/AceSegment/tree/develop/examples/Max7219Demo
 
-<a name="HeaderAndNamespace"></a>
-### Include Header and Namespace
-
 <a name="Usage"></a>
 ## Usage
 
@@ -103,6 +111,7 @@ use, all classes are defined in the `ace_spi` namespace. To use the code without
 prepending the `ace_spi::` prefix, use the `using` directive:
 
 ```C++
+#include <Arduino.h>
 #include <SPI.h>
 #include <AceSPI.h>
 using ace_spi::HardSpiInterface;
@@ -114,6 +123,7 @@ work only on AVR processors and they depend on a `<digitalWriteFast.h>`
 library. To use the "Fast" versions, use something like the following:'
 
 ```C++
+#include <Arduino.h>
 #include <SPI.h>
 #include <AceSPI.h>
 
@@ -124,6 +134,309 @@ library. To use the "Fast" versions, use something like the following:'
   using ace_spi::HardSpiFastInterface;
   using ace_spi::SoftSpiFastInterface;
 #endif
+```
+
+<a name="HardSpiInterface"></a>
+### HardSpiInterface
+
+The `HardSpiInterface` object is a thin wrapper around the `SPI` object from
+`<SPI.h>`. It is designed to be used with a templatized class that takes
+one of the "Interface" classes in this library.
+
+```C++
+#include <Arduino.h>
+#include <SPI.h>
+#include <AceSPI.h>
+using ace_spi::HardSpiInterface;
+
+const uint8_t LATCH_PIN = SS;
+
+template <T_SPII>
+class MyClass {
+  public:
+    MyClass(T_SPII& spi)
+        : mSpi(spi)
+    { ... }
+
+  [...]
+
+  private:
+    T_SPII mSpi; // reference will also work
+};
+
+using SpiInterface = HardSpiInterface<SPIClass>;
+SpiInterface spiInterface(spiInstance, LATCH_PIN);
+MyClass<SpiInterface> myClass(spiInterface);
+
+void setup() {
+  SPI.begin();
+  spiInterface.begin();
+  ...
+}
+```
+
+<a name="HardSpiFastInterface"></a>
+### HardSpiFastInterface
+
+The `HardSpiFastInterface` is identical to `HardSpiInterface` except that it
+uses one of the digitalWriteFast libraries listed above, which reduces flash
+consumption on AVR processors.
+
+```C++
+#include <Arduino.h>
+#include <SPI.h>
+#include <AceSPI.h>
+#if defined(ARDUINO_ARCH_AVR)
+  #include <ace_spi/HardSpiFastInterface.h>
+  #include <digitalWriteFast.h>
+  using ace_spi::HardSpiFastInterface;
+#endif
+
+const uint8_t LATCH_PIN = SS;
+
+template <T_SPII>
+class MyClass {
+  public:
+    MyClass(T_SPII& spi)
+        : mSpi(spi)
+    { ... }
+
+  [...]
+
+  private:
+    T_SPII mSpi; // reference will also work
+};
+
+using SpiInterface = HardSpiFastInterface<SPIClass, LATCH_PIN>;
+SpiInterface spiInterface(spiInstance);
+MyClass<SpiInterface> myClass(spiInterface);
+
+void setup() {
+  SPI.begin();
+  spiInterface.begin();
+  ...
+}
+```
+
+<a name="SoftSpiInterface"></a>
+### SoftSpiInterface
+
+The `SoftSpiInterface` class is a simple implementation of SPI using the Arduino
+built-in `shiftOut()` function, which uses `digitalWrite()` underneath the
+covers. Any appropriate GPIO pin can be used for software SPI, instead of being
+restricted to the hardware SPI pins.  We can make our `MyClass` use this
+interface like this:
+
+```C++
+#include <Arduino.h>
+#include <AceSPI.h>
+using ace_spi::SoftSpiInterface;
+
+const uint8_t DATA_PIN = MOSI;
+const uint8_t CLOCK_PIN = SCK;
+const uint8_t LATCH_PIN = SS;
+
+template <T_SPII>
+class MyClass {
+  public:
+    MyClass(T_SPII& spi)
+        : mSpi(spi)
+    { ... }
+
+  [...]
+
+  private:
+    T_SPII mSpi; // reference will also work
+};
+
+using SpiInterface = SoftSpiInterface;
+SpiInterface spiInterface(LATCH_PIN, DATA_PIN, CLOCK_PIN);
+MyClass<SpiInterface> myClass(spiInterface);
+
+void setup() {
+  spiInterface.begin();
+  ...
+}
+```
+
+<a name="SoftSpiFastInterface"></a>
+### SoftSpiFastInterface
+
+The `SoftSpiFastInterface` class is the same as `SoftSpiInterface` except that
+it uses the `digitalWriteFast()` function provided by one of the
+digitalWriteFast libraries mentioned above. The code looks very similar:
+
+```C++
+#include <Arduino.h>
+#include <AceSPI.h>
+#if defined(ARDUINO_ARCH_AVR)
+  #include <digitalWriteFast.h>
+  #include <ace_spi/SoftSpiFastInterface.h>
+  using ace_spi::SoftSpiFastInterface;
+#endif
+
+const uint8_t DATA_PIN = MOSI;
+const uint8_t CLOCK_PIN = SCK;
+const uint8_t LATCH_PIN = SS;
+
+template <T_SPII>
+class MyClass {
+  public:
+    MyClass(T_SPII& spi)
+        : mSpi(spi)
+    { ... }
+
+  [...]
+
+  private:
+    T_SPII mSpi; // reference will also work
+};
+
+using SpiInterface = SoftSpiFastInterface<LATCH_PIN, DATA_PIN, CLOCK_PIN>;
+SpiInterface spiInterface;
+MyClass<SpiInterface> myClass(spiInterface);
+
+void setup() {
+  spiInterface.begin();
+  ...
+}
+```
+
+<a name="MultipleSpiBuses"></a>
+### Multiple SPI Buses
+
+Some processors (e.g. STM32, ESP32) have multiple hardware SPI buses. Here are
+some notes about how to configure them.
+
+<a name="MultipleSpiBusesSTM32"></a>
+#### STM32 (STM32F103)
+
+The STM32F103 "Blue Pill" has 2 SPI buses:
+
+* SPI1
+    * SS1 = SS = PA4
+    * SCK1 = SCK = PA5
+    * MISO1 = MISO = PA6
+    * MOSI1 = MOSI = PA7
+* SPI2
+    * SS2 = PB12
+    * SCK2 = PB13
+    * MISO2 = PB14
+    * MOSI2 = PB15
+
+The primary (default) SPI interface is used like this:
+
+```C++
+#include <Arduino.h>
+#include <SPI.h>
+#include <AceSPI.h>
+using ace_spi::HardSpiInterface;
+
+const uint8_t LATCH_PIN = SS;
+const uint8_t DATA_PIN = MOSI;
+const uint8_t CLOCK_PIN = SCK;
+
+using SpiInterface = HardSpiInterface<SPIClass>;
+SpiInterface spiInterface(SPI, LATCH_PIN);
+MyClass<SpiInterface> myClass(spiInterface);
+
+void setup() {
+  SPI.begin();
+  spiInterface.begin();
+  ...
+}
+```
+
+The second SPI interface can be used like this:
+
+```C++
+#include <Arduino.h>
+#include <SPI.h>
+#include <AceSPI.h>
+using ace_spi::HardSpiInterface;
+
+const uint8_t LATCH_PIN = PB12;
+const uint8_t DATA_PIN = PB15;
+const uint8_t CLOCK_PIN = PB13;
+
+SPIClass spiSecondary(DATA_PIN, PB14 /*miso*/, CLOCK_PIN);
+using SpiInterface = HardSpiInterface<SPIClass>;
+SpiInterface spiInterface(spiSecondary, LATCH_PIN);
+MyClass<SpiInterface> myClass(spiInterface);
+
+void setupAceSegment() {
+  spiSecondary.begin();
+  spiInterface.begin();
+  ...
+}
+```
+
+<a name="MultipleSpiBusesESP32"></a>
+#### ESP32
+
+The ESP32 has 4 SPI buses, of which 2 are available for general purposes. The
+default GPIO pin mappings are:
+
+* SPI2 (aka HSPI)
+    * MOSI = 13
+    * MISO = 12
+    * SS = 15
+    * SCK = 14
+* SPI3 (aka VSPI, default)
+    * MOSI = 23
+    * MISO = 19
+    * SS = 5
+    * SCK = 18
+
+(My understanding is that the ESP32 has some sort of GPIO pin remapping
+matrix that can reroute these pins to other pins, but my knowledge of this
+capability is limited.)
+
+The primary (default) `SPI` instance uses the `VSPI` bus and is used like this:
+
+```C++
+#include <Arduino.h>
+#include <SPI.h>
+#include <AceSPI.h>
+using ace_spi::HardSpiInterface;
+
+const uint8_t LATCH_PIN = SS;
+const uint8_t DATA_PIN = MOSI;
+const uint8_t CLOCK_PIN = SCK;
+
+using SpiInterface = HardSpiInterface<SPIClass>;
+SpiInterface spiInterface(SPI, LATCH_PIN);
+MyClass<SpiInterface> myClass(spiInterface);
+
+void setupAceSegment() {
+  SPI.begin();
+  spiInterface.begin();
+  ...
+}
+```
+
+The secondary `HSPI` bus can be used like this:
+
+```C++
+#include <Arduino.h>
+#include <SPI.h>
+#include <AceSPI.h>
+using ace_spi::HardSpiInterface;
+
+const uint8_t LATCH_PIN = 15;
+const uint8_t DATA_PIN = 13;
+const uint8_t CLOCK_PIN = 14;
+
+SPIClass spiSecondary(HSPI);
+using SpiInterface = HardSpiInterface<SPIClass>;
+SpiInterface spiInterface(spiSecondary, LATCH_PIN);
+MyClass<SpiInterface> myClass(spiInterface);
+
+void setupAceSegment() {
+  spiSecondary.begin();
+  spiInterface.begin();
+  ...
+}
 ```
 
 <a name="SystemRequirements"></a>
