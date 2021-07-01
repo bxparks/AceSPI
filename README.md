@@ -155,6 +155,16 @@ class XxxInterface {
 };
 ```
 
+Notice that the classes in this library do *not* inherit from a common interface
+with virtual functions. This saves several hundred bytes of flash memory on
+8-bit AVR processors by avoiding the dynamic dispatch, and often allows the
+compiler to optimize away the overhead of calling the methods in this library so
+that the function call is made directly to the underlying implementation. The
+reduction of flash memory consumption is especially large for classes that use
+the digitalWriteFast libraries which use compile-time constants for pin numbers.
+The disadvantage is that this library is harder to use because these classes
+require the downstream classes to be implemented using C++ templates.
+
 <a name="HardSpiInterface"></a>
 ### HardSpiInterface
 
@@ -177,7 +187,7 @@ class MyClass {
         : mSpi(spi)
     { ... }
 
-  [...]
+    [...]
 
   private:
     T_SPII mSpi; // reference will also work
@@ -193,6 +203,15 @@ void setup() {
   ...
 }
 ```
+
+The `using` statement is the C++11 version of a `typedef` that defines
+`SpiInterface`. It is not strictly necessary here, but it allows the same
+pattern to be used for the more complicated examples below.
+
+The `T_SPII` template parameter contains a `T_` prefix to avoid name collisions
+with too many `#define` macros defined in the global namespace on Arduino
+platforms. The double `II` contains 2 `Interface`, the first referring to the
+SPI protocol, and the second referring to classes in this library.
 
 <a name="HardSpiFastInterface"></a>
 ### HardSpiFastInterface
@@ -220,7 +239,7 @@ class MyClass {
         : mSpi(spi)
     { ... }
 
-  [...]
+    [...]
 
   private:
     T_SPII mSpi; // reference will also work
@@ -262,7 +281,7 @@ class MyClass {
         : mSpi(spi)
     { ... }
 
-  [...]
+    [...]
 
   private:
     T_SPII mSpi; // reference will also work
@@ -305,7 +324,7 @@ class MyClass {
         : mSpi(spi)
     { ... }
 
-  [...]
+    [...]
 
   private:
     T_SPII mSpi; // reference will also work
