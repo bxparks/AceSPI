@@ -79,7 +79,7 @@ class HardSpiInterface {
      *    object.
      * @param latchPin the pin that controls the CS/SS pin of the slave device
      */
-    HardSpiInterface(T_SPI& spi, uint8_t latchPin) :
+    explicit HardSpiInterface(T_SPI& spi, uint8_t latchPin) :
         mSpi(spi),
         mLatchPin(latchPin)
     {}

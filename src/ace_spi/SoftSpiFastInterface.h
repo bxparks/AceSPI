@@ -41,7 +41,8 @@ namespace ace_spi {
 template <uint8_t T_LATCH_PIN, uint8_t T_DATA_PIN, uint8_t T_CLOCK_PIN>
 class SoftSpiFastInterface {
   public:
-    SoftSpiFastInterface() = default;
+    /** Constructor. */
+    explicit SoftSpiFastInterface() = default;
 
     /** Initialize the various pins. */
     void begin() const {

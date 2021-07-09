@@ -40,7 +40,7 @@ class SoftSpiInterface {
      * @param dataPin the data pin (MOSI)
      * @param clockPin the clock pin (CLK)
      */
-    SoftSpiInterface(
+    explicit SoftSpiInterface(
         uint8_t latchPin,
         uint8_t dataPin,
         uint8_t clockPin

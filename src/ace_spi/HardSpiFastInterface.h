@@ -72,7 +72,7 @@ class HardSpiFastInterface {
      *    is used, `T_SPI` is `SPIClass` and `spi` will be the pre-defined `SPI`
      *    object.
      */
-    HardSpiFastInterface(T_SPI& spi) : mSpi(spi) {}
+    explicit HardSpiFastInterface(T_SPI& spi) : mSpi(spi) {}
 
     /**
      * Initialize the HardSpiFastInterface. The hardware SPI object must be
