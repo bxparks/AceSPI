@@ -47,11 +47,14 @@ namespace ace_spi {
 template <typename T_SPI, uint8_t T_LATCH_PIN>
 class HardSpiFastInterface {
   private:
-    // The following constants are defined without including <SPI.h> to avoid
-    // pulling in the global SPI instance into applications which don't use SPI.
-    // They may become template parameters in the future.
+    // Some of the following constants are defined in <SPI.h> so unfortunately,
+    // it is not possible to avoid pulling in the global SPI instance into
+    // applications which don't use SPI.
 
-    /** MAX7219 has a maximum clock of 16 MHz, so set this to 8 MHz. */
+    /**
+     * MAX7219 has a maximum clock of 16 MHz, so set this to 8 MHz.
+     * TODO: Make this a configurable parameter?
+     */
     static const uint32_t kClockSpeed = 8000000;
 
     /** MSB first or LSB first */
