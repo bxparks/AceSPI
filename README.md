@@ -22,6 +22,9 @@ provides the following implementations:
 * `SoftSpiFastInterface.h`
     * Software SPI using `digitalWriteFast()` on AVR processors
 
+Currently, only a fix set of options for the SPI transfer mode is supported:
+MODE0, and MSB first.
+
 **Version**: 0.1 (2021-06-25)
 
 **Changelog**: [CHANGELOG.md](CHANGELOG.md)
@@ -43,6 +46,7 @@ provides the following implementations:
     * [HardSpiFastInterface](#HardSpiFastInterface)
     * [SoftSpiInterface](#SoftSpiInterface)
     * [SoftSpiFastInterface](#SoftSpiFastInterface)
+    * [Storing Interface Objects](#StoringInterfaceObjects)
     * [Multiple SPI Buses](#MultipleSpiBuses)
         * [STM32](#MultipleSpiBusesSTM32)
         * [ESP32](#MultipleSpiBusesESP32)
@@ -169,8 +173,27 @@ require the downstream classes to be implemented using C++ templates.
 ### HardSpiInterface
 
 The `HardSpiInterface` object is a thin wrapper around the `SPI` object from
-`<SPI.h>`. It is designed to be used with a templatized class that takes
-one of the "Interface" classes in this library.
+`<SPI.h>`. It implements the unified interace described above like this:
+
+```C++
+template <typename T_SPI>
+class HardSpiInterface {
+  public:
+    explicit HardSpiInterface(T_SPI& spi, uint8_t latchPin) :
+        mSpi(spi),
+        mLatchPin(latchPin)
+    {}
+
+    void begin() { ... }
+    void end() { ... }
+
+    void send8(uint8_t value) { ... }
+    void send16(uint16_t value) { ... }
+    void send16(uint8_t msb, uint8_t lsb) { ... }
+};
+```
+
+The calling code `MyClass` that uses `HardSpiInterface` is configured like this:
 
 ```C++
 #include <Arduino.h>
@@ -178,20 +201,33 @@ one of the "Interface" classes in this library.
 #include <AceSPI.h>
 using ace_spi::HardSpiInterface;
 
-const uint8_t LATCH_PIN = SS;
-
 template <typename T_SPII>
 class MyClass {
   public:
-    MyClass(T_SPII& spi)
-        : mSpi(spi)
+    MyClass(T_SPII& spiInterface)
+        : mSpiInterface(spiInterface)
     { ... }
 
-    [...]
+    void writeData() {
+      // Send 1 byte.
+      uint8_t b = ...;
+      mSpiInterface.send8(d);
+
+      // Send 2 bytes.
+      uint8_t msb = ...;
+      uint8_t lsb = ...;
+      mSpiInterface.send16(msb, lsb);
+
+      // Send 1 word, msb first.
+      uint16_t w = ...;
+      mSpiInterface.send16(w);
+    }
 
   private:
-    T_SPII mSpi; // reference will also work
+    T_SPII mSpiInterface; // copied by value
 };
+
+const uint8_t LATCH_PIN = SS;
 
 using SpiInterface = HardSpiInterface<SPIClass>;
 SpiInterface spiInterface(spiInstance, LATCH_PIN);
@@ -213,12 +249,34 @@ with too many `#define` macros defined in the global namespace on Arduino
 platforms. The double `II` contains 2 `Interface`, the first referring to the
 SPI protocol, and the second referring to classes in this library.
 
+The SPI clock speed is currently hardwared to be 8MHz.
+
+The latching of the device is attached to the `SS` pin. Other pins can be used.
+The latching is performed using the normal `digitalWrite()` function.
+
 <a name="HardSpiFastInterface"></a>
 ### HardSpiFastInterface
 
 The `HardSpiFastInterface` is identical to `HardSpiInterface` except that it
 uses one of the digitalWriteFast libraries listed above, which reduces flash
-consumption on AVR processors.
+consumption on AVR processors, and makes the code run faster.
+
+```C++
+template <typename T_SPI, uint8_t T_LATCH_PIN>
+class HardSpiFastInterface {
+  public:
+    explicit HardSpiFastInterface(T_SPI& spi) : mSpi(spi) {}
+
+    void begin() { ... }
+    void end() { ... }
+
+    void send8(uint8_t value) { ... }
+    void send16(uint16_t value) { ... }
+    void send16(uint8_t msb, uint8_t lsb) { ... }
+};
+```
+
+The calling code `MyClass` that uses `HardSpiInterface` is configured like this:
 
 ```C++
 #include <Arduino.h>
@@ -230,20 +288,12 @@ consumption on AVR processors.
   using ace_spi::HardSpiFastInterface;
 #endif
 
-const uint8_t LATCH_PIN = SS;
-
 template <typename T_SPII>
 class MyClass {
-  public:
-    MyClass(T_SPII& spi)
-        : mSpi(spi)
-    { ... }
-
-    [...]
-
-  private:
-    T_SPII mSpi; // reference will also work
+  // Exactly the same as above.
 };
+
+const uint8_t LATCH_PIN = SS;
 
 using SpiInterface = HardSpiFastInterface<SPIClass, LATCH_PIN>;
 SpiInterface spiInterface(spiInstance);
@@ -256,36 +306,56 @@ void setup() {
 }
 ```
 
+The SPI clock speed is currently hardwared to be 8MHz.
+
+The latching on the `SS` pin is performed using the `digitalWriteFast()`
+function from one of the external "digitalWriteFast" libraries.
+
 <a name="SoftSpiInterface"></a>
 ### SoftSpiInterface
 
 The `SoftSpiInterface` class is a simple implementation of SPI using the Arduino
 built-in `shiftOut()` function, which uses `digitalWrite()` underneath the
 covers. Any appropriate GPIO pin can be used for software SPI, instead of being
-restricted to the hardware SPI pins.  We can make our `MyClass` use this
-interface like this:
+restricted to the hardware SPI pins.
+
+```C++
+class SoftSpiInterface {
+  public:
+    explicit SoftSpiInterface(
+        uint8_t latchPin,
+        uint8_t dataPin,
+        uint8_t clockPin
+    ) :
+        mLatchPin(latchPin),
+        mDataPin(dataPin),
+        mClockPin(clockPin)
+    {}
+
+    void begin() { ... }
+    void end() { ... }
+
+    void send8(uint8_t value) { ... }
+    void send16(uint16_t value) { ... }
+    void send16(uint8_t msb, uint8_t lsb) { ... }
+};
+```
+
+We can make our `MyClass` use this interface like this:
 
 ```C++
 #include <Arduino.h>
 #include <AceSPI.h>
 using ace_spi::SoftSpiInterface;
 
+template <typename T_SPII>
+class MyClass {
+  // Exactly the same as above.
+};
+
 const uint8_t DATA_PIN = MOSI;
 const uint8_t CLOCK_PIN = SCK;
 const uint8_t LATCH_PIN = SS;
-
-template <typename T_SPII>
-class MyClass {
-  public:
-    MyClass(T_SPII& spi)
-        : mSpi(spi)
-    { ... }
-
-    [...]
-
-  private:
-    T_SPII mSpi; // reference will also work
-};
 
 using SpiInterface = SoftSpiInterface;
 SpiInterface spiInterface(LATCH_PIN, DATA_PIN, CLOCK_PIN);
@@ -301,8 +371,25 @@ void setup() {
 ### SoftSpiFastInterface
 
 The `SoftSpiFastInterface` class is the same as `SoftSpiInterface` except that
-it uses the `digitalWriteFast()` function provided by one of the
-digitalWriteFast libraries mentioned above. The code looks very similar:
+it uses the `digitalWriteFast()` and `pinModeFast()` functions provided by one
+of the digitalWriteFast libraries mentioned above. The pin numbers need to be
+compile-time constants, so they are passed in as template parameters, like this:
+
+```C++
+template <uint8_t T_LATCH_PIN, uint8_t T_DATA_PIN, uint8_t T_CLOCK_PIN>
+class SoftSpiFastInterface {
+  public:
+    explicit SoftSpiFastInterface() = default;
+
+    void begin() { ... }
+    void end() { ... }
+
+    void send8(uint8_t value) { ... }
+    void send16(uint16_t value) { ... }
+    void send16(uint8_t msb, uint8_t lsb) { ... }
+};
+```
+The code to configure the client code `MyClass` looks very similar:
 
 ```C++
 #include <Arduino.h>
@@ -313,22 +400,14 @@ digitalWriteFast libraries mentioned above. The code looks very similar:
   using ace_spi::SoftSpiFastInterface;
 #endif
 
+template <typename T_SPII>
+class MyClass {
+  // Exactly the same as above.
+};
+
 const uint8_t DATA_PIN = MOSI;
 const uint8_t CLOCK_PIN = SCK;
 const uint8_t LATCH_PIN = SS;
-
-template <typename T_SPII>
-class MyClass {
-  public:
-    MyClass(T_SPII& spi)
-        : mSpi(spi)
-    { ... }
-
-    [...]
-
-  private:
-    T_SPII mSpi; // reference will also work
-};
 
 using SpiInterface = SoftSpiFastInterface<LATCH_PIN, DATA_PIN, CLOCK_PIN>;
 SpiInterface spiInterface;
@@ -339,6 +418,43 @@ void setup() {
   ...
 }
 ```
+
+<a name="StoringInterfaceObjects"></a>
+### Storing Interface Objects
+
+In the above examples, the `MyClass` object holds the `T_SPII` interface object
+**by value**. In other words, the interface object is copied into the `MyClass`
+object. This is efficient because interface objects are very small in size, and
+copying them by-value avoids an extra level of indirection when they are used
+inside the `MyClass` object. The compiler will generate code that is equivalent
+to calling the underlying `SPIClass` methods through an `SPIClass` pointer.
+
+The alternative is to save the `T_SPII` object **by reference** like this:
+
+```C++
+template <typename T_SPII>
+class MyClass {
+  public:
+    MyClass(T_SPII& spiInterface)
+        : mSpiInterface(spiInterface)
+    {
+      ...
+    }
+
+    [...]
+
+  private:
+    T_SPII& mSpiInterface; // copied by reference
+};
+```
+
+The internal size of the `HardSpiInterface` object is just a single reference to
+the `T_SPII` object and one additional byte for the `latchPin`, so there is
+almost difference in the static memory size. However, storing the
+`mSpiInterface` as a reference causes an unnecessary extra layer of indirection
+every time the `mSpiInterface` object is called. In almost every case, I
+recommend storing the `XxxInterface` object **by value** into the `MyClass`
+object.
 
 <a name="MultipleSpiBuses"></a>
 ### Multiple SPI Buses
@@ -370,6 +486,11 @@ The primary (default) SPI interface is used like this:
 #include <AceSPI.h>
 using ace_spi::HardSpiInterface;
 
+template <typename T_SPII>
+class MyClass {
+  // Exactly the same as above.
+};
+
 const uint8_t LATCH_PIN = SS;
 const uint8_t DATA_PIN = MOSI;
 const uint8_t CLOCK_PIN = SCK;
@@ -392,6 +513,11 @@ The second SPI interface can be used like this:
 #include <SPI.h>
 #include <AceSPI.h>
 using ace_spi::HardSpiInterface;
+
+template <typename T_SPII>
+class MyClass {
+  // Exactly the same as above.
+};
 
 const uint8_t LATCH_PIN = PB12;
 const uint8_t DATA_PIN = PB15;
@@ -438,6 +564,11 @@ The primary (default) `SPI` instance uses the `VSPI` bus and is used like this:
 #include <AceSPI.h>
 using ace_spi::HardSpiInterface;
 
+template <typename T_SPII>
+class MyClass {
+  // Exactly the same as above.
+};
+
 const uint8_t LATCH_PIN = SS;
 const uint8_t DATA_PIN = MOSI;
 const uint8_t CLOCK_PIN = SCK;
@@ -460,6 +591,11 @@ The secondary `HSPI` bus can be used like this:
 #include <SPI.h>
 #include <AceSPI.h>
 using ace_spi::HardSpiInterface;
+
+template <typename T_SPII>
+class MyClass {
+  // Exactly the same as above.
+};
 
 const uint8_t LATCH_PIN = 15;
 const uint8_t DATA_PIN = 13;
