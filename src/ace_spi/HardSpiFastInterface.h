@@ -34,28 +34,29 @@ namespace ace_spi {
 /**
  * This class is functionally identical to HardSpiInterface except that the GPIO
  * pins are controlled by digitalWriteFast() and pinModeFast() methods. This
- * decreases flash memory consumption by 70 bytes (HybridModule) to 250
- * (Max7219Module, Hc595Module) bytes. However, if multiple LED modules are
- * used, using different LatchPins, the HardSpiInterface might ultimately
- * consume less flash memory because it avoids generating different template
- * instantiations of the HybridModule, Max7219Module, or Hc595Module classes.
- * Users are advised to try both and compare the difference.
+ * decreases flash memory consumption by 70 bytes (AceSegment/HybridModule) to
+ * 250 (AceSegment/Max7219Module, AceSegment/Hc595Module) bytes.
+ *
+ * If more than 2-3 or LED modules are used, each using different LatchPins, the
+ * HardSpiInterface class might consume less flash memory than this one because
+ * HardSpiInterface avoids generating different template instantiations of the
+ * HybridModule, Max7219Module, or Hc595Module classes. If flash memory size is
+ * a problem, users should experiment with both and compare the difference.
  *
  * @tparam T_SPI the class of the hardware SPI instance, usually SPIClass
  * @tparam T_LATCH_PIN the CS/SS pin that controls the SPI peripheral
+ * @tparam T_CLOCK_SPEED the SPI clock speed, default 8000000 (8 MHz)
  */
-template <typename T_SPI, uint8_t T_LATCH_PIN>
+template <
+    typename T_SPI,
+    uint8_t T_LATCH_PIN,
+    uint32_t T_CLOCK_SPEED = 8000000
+>
 class HardSpiFastInterface {
   private:
     // Some of the following constants are defined in <SPI.h> so unfortunately,
     // it is not possible to avoid pulling in the global SPI instance into
     // applications which don't use SPI.
-
-    /**
-     * MAX7219 has a maximum clock of 16 MHz, so set this to 8 MHz.
-     * TODO: Make this a configurable parameter?
-     */
-    static const uint32_t kClockSpeed = 8000000;
 
     /** MSB first or LSB first */
   #if defined(ARDUINO_ARCH_STM32)
@@ -103,7 +104,7 @@ class HardSpiFastInterface {
 
     /** Send 8 bits, including latching LOW and HIGH. */
     void send8(uint8_t value) const {
-      mSpi.beginTransaction(SPISettings(kClockSpeed, kBitOrder, kSpiMode));
+      mSpi.beginTransaction(SPISettings(T_CLOCK_SPEED, kBitOrder, kSpiMode));
       digitalWriteFast(T_LATCH_PIN, LOW);
       mSpi.transfer(value);
       digitalWriteFast(T_LATCH_PIN, HIGH);
@@ -112,7 +113,7 @@ class HardSpiFastInterface {
 
     /** Send 16 bits, including latching LOW and HIGH. */
     void send16(uint16_t value) const {
-      mSpi.beginTransaction(SPISettings(kClockSpeed, kBitOrder, kSpiMode));
+      mSpi.beginTransaction(SPISettings(T_CLOCK_SPEED, kBitOrder, kSpiMode));
       digitalWriteFast(T_LATCH_PIN, LOW);
       mSpi.transfer16(value);
       digitalWriteFast(T_LATCH_PIN, HIGH);

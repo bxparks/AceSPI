@@ -22,9 +22,6 @@ provides the following implementations:
 * `SoftSpiFastInterface.h`
     * Software SPI using `digitalWriteFast()` on AVR processors
 
-Currently, only a fix set of options for the SPI transfer mode is supported:
-MODE0, and MSB first.
-
 **Version**: 0.1 (2021-06-25)
 
 **Changelog**: [CHANGELOG.md](CHANGELOG.md)
@@ -176,7 +173,10 @@ The `HardSpiInterface` object is a thin wrapper around the `SPI` object from
 `<SPI.h>`. It implements the unified interace described above like this:
 
 ```C++
-template <typename T_SPI>
+template <
+    typename T_SPI,
+    uint32_t T_CLOCK_SPEED = 8000000
+>
 class HardSpiInterface {
   public:
     explicit HardSpiInterface(T_SPI& spi, uint8_t latchPin) :
@@ -204,9 +204,9 @@ using ace_spi::HardSpiInterface;
 template <typename T_SPII>
 class MyClass {
   public:
-    MyClass(T_SPII& spiInterface)
+    explicit MyClass(T_SPII& spiInterface)
         : mSpiInterface(spiInterface)
-    { ... }
+    {...}
 
     void writeData() {
       // Send 1 byte.
@@ -249,10 +249,13 @@ with too many `#define` macros defined in the global namespace on Arduino
 platforms. The double `II` contains 2 `Interface`, the first referring to the
 SPI protocol, and the second referring to classes in this library.
 
-The SPI clock speed is currently hardwared to be 8MHz.
-
 The latching of the device is attached to the `SS` pin. Other pins can be used.
 The latching is performed using the normal `digitalWrite()` function.
+
+The SPI clock speed is defaults to 8000000 (8 MHz), but can be overridden
+through one of the template parameters. This class currently supports only
+`SPI_MODE0` and `MSBFIRST`. If other SPI configurations are need, it is probably
+easiest to just copy the `HardSpiInterface` class and customize it.
 
 <a name="HardSpiFastInterface"></a>
 ### HardSpiFastInterface
@@ -262,7 +265,11 @@ uses one of the digitalWriteFast libraries listed above, which reduces flash
 consumption on AVR processors, and makes the code run faster.
 
 ```C++
-template <typename T_SPI, uint8_t T_LATCH_PIN>
+template <
+    typename T_SPI,
+    uint8_t T_LATCH_PIN,
+    uint32_t T_CLOCK_SPEED = 8000000
+>
 class HardSpiFastInterface {
   public:
     explicit HardSpiFastInterface(T_SPI& spi) : mSpi(spi) {}
@@ -305,8 +312,6 @@ void setup() {
   ...
 }
 ```
-
-The SPI clock speed is currently hardwared to be 8MHz.
 
 The latching on the `SS` pin is performed using the `digitalWriteFast()`
 function from one of the external "digitalWriteFast" libraries.
@@ -435,11 +440,9 @@ The alternative is to save the `T_SPII` object **by reference** like this:
 template <typename T_SPII>
 class MyClass {
   public:
-    MyClass(T_SPII& spiInterface)
+    explicit MyClass(T_SPII& spiInterface)
         : mSpiInterface(spiInterface)
-    {
-      ...
-    }
+    {...}
 
     [...]
 
