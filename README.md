@@ -170,7 +170,7 @@ require the downstream classes to be implemented using C++ templates.
 ### HardSpiInterface
 
 The `HardSpiInterface` object is a thin wrapper around the `SPI` object from
-`<SPI.h>`. It implements the unified interace described above like this:
+`<SPI.h>`. It implements the unified interface described above like this:
 
 ```C++
 template <
