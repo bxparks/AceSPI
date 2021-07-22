@@ -59,7 +59,7 @@ class HardSpiFastInterface {
     // applications which don't use SPI.
 
     /** MSB first or LSB first */
-  #if defined(ARDUINO_ARCH_STM32)
+  #if defined(ARDUINO_ARCH_STM32) || defined(ARDUINO_ARCH_SAMD)
     static const BitOrder kBitOrder = MSBFIRST;
   #else
     static const uint8_t kBitOrder = MSBFIRST;
