@@ -645,6 +645,7 @@ The Memory benchmark numbers can be seen in
 
 **ESP8266**
 
+```
 +--------------------------------------------------------------+
 | functionality                   |  flash/  ram |       delta |
 |---------------------------------+--------------+-------------|
@@ -653,7 +654,6 @@ The Memory benchmark numbers can be seen in
 | SoftSpiInterface                | 257384/26800 |   684/   16 |
 | HardSpiInterface                | 258456/26816 |  1756/   32 |
 +--------------------------------------------------------------+
-```
 ```
 
 <a name="CpuCycles"></a>
