@@ -47,6 +47,9 @@ provides the following implementations:
     * [Multiple SPI Buses](#MultipleSpiBuses)
         * [STM32](#MultipleSpiBusesSTM32)
         * [ESP32](#MultipleSpiBusesESP32)
+* [Resource Consumption](#ResourceConsumption)
+    * [Flash And Static Memory](#FlashAndStaticMemory)
+    * [CPU Cycles](#CpuCycles)
 * [System Requirements](#SystemRequirements)
     * [Hardware](#Hardware)
     * [Tool Chain](#ToolChain)
@@ -614,6 +617,73 @@ void setupAceSegment() {
   spiInterface.begin();
   ...
 }
+```
+
+<a name="ResourceConsumption"></a>
+## Resource Consumption
+
+<a name="FlashAndStaticMemory"></a>
+### Flash And Static Memory
+
+The Memory benchmark numbers can be seen in
+[examples/MemoryBenchmark](examples/MemoryBenchmark). Here are 2 samples:
+
+**Arduino Nano**
+
+```
++--------------------------------------------------------------+
+| functionality                   |  flash/  ram |       delta |
+|---------------------------------+--------------+-------------|
+| baseline                        |    456/   11 |     0/    0 |
+|---------------------------------+--------------+-------------|
+| SoftSpiInterface                |    936/   14 |   480/    3 |
+| SoftSpiFastInterface            |    518/   11 |    62/    0 |
+| HardSpiInterface                |    978/   16 |   522/    5 |
+| HardSpiFastInterface            |    884/   12 |   428/    1 |
++--------------------------------------------------------------+
+```
+
+**ESP8266**
+
++--------------------------------------------------------------+
+| functionality                   |  flash/  ram |       delta |
+|---------------------------------+--------------+-------------|
+| baseline                        | 256700/26784 |     0/    0 |
+|---------------------------------+--------------+-------------|
+| SoftSpiInterface                | 257384/26800 |   684/   16 |
+| HardSpiInterface                | 258456/26816 |  1756/   32 |
++--------------------------------------------------------------+
+```
+```
+
+<a name="CpuCycles"></a>
+### CPU Cycles
+
+The CPU benchmark numbers can be seen in
+[examples/AutoBenchmark](examples/AutoBenchmark). Here are 2 samples:
+
+**Arduino Nano**
+
+```
++-----------------------------------------+-------------------+----------+
+| Functionality                           |   min/  avg/  max | eff kbps |
+|-----------------------------------------+-------------------+----------|
+| SoftSpiInterface                        |   860/  891/  956 |     71.8 |
+| SoftSpiFastInterface                    |    76/   76/   84 |    842.1 |
+| HardSpiInterface                        |   108/  117/  124 |    547.0 |
+| HardSpiFastInterface                    |    28/   30/   36 |   2133.3 |
++-----------------------------------------+-------------------+----------+
+```
+
+**ESP8266**
+
+```
++-----------------------------------------+-------------------+----------+
+| Functionality                           |   min/  avg/  max | eff kbps |
+|-----------------------------------------+-------------------+----------|
+| SoftSpiInterface                        |   207/  208/  238 |    307.7 |
+| HardSpiInterface                        |    69/   73/  133 |    876.7 |
++-----------------------------------------+-------------------+----------+
 ```
 
 <a name="SystemRequirements"></a>
