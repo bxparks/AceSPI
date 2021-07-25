@@ -5,6 +5,7 @@
       `HardSpiFastInterface`, defaulting to 8000000 (8 MHz).
     * Add `examples/MemoryBenchmark` and `examples/AutoBenchmark` to
       calculate memory and CPU consumptions for various implementations.
+    * Add GitHub workflows validation of `examples/*`.
 * 0.1 (2021-06-25)
     * First GitHub release.
 * 2021-06-24
