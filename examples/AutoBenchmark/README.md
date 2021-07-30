@@ -92,19 +92,19 @@ addition, the `digitalWriteFast` functions reduce flash memory consumption by
 
 ```
 Sizes of Objects:
-sizeof(SimpleSpiInterface): 3
-sizeof(SimpleSpiFastInterface<11, 12, 13>): 1
 sizeof(HardSpiInterface): 3
 sizeof(HardSpiFastInterface): 2
+sizeof(SimpleSpiInterface): 3
+sizeof(SimpleSpiFastInterface<11, 12, 13>): 1
 
 CPU:
 +-----------------------------------------+-------------------+----------+
 | Functionality                           |   min/  avg/  max | eff kbps |
 |-----------------------------------------+-------------------+----------|
-| SimpleSpiInterface                      |   860/  891/  956 |     71.8 |
-| SimpleSpiFastInterface                  |    76/   76/   84 |    842.1 |
 | HardSpiInterface                        |   108/  117/  124 |    547.0 |
 | HardSpiFastInterface                    |    28/   30/   36 |   2133.3 |
+| SimpleSpiInterface                      |   860/  891/  956 |     71.8 |
+| SimpleSpiFastInterface                  |    76/   76/   84 |    842.1 |
 +-----------------------------------------+-------------------+----------+
 
 ```
@@ -118,19 +118,19 @@ CPU:
 
 ```
 Sizes of Objects:
-sizeof(SimpleSpiInterface): 3
-sizeof(SimpleSpiFastInterface<11, 12, 13>): 1
 sizeof(HardSpiInterface): 3
 sizeof(HardSpiFastInterface): 2
+sizeof(SimpleSpiInterface): 3
+sizeof(SimpleSpiFastInterface<11, 12, 13>): 1
 
 CPU:
 +-----------------------------------------+-------------------+----------+
 | Functionality                           |   min/  avg/  max | eff kbps |
 |-----------------------------------------+-------------------+----------|
-| SimpleSpiInterface                      |   832/  839/  844 |     76.3 |
-| SimpleSpiFastInterface                  |    68/   69/   76 |    927.5 |
 | HardSpiInterface                        |    88/   92/  100 |    695.7 |
 | HardSpiFastInterface                    |    28/   29/   36 |   2206.9 |
+| SimpleSpiInterface                      |   832/  839/  844 |     76.3 |
+| SimpleSpiFastInterface                  |    68/   69/   76 |    927.5 |
 +-----------------------------------------+-------------------+----------+
 
 ```
@@ -143,15 +143,15 @@ CPU:
 
 ```
 Sizes of Objects:
-sizeof(SimpleSpiInterface): 3
 sizeof(HardSpiInterface): 8
+sizeof(SimpleSpiInterface): 3
 
 CPU:
 +-----------------------------------------+-------------------+----------+
 | Functionality                           |   min/  avg/  max | eff kbps |
 |-----------------------------------------+-------------------+----------|
-| SimpleSpiInterface                      |   374/  376/  378 |    170.2 |
 | HardSpiInterface                        |   137/  137/  141 |    467.2 |
+| SimpleSpiInterface                      |   374/  376/  378 |    170.2 |
 +-----------------------------------------+-------------------+----------+
 
 ```
@@ -164,15 +164,15 @@ CPU:
 
 ```
 Sizes of Objects:
-sizeof(SimpleSpiInterface): 3
 sizeof(HardSpiInterface): 8
+sizeof(SimpleSpiInterface): 3
 
 CPU:
 +-----------------------------------------+-------------------+----------+
 | Functionality                           |   min/  avg/  max | eff kbps |
 |-----------------------------------------+-------------------+----------|
-| SimpleSpiInterface                      |   310/  311/  318 |    205.8 |
 | HardSpiInterface                        |   320/  321/  325 |    199.4 |
+| SimpleSpiInterface                      |   310/  311/  318 |    205.8 |
 +-----------------------------------------+-------------------+----------+
 
 ```
@@ -185,15 +185,15 @@ CPU:
 
 ```
 Sizes of Objects:
-sizeof(SimpleSpiInterface): 3
 sizeof(HardSpiInterface): 8
+sizeof(SimpleSpiInterface): 3
 
 CPU:
 +-----------------------------------------+-------------------+----------+
 | Functionality                           |   min/  avg/  max | eff kbps |
 |-----------------------------------------+-------------------+----------|
-| SimpleSpiInterface                      |   207/  208/  238 |    307.7 |
 | HardSpiInterface                        |    69/   73/  133 |    876.7 |
+| SimpleSpiInterface                      |   207/  208/  238 |    307.7 |
 +-----------------------------------------+-------------------+----------+
 
 ```
@@ -206,15 +206,15 @@ CPU:
 
 ```
 Sizes of Objects:
-sizeof(SimpleSpiInterface): 3
 sizeof(HardSpiInterface): 8
+sizeof(SimpleSpiInterface): 3
 
 CPU:
 +-----------------------------------------+-------------------+----------+
 | Functionality                           |   min/  avg/  max | eff kbps |
 |-----------------------------------------+-------------------+----------|
-| SimpleSpiInterface                      |    26/   27/   34 |   2370.4 |
 | HardSpiInterface                        |    68/   70/   90 |    914.3 |
+| SimpleSpiInterface                      |    26/   27/   34 |   2370.4 |
 +-----------------------------------------+-------------------+----------+
 
 ```
@@ -228,15 +228,15 @@ CPU:
 
 ```
 Sizes of Objects:
-sizeof(SimpleSpiInterface): 3
 sizeof(HardSpiInterface): 8
+sizeof(SimpleSpiInterface): 3
 
 CPU:
 +-----------------------------------------+-------------------+----------+
 | Functionality                           |   min/  avg/  max | eff kbps |
 |-----------------------------------------+-------------------+----------|
-| SimpleSpiInterface                      |    65/   65/   69 |    984.6 |
 | HardSpiInterface                        |    18/   18/   19 |   3555.6 |
+| SimpleSpiInterface                      |    65/   65/   69 |    984.6 |
 +-----------------------------------------+-------------------+----------+
 
 ```

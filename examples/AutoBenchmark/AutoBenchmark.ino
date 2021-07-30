@@ -151,14 +151,14 @@ void runHardSpiFast() {
 //-----------------------------------------------------------------------------
 
 void runBenchmarks() {
-  runSimpleSpi();
-#if defined(ARDUINO_ARCH_AVR) || defined(EPOXY_DUINO)
-  runSimpleSpiFast();
-#endif
-
   runHardSpi();
 #if defined(ARDUINO_ARCH_AVR) || defined(EPOXY_DUINO)
   runHardSpiFast();
+#endif
+
+  runSimpleSpi();
+#if defined(ARDUINO_ARCH_AVR) || defined(EPOXY_DUINO)
+  runSimpleSpiFast();
 #endif
 }
 
@@ -167,20 +167,20 @@ void runBenchmarks() {
 //-----------------------------------------------------------------------------
 
 void printSizeOf() {
-  SERIAL_PORT_MONITOR.print(F("sizeof(SimpleSpiInterface): "));
-  SERIAL_PORT_MONITOR.println(sizeof(SimpleSpiInterface));
-
-#if defined(ARDUINO_ARCH_AVR) || defined(EPOXY_DUINO)
-  SERIAL_PORT_MONITOR.print(F("sizeof(SimpleSpiFastInterface<11, 12, 13>): "));
-  SERIAL_PORT_MONITOR.println(sizeof(SimpleSpiFastInterface<11, 12, 13>));
-#endif
-
   SERIAL_PORT_MONITOR.print(F("sizeof(HardSpiInterface): "));
   SERIAL_PORT_MONITOR.println(sizeof(HardSpiInterface<SPIClass>));
 
 #if defined(ARDUINO_ARCH_AVR) || defined(EPOXY_DUINO)
   SERIAL_PORT_MONITOR.print(F("sizeof(HardSpiFastInterface): "));
   SERIAL_PORT_MONITOR.println(sizeof(HardSpiFastInterface<SPIClass, 11>));
+#endif
+
+  SERIAL_PORT_MONITOR.print(F("sizeof(SimpleSpiInterface): "));
+  SERIAL_PORT_MONITOR.println(sizeof(SimpleSpiInterface));
+
+#if defined(ARDUINO_ARCH_AVR) || defined(EPOXY_DUINO)
+  SERIAL_PORT_MONITOR.print(F("sizeof(SimpleSpiFastInterface<11, 12, 13>): "));
+  SERIAL_PORT_MONITOR.println(sizeof(SimpleSpiFastInterface<11, 12, 13>));
 #endif
 }
 

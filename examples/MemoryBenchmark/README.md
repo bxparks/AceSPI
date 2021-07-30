@@ -85,10 +85,10 @@ program for various `LedModule` configurations and various Writer classes.
 |---------------------------------+--------------+-------------|
 | baseline                        |    260/   11 |     0/    0 |
 |---------------------------------+--------------+-------------|
-| SimpleSpiInterface              |    726/   14 |   466/    3 |
-| SimpleSpiFastInterface          |    314/   11 |    54/    0 |
 | HardSpiInterface                |   1060/   20 |   800/    9 |
 | HardSpiFastInterface            |    746/   16 |   486/    5 |
+| SimpleSpiInterface              |    726/   14 |   466/    3 |
+| SimpleSpiFastInterface          |    314/   11 |    54/    0 |
 +--------------------------------------------------------------+
 
 ```
@@ -105,10 +105,10 @@ program for various `LedModule` configurations and various Writer classes.
 |---------------------------------+--------------+-------------|
 | baseline                        |    456/   11 |     0/    0 |
 |---------------------------------+--------------+-------------|
-| SimpleSpiInterface              |    936/   14 |   480/    3 |
-| SimpleSpiFastInterface          |    518/   11 |    62/    0 |
 | HardSpiInterface                |    978/   16 |   522/    5 |
 | HardSpiFastInterface            |    884/   12 |   428/    1 |
+| SimpleSpiInterface              |    936/   14 |   480/    3 |
+| SimpleSpiFastInterface          |    518/   11 |    62/    0 |
 +--------------------------------------------------------------+
 
 ```
@@ -125,10 +125,10 @@ program for various `LedModule` configurations and various Writer classes.
 |---------------------------------+--------------+-------------|
 | baseline                        |   3472/  151 |     0/    0 |
 |---------------------------------+--------------+-------------|
-| SimpleSpiInterface              |   4028/  154 |   556/    3 |
-| SimpleSpiFastInterface          |   3534/  151 |    62/    0 |
 | HardSpiInterface                |   4070/  156 |   598/    5 |
 | HardSpiFastInterface            |   4000/  152 |   528/    1 |
+| SimpleSpiInterface              |   4028/  154 |   556/    3 |
+| SimpleSpiFastInterface          |   3534/  151 |    62/    0 |
 +--------------------------------------------------------------+
 
 ```
@@ -145,8 +145,8 @@ program for various `LedModule` configurations and various Writer classes.
 |---------------------------------+--------------+-------------|
 | baseline                        |   9940/    0 |     0/    0 |
 |---------------------------------+--------------+-------------|
-| SimpleSpiInterface              |  10292/    0 |   352/    0 |
 | HardSpiInterface                |  10716/    0 |   776/    0 |
+| SimpleSpiInterface              |  10292/    0 |   352/    0 |
 +--------------------------------------------------------------+
 
 ```
@@ -163,8 +163,8 @@ program for various `LedModule` configurations and various Writer classes.
 |---------------------------------+--------------+-------------|
 | baseline                        |  21420/ 3536 |     0/    0 |
 |---------------------------------+--------------+-------------|
-| SimpleSpiInterface              |  23864/ 3720 |  2444/  184 |
 | HardSpiInterface                |  25716/ 3724 |  4296/  188 |
+| SimpleSpiInterface              |  23864/ 3720 |  2444/  184 |
 +--------------------------------------------------------------+
 
 ```
@@ -181,8 +181,8 @@ program for various `LedModule` configurations and various Writer classes.
 |---------------------------------+--------------+-------------|
 | baseline                        | 256700/26784 |     0/    0 |
 |---------------------------------+--------------+-------------|
-| SimpleSpiInterface              | 257384/26800 |   684/   16 |
 | HardSpiInterface                | 258456/26816 |  1756/   32 |
+| SimpleSpiInterface              | 257384/26800 |   684/   16 |
 +--------------------------------------------------------------+
 
 ```
@@ -199,8 +199,8 @@ program for various `LedModule` configurations and various Writer classes.
 |---------------------------------+--------------+-------------|
 | baseline                        | 197748/13084 |     0/    0 |
 |---------------------------------+--------------+-------------|
-| SimpleSpiInterface              | 199532/13272 |  1784/  188 |
 | HardSpiInterface                | 201800/13328 |  4052/  244 |
+| SimpleSpiInterface              | 199532/13272 |  1784/  188 |
 +--------------------------------------------------------------+
 
 ```
@@ -218,8 +218,8 @@ program for various `LedModule` configurations and various Writer classes.
 |---------------------------------+--------------+-------------|
 | baseline                        |  10880/ 4152 |     0/    0 |
 |---------------------------------+--------------+-------------|
-| SimpleSpiInterface              |  11616/ 4156 |   736/    4 |
 | HardSpiInterface                |  12940/ 4216 |  2060/   64 |
+| SimpleSpiInterface              |  11616/ 4156 |   736/    4 |
 +--------------------------------------------------------------+
 
 ```
