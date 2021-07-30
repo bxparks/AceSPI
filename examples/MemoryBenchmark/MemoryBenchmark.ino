@@ -16,10 +16,10 @@
 
 // List of features of AceSPI that we want to gather memory usage numbers.
 #define FEATURE_BASELINE 0
-#define FEATURE_SIMPLE_SPI 1
-#define FEATURE_SIMPLE_SPI_FAST 2
-#define FEATURE_HARD_SPI 3
-#define FEATURE_HARD_SPI_FAST 4
+#define FEATURE_HARD_SPI 1
+#define FEATURE_HARD_SPI_FAST 2
+#define FEATURE_SIMPLE_SPI 3
+#define FEATURE_SIMPLE_SPI_FAST 4
 
 // A volatile integer to prevent the compiler from optimizing away the entire
 // program.
@@ -38,20 +38,7 @@ volatile int disableCompilerOptimization = 0;
   const uint8_t DATA_PIN = MOSI;
   const uint8_t CLOCK_PIN = SCK;
 
-  #if FEATURE == FEATURE_SIMPLE_SPI
-    // Common Cathode, with transistors on Group pins
-    using SpiInterface = SimpleSpiInterface;
-    SpiInterface spiInterface(LATCH_PIN, DATA_PIN, CLOCK_PIN);
-
-  #elif FEATURE == FEATURE_SIMPLE_SPI_FAST
-    #if ! defined(ARDUINO_ARCH_AVR) && ! defined(EPOXY_DUINO)
-      #error Unsupported FEATURE on this platform
-    #endif
-
-    using SpiInterface = SimpleSpiFastInterface<LATCH_PIN, DATA_PIN, CLOCK_PIN>;
-    SpiInterface spiInterface;
-
-  #elif FEATURE == FEATURE_HARD_SPI
+  #if FEATURE == FEATURE_HARD_SPI
     using SpiInterface = HardSpiInterface<SPIClass>;
     SpiInterface spiInterface(SPI, LATCH_PIN);
 
@@ -62,6 +49,18 @@ volatile int disableCompilerOptimization = 0;
 
     using SpiInterface = HardSpiFastInterface<SPIClass, LATCH_PIN>;
     SpiInterface spiInterface(SPI);
+
+  #elif FEATURE == FEATURE_SIMPLE_SPI
+    using SpiInterface = SimpleSpiInterface;
+    SpiInterface spiInterface(LATCH_PIN, DATA_PIN, CLOCK_PIN);
+
+  #elif FEATURE == FEATURE_SIMPLE_SPI_FAST
+    #if ! defined(ARDUINO_ARCH_AVR) && ! defined(EPOXY_DUINO)
+      #error Unsupported FEATURE on this platform
+    #endif
+
+    using SpiInterface = SimpleSpiFastInterface<LATCH_PIN, DATA_PIN, CLOCK_PIN>;
+    SpiInterface spiInterface;
 
   #else
     #error Unknown FEATURE
@@ -93,18 +92,18 @@ void setup() {
 
   disableCompilerOptimization = 3;
 
-#if FEATURE == FEATURE_SIMPLE_SPI
-  spiInterface.begin();
-
-#elif FEATURE == FEATURE_SIMPLE_SPI_FAST
-  spiInterface.begin();
-
-#elif FEATURE == FEATURE_HARD_SPI
+#if FEATURE == FEATURE_HARD_SPI
   SPI.begin();
   spiInterface.begin();
 
 #elif FEATURE == FEATURE_HARD_SPI_FAST
   SPI.begin();
+  spiInterface.begin();
+
+#elif FEATURE == FEATURE_SIMPLE_SPI
+  spiInterface.begin();
+
+#elif FEATURE == FEATURE_SIMPLE_SPI_FAST
   spiInterface.begin();
 
 #else
