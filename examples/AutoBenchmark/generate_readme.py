@@ -90,8 +90,8 @@ number of `TimingStats::update()` calls that were made.
 The following tables show the number of microseconds taken by various SPI
 implementations:
 
-* `SoftSpiInterface`
-* `SoftSpiFastInterface`
+* `SimpleSpiInterface`
+* `SimpleSpiFastInterface`
 * `HardSpiInterface`
 * `HardSpiFastInterface`
 

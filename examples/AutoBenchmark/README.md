@@ -66,8 +66,8 @@ number of `TimingStats::update()` calls that were made.
 The following tables show the number of microseconds taken by various SPI
 implementations:
 
-* `SoftSpiInterface`
-* `SoftSpiFastInterface`
+* `SimpleSpiInterface`
+* `SimpleSpiFastInterface`
 * `HardSpiInterface`
 * `HardSpiFastInterface`
 
@@ -92,8 +92,8 @@ addition, the `digitalWriteFast` functions reduce flash memory consumption by
 
 ```
 Sizes of Objects:
-sizeof(SoftSpiInterface): 3
-sizeof(SoftSpiFastInterface<11, 12, 13>): 1
+sizeof(SimpleSpiInterface): 3
+sizeof(SimpleSpiFastInterface<11, 12, 13>): 1
 sizeof(HardSpiInterface): 3
 sizeof(HardSpiFastInterface): 2
 
@@ -101,8 +101,8 @@ CPU:
 +-----------------------------------------+-------------------+----------+
 | Functionality                           |   min/  avg/  max | eff kbps |
 |-----------------------------------------+-------------------+----------|
-| SoftSpiInterface                        |   860/  891/  956 |     71.8 |
-| SoftSpiFastInterface                    |    76/   76/   84 |    842.1 |
+| SimpleSpiInterface                      |   860/  891/  956 |     71.8 |
+| SimpleSpiFastInterface                  |    76/   76/   84 |    842.1 |
 | HardSpiInterface                        |   108/  117/  124 |    547.0 |
 | HardSpiFastInterface                    |    28/   30/   36 |   2133.3 |
 +-----------------------------------------+-------------------+----------+
@@ -118,8 +118,8 @@ CPU:
 
 ```
 Sizes of Objects:
-sizeof(SoftSpiInterface): 3
-sizeof(SoftSpiFastInterface<11, 12, 13>): 1
+sizeof(SimpleSpiInterface): 3
+sizeof(SimpleSpiFastInterface<11, 12, 13>): 1
 sizeof(HardSpiInterface): 3
 sizeof(HardSpiFastInterface): 2
 
@@ -127,8 +127,8 @@ CPU:
 +-----------------------------------------+-------------------+----------+
 | Functionality                           |   min/  avg/  max | eff kbps |
 |-----------------------------------------+-------------------+----------|
-| SoftSpiInterface                        |   832/  839/  844 |     76.3 |
-| SoftSpiFastInterface                    |    68/   69/   76 |    927.5 |
+| SimpleSpiInterface                      |   832/  839/  844 |     76.3 |
+| SimpleSpiFastInterface                  |    68/   69/   76 |    927.5 |
 | HardSpiInterface                        |    88/   92/  100 |    695.7 |
 | HardSpiFastInterface                    |    28/   29/   36 |   2206.9 |
 +-----------------------------------------+-------------------+----------+
@@ -143,14 +143,14 @@ CPU:
 
 ```
 Sizes of Objects:
-sizeof(SoftSpiInterface): 3
+sizeof(SimpleSpiInterface): 3
 sizeof(HardSpiInterface): 8
 
 CPU:
 +-----------------------------------------+-------------------+----------+
 | Functionality                           |   min/  avg/  max | eff kbps |
 |-----------------------------------------+-------------------+----------|
-| SoftSpiInterface                        |   374/  376/  378 |    170.2 |
+| SimpleSpiInterface                      |   374/  376/  378 |    170.2 |
 | HardSpiInterface                        |   137/  137/  141 |    467.2 |
 +-----------------------------------------+-------------------+----------+
 
@@ -164,14 +164,14 @@ CPU:
 
 ```
 Sizes of Objects:
-sizeof(SoftSpiInterface): 3
+sizeof(SimpleSpiInterface): 3
 sizeof(HardSpiInterface): 8
 
 CPU:
 +-----------------------------------------+-------------------+----------+
 | Functionality                           |   min/  avg/  max | eff kbps |
 |-----------------------------------------+-------------------+----------|
-| SoftSpiInterface                        |   310/  311/  318 |    205.8 |
+| SimpleSpiInterface                      |   310/  311/  318 |    205.8 |
 | HardSpiInterface                        |   320/  321/  325 |    199.4 |
 +-----------------------------------------+-------------------+----------+
 
@@ -185,14 +185,14 @@ CPU:
 
 ```
 Sizes of Objects:
-sizeof(SoftSpiInterface): 3
+sizeof(SimpleSpiInterface): 3
 sizeof(HardSpiInterface): 8
 
 CPU:
 +-----------------------------------------+-------------------+----------+
 | Functionality                           |   min/  avg/  max | eff kbps |
 |-----------------------------------------+-------------------+----------|
-| SoftSpiInterface                        |   207/  208/  238 |    307.7 |
+| SimpleSpiInterface                      |   207/  208/  238 |    307.7 |
 | HardSpiInterface                        |    69/   73/  133 |    876.7 |
 +-----------------------------------------+-------------------+----------+
 
@@ -206,14 +206,14 @@ CPU:
 
 ```
 Sizes of Objects:
-sizeof(SoftSpiInterface): 3
+sizeof(SimpleSpiInterface): 3
 sizeof(HardSpiInterface): 8
 
 CPU:
 +-----------------------------------------+-------------------+----------+
 | Functionality                           |   min/  avg/  max | eff kbps |
 |-----------------------------------------+-------------------+----------|
-| SoftSpiInterface                        |    26/   27/   34 |   2370.4 |
+| SimpleSpiInterface                      |    26/   27/   34 |   2370.4 |
 | HardSpiInterface                        |    68/   70/   90 |    914.3 |
 +-----------------------------------------+-------------------+----------+
 
@@ -228,14 +228,14 @@ CPU:
 
 ```
 Sizes of Objects:
-sizeof(SoftSpiInterface): 3
+sizeof(SimpleSpiInterface): 3
 sizeof(HardSpiInterface): 8
 
 CPU:
 +-----------------------------------------+-------------------+----------+
 | Functionality                           |   min/  avg/  max | eff kbps |
 |-----------------------------------------+-------------------+----------|
-| SoftSpiInterface                        |    65/   65/   69 |    984.6 |
+| SimpleSpiInterface                      |    65/   65/   69 |    984.6 |
 | HardSpiInterface                        |    18/   18/   19 |   3555.6 |
 +-----------------------------------------+-------------------+----------+
 

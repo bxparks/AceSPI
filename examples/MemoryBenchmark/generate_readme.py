@@ -94,8 +94,8 @@ before substantional refactoring in 2021.
 The following shows the flash and static memory sizes of the `MemoryBenchmark`
 program for various `LedModule` configurations and various Writer classes.
 
-* `SoftSpiInterface`
-* `SoftSpiFastInterface`
+* `SimpleSpiInterface`
+* `SimpleSpiFastInterface`
 * `HardSpiInterface`
 * `HardSpiFastInterface`
 

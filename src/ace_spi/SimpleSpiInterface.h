@@ -22,8 +22,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef ACE_SPI_SOFT_SPI_INTERFACE_H
-#define ACE_SPI_SOFT_SPI_INTERFACE_H
+#ifndef ACE_SPI_SIMPLE_SPI_INTERFACE_H
+#define ACE_SPI_SIMPLE_SPI_INTERFACE_H
 
 #include <stdint.h>
 #include <Arduino.h>
@@ -31,7 +31,7 @@ SOFTWARE.
 namespace ace_spi {
 
 /** Software SPI using shiftOut(). */
-class SoftSpiInterface {
+class SimpleSpiInterface {
   public:
     /**
      * Constructor.
@@ -40,7 +40,7 @@ class SoftSpiInterface {
      * @param dataPin the data pin (MOSI)
      * @param clockPin the clock pin (CLK)
      */
-    explicit SoftSpiInterface(
+    explicit SimpleSpiInterface(
         uint8_t latchPin,
         uint8_t dataPin,
         uint8_t clockPin
@@ -87,8 +87,8 @@ class SoftSpiInterface {
     }
 
     // Use default copy constructor and assignment operator.
-    SoftSpiInterface(const SoftSpiInterface&) = default;
-    SoftSpiInterface& operator=(const SoftSpiInterface&) = default;
+    SimpleSpiInterface(const SimpleSpiInterface&) = default;
+    SimpleSpiInterface& operator=(const SimpleSpiInterface&) = default;
 
   private:
     uint8_t const mLatchPin;

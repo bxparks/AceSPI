@@ -48,11 +48,11 @@ SOFTWARE.
 
 // Files exported by this main header file.
 #include "ace_spi/HardSpiInterface.h"
-#include "ace_spi/SoftSpiInterface.h"
+#include "ace_spi/SimpleSpiInterface.h"
 
 // The following are commented out because they work only on AVR platforms with
 // a suitable <digitalWriteFast.h> library.
 //#include "ace_spi/HardSpiFastInterface.h"
-//#include "ace_spi/SoftSpiFastInterface.h"
+//#include "ace_spi/SimpleSpiFastInterface.h"
 
 #endif

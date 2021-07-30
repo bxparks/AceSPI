@@ -17,9 +17,9 @@ provides the following implementations:
 * `HardSpiFastInterface.h`
     * Hardware SPI using `digitalWriteFast()` to control the latch pin.
     * Depends on `<SPI.h>`.
-* `SoftSpiInterface.h`
+* `SimpleSpiInterface.h`
     * Software SPI using `shiftOut()`
-* `SoftSpiFastInterface.h`
+* `SimpleSpiFastInterface.h`
     * Software SPI using `digitalWriteFast()` on AVR processors
 
 **Version**: 0.1 (2021-06-25)
@@ -41,8 +41,8 @@ provides the following implementations:
     * [Unified Interface](#UnifiedInterface)
     * [HardSpiInterface](#HardSpiInterface)
     * [HardSpiFastInterface](#HardSpiFastInterface)
-    * [SoftSpiInterface](#SoftSpiInterface)
-    * [SoftSpiFastInterface](#SoftSpiFastInterface)
+    * [SimpleSpiInterface](#SimpleSpiInterface)
+    * [SimpleSpiFastInterface](#SimpleSpiFastInterface)
     * [Storing Interface Objects](#StoringInterfaceObjects)
     * [Multiple SPI Buses](#MultipleSpiBuses)
         * [STM32](#MultipleSpiBusesSTM32)
@@ -86,7 +86,7 @@ The source files are organized as follows:
 
 The main `AceSPI.h` does not depend any external libraries.
 
-The "Fast" versions (`HardSpiFastInterface.h`, `SoftSpiFastInterface.h`)
+The "Fast" versions (`HardSpiFastInterface.h`, `SimpleSpiFastInterface.h`)
 depend on one of the digitalWriteFast libraries, for example:
 
 * https://github.com/watterott/Arduino-Libs/tree/master/digitalWriteFast
@@ -118,7 +118,7 @@ prepending the `ace_spi::` prefix, use the `using` directive:
 #include <SPI.h>
 #include <AceSPI.h>
 using ace_spi::HardSpiInterface;
-using ace_spi::SoftSpiInterface;
+using ace_spi::SimpleSpiInterface;
 ```
 
 The "Fast" versions are not included automatically by `AceSPI.h` because they
@@ -133,9 +133,9 @@ library. To use the "Fast" versions, use something like the following:'
 #if defined(ARDUINO_ARCH_AVR)
   #include <digitalWriteFast.h>
   #include <ace_spi/HardSpiFastInterface.h>
-  #include <ace_spi/SoftSpiFastInterface.h>
+  #include <ace_spi/SimpleSpiFastInterface.h>
   using ace_spi::HardSpiFastInterface;
-  using ace_spi::SoftSpiFastInterface;
+  using ace_spi::SimpleSpiFastInterface;
 #endif
 ```
 
@@ -319,18 +319,18 @@ void setup() {
 The latching on the `SS` pin is performed using the `digitalWriteFast()`
 function from one of the external "digitalWriteFast" libraries.
 
-<a name="SoftSpiInterface"></a>
-### SoftSpiInterface
+<a name="SimpleSpiInterface"></a>
+### SimpleSpiInterface
 
-The `SoftSpiInterface` class is a simple implementation of SPI using the Arduino
+The `SimpleSpiInterface` class is a simple implementation of SPI using the Arduino
 built-in `shiftOut()` function, which uses `digitalWrite()` underneath the
 covers. Any appropriate GPIO pin can be used for software SPI, instead of being
 restricted to the hardware SPI pins.
 
 ```C++
-class SoftSpiInterface {
+class SimpleSpiInterface {
   public:
-    explicit SoftSpiInterface(
+    explicit SimpleSpiInterface(
         uint8_t latchPin,
         uint8_t dataPin,
         uint8_t clockPin
@@ -354,7 +354,7 @@ We can make our `MyClass` use this interface like this:
 ```C++
 #include <Arduino.h>
 #include <AceSPI.h>
-using ace_spi::SoftSpiInterface;
+using ace_spi::SimpleSpiInterface;
 
 template <typename T_SPII>
 class MyClass {
@@ -365,7 +365,7 @@ const uint8_t DATA_PIN = MOSI;
 const uint8_t CLOCK_PIN = SCK;
 const uint8_t LATCH_PIN = SS;
 
-using SpiInterface = SoftSpiInterface;
+using SpiInterface = SimpleSpiInterface;
 SpiInterface spiInterface(LATCH_PIN, DATA_PIN, CLOCK_PIN);
 MyClass<SpiInterface> myClass(spiInterface);
 
@@ -375,19 +375,19 @@ void setup() {
 }
 ```
 
-<a name="SoftSpiFastInterface"></a>
-### SoftSpiFastInterface
+<a name="SimpleSpiFastInterface"></a>
+### SimpleSpiFastInterface
 
-The `SoftSpiFastInterface` class is the same as `SoftSpiInterface` except that
+The `SimpleSpiFastInterface` class is the same as `SimpleSpiInterface` except that
 it uses the `digitalWriteFast()` and `pinModeFast()` functions provided by one
 of the digitalWriteFast libraries mentioned above. The pin numbers need to be
 compile-time constants, so they are passed in as template parameters, like this:
 
 ```C++
 template <uint8_t T_LATCH_PIN, uint8_t T_DATA_PIN, uint8_t T_CLOCK_PIN>
-class SoftSpiFastInterface {
+class SimpleSpiFastInterface {
   public:
-    explicit SoftSpiFastInterface() = default;
+    explicit SimpleSpiFastInterface() = default;
 
     void begin() { ... }
     void end() { ... }
@@ -404,8 +404,8 @@ The code to configure the client code `MyClass` looks very similar:
 #include <AceSPI.h>
 #if defined(ARDUINO_ARCH_AVR)
   #include <digitalWriteFast.h>
-  #include <ace_spi/SoftSpiFastInterface.h>
-  using ace_spi::SoftSpiFastInterface;
+  #include <ace_spi/SimpleSpiFastInterface.h>
+  using ace_spi::SimpleSpiFastInterface;
 #endif
 
 template <typename T_SPII>
@@ -417,7 +417,7 @@ const uint8_t DATA_PIN = MOSI;
 const uint8_t CLOCK_PIN = SCK;
 const uint8_t LATCH_PIN = SS;
 
-using SpiInterface = SoftSpiFastInterface<LATCH_PIN, DATA_PIN, CLOCK_PIN>;
+using SpiInterface = SimpleSpiFastInterface<LATCH_PIN, DATA_PIN, CLOCK_PIN>;
 SpiInterface spiInterface;
 MyClass<SpiInterface> myClass(spiInterface);
 
@@ -636,8 +636,8 @@ The Memory benchmark numbers can be seen in
 |---------------------------------+--------------+-------------|
 | baseline                        |    456/   11 |     0/    0 |
 |---------------------------------+--------------+-------------|
-| SoftSpiInterface                |    936/   14 |   480/    3 |
-| SoftSpiFastInterface            |    518/   11 |    62/    0 |
+| SimpleSpiInterface              |    936/   14 |   480/    3 |
+| SimpleSpiFastInterface          |    518/   11 |    62/    0 |
 | HardSpiInterface                |    978/   16 |   522/    5 |
 | HardSpiFastInterface            |    884/   12 |   428/    1 |
 +--------------------------------------------------------------+
@@ -651,7 +651,7 @@ The Memory benchmark numbers can be seen in
 |---------------------------------+--------------+-------------|
 | baseline                        | 256700/26784 |     0/    0 |
 |---------------------------------+--------------+-------------|
-| SoftSpiInterface                | 257384/26800 |   684/   16 |
+| SimpleSpiInterface              | 257384/26800 |   684/   16 |
 | HardSpiInterface                | 258456/26816 |  1756/   32 |
 +--------------------------------------------------------------+
 ```
@@ -668,8 +668,8 @@ The CPU benchmark numbers can be seen in
 +-----------------------------------------+-------------------+----------+
 | Functionality                           |   min/  avg/  max | eff kbps |
 |-----------------------------------------+-------------------+----------|
-| SoftSpiInterface                        |   860/  891/  956 |     71.8 |
-| SoftSpiFastInterface                    |    76/   76/   84 |    842.1 |
+| SimpleSpiInterface                      |   860/  891/  956 |     71.8 |
+| SimpleSpiFastInterface                  |    76/   76/   84 |    842.1 |
 | HardSpiInterface                        |   108/  117/  124 |    547.0 |
 | HardSpiFastInterface                    |    28/   30/   36 |   2133.3 |
 +-----------------------------------------+-------------------+----------+
@@ -681,7 +681,7 @@ The CPU benchmark numbers can be seen in
 +-----------------------------------------+-------------------+----------+
 | Functionality                           |   min/  avg/  max | eff kbps |
 |-----------------------------------------+-------------------+----------|
-| SoftSpiInterface                        |   207/  208/  238 |    307.7 |
+| SimpleSpiInterface                      |   207/  208/  238 |    307.7 |
 | HardSpiInterface                        |    69/   73/  133 |    876.7 |
 +-----------------------------------------+-------------------+----------+
 ```

@@ -35,7 +35,7 @@ SOFTWARE.
 
 #if defined(ARDUINO_ARCH_AVR) || defined(EPOXY_DUINO)
 #include <digitalWriteFast.h>
-#include <ace_spi/SoftSpiFastInterface.h>
+#include <ace_spi/SimpleSpiFastInterface.h>
 #include <ace_spi/HardSpiFastInterface.h>
 #endif
 
@@ -104,22 +104,22 @@ void runBenchmark(const __FlashStringHelper* name, T_SPII& spiInterface) {
 // Specific SPI implementations
 //-----------------------------------------------------------------------------
 
-void runSoftSpi() {
-  using SpiInterface = SoftSpiInterface;
+void runSimpleSpi() {
+  using SpiInterface = SimpleSpiInterface;
   SpiInterface spiInterface(LATCH_PIN, DATA_PIN, CLOCK_PIN);
 
   spiInterface.begin();
-  runBenchmark(F("SoftSpiInterface"), spiInterface);
+  runBenchmark(F("SimpleSpiInterface"), spiInterface);
   spiInterface.end();
 }
 
 #if defined(ARDUINO_ARCH_AVR) || defined(EPOXY_DUINO)
-void runSoftSpiFast() {
-  using SpiInterface = SoftSpiFastInterface<LATCH_PIN, DATA_PIN, CLOCK_PIN>;
+void runSimpleSpiFast() {
+  using SpiInterface = SimpleSpiFastInterface<LATCH_PIN, DATA_PIN, CLOCK_PIN>;
   SpiInterface spiInterface;
 
   spiInterface.begin();
-  runBenchmark(F("SoftSpiFastInterface"), spiInterface);
+  runBenchmark(F("SimpleSpiFastInterface"), spiInterface);
   spiInterface.end();
 }
 #endif
@@ -151,9 +151,9 @@ void runHardSpiFast() {
 //-----------------------------------------------------------------------------
 
 void runBenchmarks() {
-  runSoftSpi();
+  runSimpleSpi();
 #if defined(ARDUINO_ARCH_AVR) || defined(EPOXY_DUINO)
-  runSoftSpiFast();
+  runSimpleSpiFast();
 #endif
 
   runHardSpi();
@@ -167,12 +167,12 @@ void runBenchmarks() {
 //-----------------------------------------------------------------------------
 
 void printSizeOf() {
-  SERIAL_PORT_MONITOR.print(F("sizeof(SoftSpiInterface): "));
-  SERIAL_PORT_MONITOR.println(sizeof(SoftSpiInterface));
+  SERIAL_PORT_MONITOR.print(F("sizeof(SimpleSpiInterface): "));
+  SERIAL_PORT_MONITOR.println(sizeof(SimpleSpiInterface));
 
 #if defined(ARDUINO_ARCH_AVR) || defined(EPOXY_DUINO)
-  SERIAL_PORT_MONITOR.print(F("sizeof(SoftSpiFastInterface<11, 12, 13>): "));
-  SERIAL_PORT_MONITOR.println(sizeof(SoftSpiFastInterface<11, 12, 13>));
+  SERIAL_PORT_MONITOR.print(F("sizeof(SimpleSpiFastInterface<11, 12, 13>): "));
+  SERIAL_PORT_MONITOR.println(sizeof(SimpleSpiFastInterface<11, 12, 13>));
 #endif
 
   SERIAL_PORT_MONITOR.print(F("sizeof(HardSpiInterface): "));

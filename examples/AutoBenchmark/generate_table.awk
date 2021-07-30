@@ -60,7 +60,7 @@ END {
   printf("| Functionality                           |   min/  avg/  max | eff kbps |\n")
   for (i = 0; i < TOTAL_BENCHMARKS; i++) {
     name = u[i]["name"]
-    if (name ~ /^SoftSpiInterface$/) {
+    if (name ~ /^SimpleSpiInterface$/) {
       printf("|-----------------------------------------+-------------------+----------|\n")
     }
 

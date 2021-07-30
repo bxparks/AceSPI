@@ -22,8 +22,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef ACE_SPI_SOFT_SPI_FAST_INTERFACE_H
-#define ACE_SPI_SOFT_SPI_FAST_INTERFACE_H
+#ifndef ACE_SPI_SIMPLE_SPI_FAST_INTERFACE_H
+#define ACE_SPI_SIMPLE_SPI_FAST_INTERFACE_H
 
 #include <stdint.h>
 #include <Arduino.h> // OUTPUT, INPUT
@@ -39,10 +39,10 @@ namespace ace_spi {
  * @tparam T_CLOCK_PIN the clock pin (CLK)
  */
 template <uint8_t T_LATCH_PIN, uint8_t T_DATA_PIN, uint8_t T_CLOCK_PIN>
-class SoftSpiFastInterface {
+class SimpleSpiFastInterface {
   public:
     /** Constructor. */
-    explicit SoftSpiFastInterface() = default;
+    explicit SimpleSpiFastInterface() = default;
 
     /** Initialize the various pins. */
     void begin() const {
@@ -81,8 +81,8 @@ class SoftSpiFastInterface {
     }
 
     // Use default copy constructor and assignment operator.
-    SoftSpiFastInterface(const SoftSpiFastInterface&) = default;
-    SoftSpiFastInterface& operator=(const SoftSpiFastInterface&) = default;
+    SimpleSpiFastInterface(const SimpleSpiFastInterface&) = default;
+    SimpleSpiFastInterface& operator=(const SimpleSpiFastInterface&) = default;
 
   private:
     static void shiftOutFast(uint8_t output) {

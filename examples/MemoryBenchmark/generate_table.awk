@@ -7,8 +7,8 @@
 
 BEGIN {
   labels[0] = "baseline"
-  labels[1] = "SoftSpiInterface";
-  labels[2] = "SoftSpiFastInterface";
+  labels[1] = "SimpleSpiInterface";
+  labels[2] = "SimpleSpiFastInterface";
   labels[3] = "HardSpiInterface";
   labels[4] = "HardSpiFastInterface";
   record_index = 0
@@ -42,7 +42,7 @@ END {
   for (i = 1 ; i < NUM_ENTRIES; i++) {
     if (u[i]["flash"] == "-1") continue
 
-    if (labels[i] ~ /^SoftSpiInterface/) {
+    if (labels[i] ~ /^SimpleSpiInterface/) {
       printf(\
         "|---------------------------------+--------------+-------------|\n")
     }

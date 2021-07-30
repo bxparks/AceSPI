@@ -1,7 +1,7 @@
 SIZEOF
-sizeof(SoftSpiInterface): 3
+sizeof(SimpleSpiInterface): 3
 sizeof(HardSpiInterface): 8
 BENCHMARKS
-SoftSpiInterface 207 208 238 20
+SimpleSpiInterface 207 208 238 20
 HardSpiInterface 69 73 133 20
 END
