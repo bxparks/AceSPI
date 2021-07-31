@@ -26,7 +26,7 @@ print(f"""\
 
 This program determines the speed of various SPI implementations.
 
-**Version**: AceSPI v0.1+
+**Version**: AceSPI v0.2
 
 **DO NOT EDIT**: This file was auto-generated using `make README.md`.
 
@@ -82,7 +82,7 @@ number of `TimingStats::update()` calls that were made.
 
 ## CPU Time Changes
 
-**v0.1+:**
+**v0.2:**
 * Initial benchmarks.
 
 ## Results

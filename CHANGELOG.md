@@ -1,6 +1,7 @@
 # Changelog
 
 * Unreleased
+* 0.2 (2021-07-30)
     * Add `T_CLOCK_SPEED` template parameter to `HardSpiInterface` and
       `HardSpiFastInterface`, defaulting to 8000000 (8 MHz).
     * Add `examples/MemoryBenchmark` and `examples/AutoBenchmark` to

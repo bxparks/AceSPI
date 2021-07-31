@@ -22,7 +22,7 @@ provides the following implementations:
 * `SimpleSpiFastInterface.h`
     * Software SPI using `digitalWriteFast()` on AVR processors
 
-**Version**: 0.1 (2021-06-25)
+**Version**: 0.2 (2021-07-30)
 
 **Changelog**: [CHANGELOG.md](CHANGELOG.md)
 
