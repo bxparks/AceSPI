@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['begin_13',['begin',['../classace__spi_1_1HardSpiFastInterface.html#ae6f88387ef24e6dd5ae02da401707c81',1,'ace_spi::HardSpiFastInterface::begin()'],['../classace__spi_1_1HardSpiInterface.html#a9f51b0e35638fefba189f8c38950cad0',1,'ace_spi::HardSpiInterface::begin()'],['../classace__spi_1_1SoftSpiFastInterface.html#aec1c8f82a21888279d2cbae7005987da',1,'ace_spi::SoftSpiFastInterface::begin()'],['../classace__spi_1_1SoftSpiInterface.html#a26f88d0c86744c128bbef255055ab3a4',1,'ace_spi::SoftSpiInterface::begin()']]]
+  ['begin_13',['begin',['../classace__spi_1_1HardSpiFastInterface.html#aaafc7a9b7a565dab5b135e069fdd31a9',1,'ace_spi::HardSpiFastInterface::begin()'],['../classace__spi_1_1HardSpiInterface.html#a662ff1c00b0adc29f1e88639b6ac54da',1,'ace_spi::HardSpiInterface::begin()'],['../classace__spi_1_1SimpleSpiFastInterface.html#af6b7532774f370c8beb331e517b0cfb2',1,'ace_spi::SimpleSpiFastInterface::begin()'],['../classace__spi_1_1SimpleSpiInterface.html#ab9be79473dd551a538f2820b1530da71',1,'ace_spi::SimpleSpiInterface::begin()']]]
 ];

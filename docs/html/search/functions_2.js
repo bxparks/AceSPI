@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['hardspifastinterface_15',['HardSpiFastInterface',['../classace__spi_1_1HardSpiFastInterface.html#aab787b4497d5b20cad6860fce1ef1854',1,'ace_spi::HardSpiFastInterface']]],
-  ['hardspiinterface_16',['HardSpiInterface',['../classace__spi_1_1HardSpiInterface.html#a6c5ac4c35d179c28379198c491fd60cd',1,'ace_spi::HardSpiInterface']]]
+  ['hardspifastinterface_15',['HardSpiFastInterface',['../classace__spi_1_1HardSpiFastInterface.html#ad370f650886b66891b18bbc1747cfc9b',1,'ace_spi::HardSpiFastInterface']]],
+  ['hardspiinterface_16',['HardSpiInterface',['../classace__spi_1_1HardSpiInterface.html#a28b7e98dd0c1db6ec0e0882124bb9a12',1,'ace_spi::HardSpiInterface']]]
 ];
