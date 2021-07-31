@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>AceSPI: ace_spi::HardSpiInterface&lt; T_SPI &gt; Class Template Reference</title>
+<title>AceSPI: ace_spi::HardSpiInterface&lt; T_SPI, T_CLOCK_SPEED &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AceSPI
-   &#160;<span id="projectnumber">0.1.0</span>
+   &#160;<span id="projectnumber">0.2.0</span>
    </div>
    <div id="projectbrief">Unified interface for selecting hardware or software SPI implementations on Arduino platforms</div>
   </td>
@@ -71,69 +71,127 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classace__spi_1_1HardSpiInterface-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">ace_spi::HardSpiInterface&lt; T_SPI &gt; Class Template Reference</div>  </div>
+<div class="title">ace_spi::HardSpiInterface&lt; T_SPI, T_CLOCK_SPEED &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Hardware SPI interface to talk to one or two 74HC595 Shift Register chip(s), using the predefined <code>SPI</code> global instance.  
+<p>Hardware SPI interface to talk to SPI peripherals.  
  <a href="classace__spi_1_1HardSpiInterface.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="HardSpiInterface_8h_source.html">HardSpiInterface.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a6c5ac4c35d179c28379198c491fd60cd"><td class="memItemLeft" align="right" valign="top"><a id="a6c5ac4c35d179c28379198c491fd60cd"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>HardSpiInterface</b> (T_SPI &amp;spi, uint8_t latchPin)</td></tr>
-<tr class="separator:a6c5ac4c35d179c28379198c491fd60cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9f51b0e35638fefba189f8c38950cad0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classace__spi_1_1HardSpiInterface.html#a9f51b0e35638fefba189f8c38950cad0">begin</a> () const</td></tr>
-<tr class="memdesc:a9f51b0e35638fefba189f8c38950cad0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the <a class="el" href="classace__spi_1_1HardSpiInterface.html" title="Hardware SPI interface to talk to one or two 74HC595 Shift Register chip(s), using the predefined SPI...">HardSpiInterface</a>.  <a href="classace__spi_1_1HardSpiInterface.html#a9f51b0e35638fefba189f8c38950cad0">More...</a><br /></td></tr>
-<tr class="separator:a9f51b0e35638fefba189f8c38950cad0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aabd9d6028f61a684e8c41bebb21556bf"><td class="memItemLeft" align="right" valign="top"><a id="aabd9d6028f61a684e8c41bebb21556bf"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> () const</td></tr>
-<tr class="separator:aabd9d6028f61a684e8c41bebb21556bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7afc4ed403409920e2694702b69b7477"><td class="memItemLeft" align="right" valign="top"><a id="a7afc4ed403409920e2694702b69b7477"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classace__spi_1_1HardSpiInterface.html#a7afc4ed403409920e2694702b69b7477">send8</a> (uint8_t value) const</td></tr>
-<tr class="memdesc:a7afc4ed403409920e2694702b69b7477"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send 8 bits, including latching LOW and HIGH. <br /></td></tr>
-<tr class="separator:a7afc4ed403409920e2694702b69b7477"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac53da05acc430bb696e7235b5d1444fd"><td class="memItemLeft" align="right" valign="top"><a id="ac53da05acc430bb696e7235b5d1444fd"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classace__spi_1_1HardSpiInterface.html#ac53da05acc430bb696e7235b5d1444fd">send16</a> (uint16_t value) const</td></tr>
-<tr class="memdesc:ac53da05acc430bb696e7235b5d1444fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send 16 bits, including latching LOW and HIGH. <br /></td></tr>
-<tr class="separator:ac53da05acc430bb696e7235b5d1444fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e6515c2f242e09df9bb6c2bd9557d8b"><td class="memItemLeft" align="right" valign="top"><a id="a2e6515c2f242e09df9bb6c2bd9557d8b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classace__spi_1_1HardSpiInterface.html#a2e6515c2f242e09df9bb6c2bd9557d8b">send16</a> (uint8_t msb, uint8_t lsb) const</td></tr>
-<tr class="memdesc:a2e6515c2f242e09df9bb6c2bd9557d8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send two 8-bit bytes as a single 16-bit stream, including latching LOW and HIGH. <br /></td></tr>
-<tr class="separator:a2e6515c2f242e09df9bb6c2bd9557d8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28b7e98dd0c1db6ec0e0882124bb9a12"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classace__spi_1_1HardSpiInterface.html#a28b7e98dd0c1db6ec0e0882124bb9a12">HardSpiInterface</a> (T_SPI &amp;spi, uint8_t latchPin)</td></tr>
+<tr class="memdesc:a28b7e98dd0c1db6ec0e0882124bb9a12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="classace__spi_1_1HardSpiInterface.html#a28b7e98dd0c1db6ec0e0882124bb9a12">More...</a><br /></td></tr>
+<tr class="separator:a28b7e98dd0c1db6ec0e0882124bb9a12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a662ff1c00b0adc29f1e88639b6ac54da"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classace__spi_1_1HardSpiInterface.html#a662ff1c00b0adc29f1e88639b6ac54da">begin</a> () const</td></tr>
+<tr class="memdesc:a662ff1c00b0adc29f1e88639b6ac54da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the <a class="el" href="classace__spi_1_1HardSpiInterface.html" title="Hardware SPI interface to talk to SPI peripherals.">HardSpiInterface</a>.  <a href="classace__spi_1_1HardSpiInterface.html#a662ff1c00b0adc29f1e88639b6ac54da">More...</a><br /></td></tr>
+<tr class="separator:a662ff1c00b0adc29f1e88639b6ac54da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e3bb4d60e5fa73c2f43cc7befbad079"><td class="memItemLeft" align="right" valign="top"><a id="a2e3bb4d60e5fa73c2f43cc7befbad079"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classace__spi_1_1HardSpiInterface.html#a2e3bb4d60e5fa73c2f43cc7befbad079">end</a> () const</td></tr>
+<tr class="memdesc:a2e3bb4d60e5fa73c2f43cc7befbad079"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clean up the object. <br /></td></tr>
+<tr class="separator:a2e3bb4d60e5fa73c2f43cc7befbad079"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3dac505f44304e13dbc388cfd3629b4c"><td class="memItemLeft" align="right" valign="top"><a id="a3dac505f44304e13dbc388cfd3629b4c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classace__spi_1_1HardSpiInterface.html#a3dac505f44304e13dbc388cfd3629b4c">send8</a> (uint8_t value) const</td></tr>
+<tr class="memdesc:a3dac505f44304e13dbc388cfd3629b4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send 8 bits, including latching LOW and HIGH. <br /></td></tr>
+<tr class="separator:a3dac505f44304e13dbc388cfd3629b4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a066fc66ae091237ebc3ff72e0ec25580"><td class="memItemLeft" align="right" valign="top"><a id="a066fc66ae091237ebc3ff72e0ec25580"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classace__spi_1_1HardSpiInterface.html#a066fc66ae091237ebc3ff72e0ec25580">send16</a> (uint16_t value) const</td></tr>
+<tr class="memdesc:a066fc66ae091237ebc3ff72e0ec25580"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send 16 bits, including latching LOW and HIGH. <br /></td></tr>
+<tr class="separator:a066fc66ae091237ebc3ff72e0ec25580"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a4189a73cae2a072e76b1d7717c3177"><td class="memItemLeft" align="right" valign="top"><a id="a9a4189a73cae2a072e76b1d7717c3177"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classace__spi_1_1HardSpiInterface.html#a9a4189a73cae2a072e76b1d7717c3177">send16</a> (uint8_t msb, uint8_t lsb) const</td></tr>
+<tr class="memdesc:a9a4189a73cae2a072e76b1d7717c3177"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send two 8-bit bytes as a single 16-bit stream, including latching LOW and HIGH. <br /></td></tr>
+<tr class="separator:a9a4189a73cae2a072e76b1d7717c3177"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93b305b61d1c98534923b9e2368b7ed5"><td class="memItemLeft" align="right" valign="top"><a id="a93b305b61d1c98534923b9e2368b7ed5"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>HardSpiInterface</b> (const <a class="el" href="classace__spi_1_1HardSpiInterface.html">HardSpiInterface</a> &amp;)=default</td></tr>
+<tr class="separator:a93b305b61d1c98534923b9e2368b7ed5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3559d57af3afca9f5b5d8d736c5479a5"><td class="memItemLeft" align="right" valign="top"><a id="a3559d57af3afca9f5b5d8d736c5479a5"></a>
+<a class="el" href="classace__spi_1_1HardSpiInterface.html">HardSpiInterface</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classace__spi_1_1HardSpiInterface.html">HardSpiInterface</a> &amp;)=default</td></tr>
+<tr class="separator:a3559d57af3afca9f5b5d8d736c5479a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;typename T_SPI&gt;<br />
-class ace_spi::HardSpiInterface&lt; T_SPI &gt;</h3>
+<div class="textblock"><h3>template&lt;typename T_SPI, uint32_t T_CLOCK_SPEED = 8000000&gt;<br />
+class ace_spi::HardSpiInterface&lt; T_SPI, T_CLOCK_SPEED &gt;</h3>
 
-<p>Hardware SPI interface to talk to one or two 74HC595 Shift Register chip(s), using the predefined <code>SPI</code> global instance. </p>
-<p>This is currently not meant to be general-purpose SPI interface. For different SPI configurations, it is probably easiest to just copy this file, make the necessary changes, then substitute the new class in places where this class is used.</p>
-<p>The maximum speed of MAX7219 is 16MHz so this class sets the SPI speed to 8MHz. It's not clear if the SPI speed is worth making into a configurable parameter. Such a change needs to done a bit carefully, because it should be a template parameter so that <code>SPISettings</code> is a compile-time constant which allows compile-time optimizations to happen.</p>
-<p>The ESP32 has 2 user-accessible SPI buses (HSPI and VSPI), and so does the STM32F1 (SPI1 and SPI2). By default, the predefined SPI instance is used, but a user-defined secondary SPI instance can be passed into the constructor.</p>
+<p>Hardware SPI interface to talk to SPI peripherals. </p>
+<p>It was initially created to communicate with the 74HC595 Shift Register chip, then verified to work with the MAX7219 LED controller chip. This is currently not meant to be general-purpose SPI interface. In particular, it supports only SPI MODE0, and MSBFIRST configurations.</p>
+<p>For different SPI configurations, it is probably easiest to just copy this file, make the necessary changes, then substitute the new class in places where this class is used. The maximum speed of MAX7219 is 16MHz so this class sets the default SPI speed to 8MHz.</p>
+<p>The ESP32 has 2 user-accessible SPI buses (HSPI and VSPI), and so does the STM32F1 (SPI1 and SPI2). Usually, the predefined SPI instance is used, but a user-defined secondary SPI instance can be passed into the constructor.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T_SPI</td><td>the class of the hardware SPI instance, usually SPIClass </td></tr>
+    <tr><td class="paramname">T_CLOCK_SPEED</td><td>the SPI clock speed, default 8000000 (8 MHz) </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="HardSpiInterface_8h_source.html#l00054">54</a> of file <a class="el" href="HardSpiInterface_8h_source.html">HardSpiInterface.h</a>.</p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a9f51b0e35638fefba189f8c38950cad0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9f51b0e35638fefba189f8c38950cad0">&#9670;&nbsp;</a></span>begin()</h2>
+<p class="definition">Definition at line <a class="el" href="HardSpiInterface_8h_source.html#l00057">57</a> of file <a class="el" href="HardSpiInterface_8h_source.html">HardSpiInterface.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a28b7e98dd0c1db6ec0e0882124bb9a12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28b7e98dd0c1db6ec0e0882124bb9a12">&#9670;&nbsp;</a></span>HardSpiInterface()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T_SPI &gt; </div>
+template&lt;typename T_SPI , uint32_t T_CLOCK_SPEED = 8000000&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classace__spi_1_1HardSpiInterface.html">ace_spi::HardSpiInterface</a>&lt; T_SPI &gt;::begin </td>
+          <td class="memname"><a class="el" href="classace__spi_1_1HardSpiInterface.html">ace_spi::HardSpiInterface</a>&lt; T_SPI, T_CLOCK_SPEED &gt;::<a class="el" href="classace__spi_1_1HardSpiInterface.html">HardSpiInterface</a> </td>
+          <td>(</td>
+          <td class="paramtype">T_SPI &amp;&#160;</td>
+          <td class="paramname"><em>spi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>latchPin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">spi</td><td>instance of the <code>T_SPI</code> class. If the pre-installed <code>&lt;SPI.h&gt;</code> is used, <code>T_SPI</code> is <code>SPIClass</code> and <code>spi</code> will be the pre-defined <code>SPI</code> object. </td></tr>
+    <tr><td class="paramname">latchPin</td><td>the pin that controls the CS/SS pin of the slave device </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="HardSpiInterface_8h_source.html#l00082">82</a> of file <a class="el" href="HardSpiInterface_8h_source.html">HardSpiInterface.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a662ff1c00b0adc29f1e88639b6ac54da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a662ff1c00b0adc29f1e88639b6ac54da">&#9670;&nbsp;</a></span>begin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T_SPI , uint32_t T_CLOCK_SPEED = 8000000&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classace__spi_1_1HardSpiInterface.html">ace_spi::HardSpiInterface</a>&lt; T_SPI, T_CLOCK_SPEED &gt;::begin </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -146,10 +204,10 @@ template&lt;typename T_SPI &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Initialize the <a class="el" href="classace__spi_1_1HardSpiInterface.html" title="Hardware SPI interface to talk to one or two 74HC595 Shift Register chip(s), using the predefined SPI...">HardSpiInterface</a>. </p>
+<p>Initialize the <a class="el" href="classace__spi_1_1HardSpiInterface.html" title="Hardware SPI interface to talk to SPI peripherals.">HardSpiInterface</a>. </p>
 <p>The hardware SPI object must be initialized using <code>SPI.begin()</code> as well. </p>
 
-<p class="definition">Definition at line <a class="el" href="HardSpiInterface_8h_source.html#l00083">83</a> of file <a class="el" href="HardSpiInterface_8h_source.html">HardSpiInterface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="HardSpiInterface_8h_source.html#l00091">91</a> of file <a class="el" href="HardSpiInterface_8h_source.html">HardSpiInterface.h</a>.</p>
 
 </div>
 </div>

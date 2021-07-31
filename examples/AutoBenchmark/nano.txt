@@ -1,0 +1,11 @@
+SIZEOF
+sizeof(HardSpiInterface): 3
+sizeof(HardSpiFastInterface): 2
+sizeof(SimpleSpiInterface): 3
+sizeof(SimpleSpiFastInterface<11, 12, 13>): 1
+BENCHMARKS
+HardSpiInterface 108 117 124 20
+HardSpiFastInterface 28 30 36 20
+SimpleSpiInterface 860 891 956 20
+SimpleSpiFastInterface 76 76 84 20
+END

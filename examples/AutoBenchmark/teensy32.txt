@@ -1,0 +1,7 @@
+SIZEOF
+sizeof(HardSpiInterface): 8
+sizeof(SimpleSpiInterface): 3
+BENCHMARKS
+HardSpiInterface 18 18 19 20
+SimpleSpiInterface 65 65 69 20
+END

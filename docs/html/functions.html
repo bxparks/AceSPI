@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AceSPI
-   &#160;<span id="projectnumber">0.1.0</span>
+   &#160;<span id="projectnumber">0.2.0</span>
    </div>
    <div id="projectbrief">Unified interface for selecting hardware or software SPI implementations on Arduino platforms</div>
   </td>
@@ -65,18 +65,40 @@ $(function() {
 <div class="contents">
 <div class="textblock">Here is a list of all documented class members with links to the class documentation for each member:</div><ul>
 <li>begin()
-: <a class="el" href="classace__spi_1_1HardSpiFastInterface.html#ae6f88387ef24e6dd5ae02da401707c81">ace_spi::HardSpiFastInterface&lt; T_SPI, T_LATCH_PIN &gt;</a>
-, <a class="el" href="classace__spi_1_1HardSpiInterface.html#a9f51b0e35638fefba189f8c38950cad0">ace_spi::HardSpiInterface&lt; T_SPI &gt;</a>
+: <a class="el" href="classace__spi_1_1HardSpiFastInterface.html#aaafc7a9b7a565dab5b135e069fdd31a9">ace_spi::HardSpiFastInterface&lt; T_SPI, T_LATCH_PIN, T_CLOCK_SPEED &gt;</a>
+, <a class="el" href="classace__spi_1_1HardSpiInterface.html#a662ff1c00b0adc29f1e88639b6ac54da">ace_spi::HardSpiInterface&lt; T_SPI, T_CLOCK_SPEED &gt;</a>
+, <a class="el" href="classace__spi_1_1SimpleSpiFastInterface.html#af6b7532774f370c8beb331e517b0cfb2">ace_spi::SimpleSpiFastInterface&lt; T_LATCH_PIN, T_DATA_PIN, T_CLOCK_PIN &gt;</a>
+, <a class="el" href="classace__spi_1_1SimpleSpiInterface.html#ab9be79473dd551a538f2820b1530da71">ace_spi::SimpleSpiInterface</a>
+</li>
+<li>end()
+: <a class="el" href="classace__spi_1_1HardSpiFastInterface.html#a04cec88f3865aad1a08bed75d1d98d87">ace_spi::HardSpiFastInterface&lt; T_SPI, T_LATCH_PIN, T_CLOCK_SPEED &gt;</a>
+, <a class="el" href="classace__spi_1_1HardSpiInterface.html#a2e3bb4d60e5fa73c2f43cc7befbad079">ace_spi::HardSpiInterface&lt; T_SPI, T_CLOCK_SPEED &gt;</a>
+, <a class="el" href="classace__spi_1_1SimpleSpiFastInterface.html#a81d83b3ef4d553e650363614aeca5629">ace_spi::SimpleSpiFastInterface&lt; T_LATCH_PIN, T_DATA_PIN, T_CLOCK_PIN &gt;</a>
+, <a class="el" href="classace__spi_1_1SimpleSpiInterface.html#ae895b310952809bfeb6dbb99f980f5de">ace_spi::SimpleSpiInterface</a>
+</li>
+<li>HardSpiFastInterface()
+: <a class="el" href="classace__spi_1_1HardSpiFastInterface.html#ad370f650886b66891b18bbc1747cfc9b">ace_spi::HardSpiFastInterface&lt; T_SPI, T_LATCH_PIN, T_CLOCK_SPEED &gt;</a>
+</li>
+<li>HardSpiInterface()
+: <a class="el" href="classace__spi_1_1HardSpiInterface.html#a28b7e98dd0c1db6ec0e0882124bb9a12">ace_spi::HardSpiInterface&lt; T_SPI, T_CLOCK_SPEED &gt;</a>
 </li>
 <li>send16()
-: <a class="el" href="classace__spi_1_1HardSpiFastInterface.html#a12d7475c8f497c91621edfd97561f65f">ace_spi::HardSpiFastInterface&lt; T_SPI, T_LATCH_PIN &gt;</a>
-, <a class="el" href="classace__spi_1_1HardSpiInterface.html#ac53da05acc430bb696e7235b5d1444fd">ace_spi::HardSpiInterface&lt; T_SPI &gt;</a>
-, <a class="el" href="classace__spi_1_1SoftSpiInterface.html#aeca1598f4eef388d2976562e50006c8f">ace_spi::SoftSpiInterface</a>
+: <a class="el" href="classace__spi_1_1HardSpiFastInterface.html#ae6f781ffa918d8204b76bef06ec15dbf">ace_spi::HardSpiFastInterface&lt; T_SPI, T_LATCH_PIN, T_CLOCK_SPEED &gt;</a>
+, <a class="el" href="classace__spi_1_1HardSpiInterface.html#a066fc66ae091237ebc3ff72e0ec25580">ace_spi::HardSpiInterface&lt; T_SPI, T_CLOCK_SPEED &gt;</a>
+, <a class="el" href="classace__spi_1_1SimpleSpiFastInterface.html#a0f9825f3ec52d1a474f6a6515e04466d">ace_spi::SimpleSpiFastInterface&lt; T_LATCH_PIN, T_DATA_PIN, T_CLOCK_PIN &gt;</a>
+, <a class="el" href="classace__spi_1_1SimpleSpiInterface.html#a8906d6e4c7b228f5d8d93697d872f6d0">ace_spi::SimpleSpiInterface</a>
 </li>
 <li>send8()
-: <a class="el" href="classace__spi_1_1HardSpiFastInterface.html#a3db0fea6346573036d81467e722369ae">ace_spi::HardSpiFastInterface&lt; T_SPI, T_LATCH_PIN &gt;</a>
-, <a class="el" href="classace__spi_1_1HardSpiInterface.html#a7afc4ed403409920e2694702b69b7477">ace_spi::HardSpiInterface&lt; T_SPI &gt;</a>
-, <a class="el" href="classace__spi_1_1SoftSpiInterface.html#abac84e3d4c82b13efbdbd330a589326a">ace_spi::SoftSpiInterface</a>
+: <a class="el" href="classace__spi_1_1HardSpiFastInterface.html#aaa812cda71236f1a5f8300c8a36f01db">ace_spi::HardSpiFastInterface&lt; T_SPI, T_LATCH_PIN, T_CLOCK_SPEED &gt;</a>
+, <a class="el" href="classace__spi_1_1HardSpiInterface.html#a3dac505f44304e13dbc388cfd3629b4c">ace_spi::HardSpiInterface&lt; T_SPI, T_CLOCK_SPEED &gt;</a>
+, <a class="el" href="classace__spi_1_1SimpleSpiFastInterface.html#a486e705ecb2d3b216cb194dd1f94536c">ace_spi::SimpleSpiFastInterface&lt; T_LATCH_PIN, T_DATA_PIN, T_CLOCK_PIN &gt;</a>
+, <a class="el" href="classace__spi_1_1SimpleSpiInterface.html#a6acd352208ebf8d33147a76bd69e91bb">ace_spi::SimpleSpiInterface</a>
+</li>
+<li>SimpleSpiFastInterface()
+: <a class="el" href="classace__spi_1_1SimpleSpiFastInterface.html#a51376751b9eccf36ec01a319662161ae">ace_spi::SimpleSpiFastInterface&lt; T_LATCH_PIN, T_DATA_PIN, T_CLOCK_PIN &gt;</a>
+</li>
+<li>SimpleSpiInterface()
+: <a class="el" href="classace__spi_1_1SimpleSpiInterface.html#a8d1ce02eae7984f183fbfe41053c5ba9">ace_spi::SimpleSpiInterface</a>
 </li>
 </ul>
 </div><!-- contents -->

@@ -32,42 +32,34 @@ SOFTWARE.
 namespace ace_spi {
 
 /**
- * Hardware SPI interface to talk to one or two 74HC595 Shift Register chip(s),
- * using the predefined `SPI` global instance. This is currently not meant to be
- * general-purpose SPI interface. For different SPI configurations, it is
- * probably easiest to just copy this file, make the necessary changes, then
- * substitute the new class in places where this class is used.
- *
- * The maximum speed of MAX7219 is 16MHz so this class sets the SPI speed to
- * 8MHz. It's not clear if the SPI speed is worth making into a configurable
- * parameter. Such a change needs to done a bit carefully, because it should
- * be a template parameter so that `SPISettings` is a compile-time constant
- * which allows compile-time optimizations to happen.
- *
  * This class is functionally identical to HardSpiInterface except that the GPIO
  * pins are controlled by digitalWriteFast() and pinModeFast() methods. This
- * decreases flash memory consumption by 70 bytes (HybridModule) to 250
- * (Max7219Module, Hc595Module) bytes. However, if multiple LED modules are
- * used, using different LatchPins, the HardSpiInterface might ultimately
- * consume less flash memory because it avoids generating different template
- * instantiations of the HybridModule, Max7219Module, or Hc595Module classes.
- * Users are advised to try both and compare the difference.
+ * decreases flash memory consumption by 70 bytes (AceSegment/HybridModule) to
+ * 250 (AceSegment/Max7219Module, AceSegment/Hc595Module) bytes.
+ *
+ * If more than 2-3 or LED modules are used, each using different LatchPins, the
+ * HardSpiInterface class might consume less flash memory than this one because
+ * HardSpiInterface avoids generating different template instantiations of the
+ * HybridModule, Max7219Module, or Hc595Module classes. If flash memory size is
+ * a problem, users should experiment with both and compare the difference.
  *
  * @tparam T_SPI the class of the hardware SPI instance, usually SPIClass
  * @tparam T_LATCH_PIN the CS/SS pin that controls the SPI peripheral
+ * @tparam T_CLOCK_SPEED the SPI clock speed, default 8000000 (8 MHz)
  */
-template <typename T_SPI, uint8_t T_LATCH_PIN>
+template <
+    typename T_SPI,
+    uint8_t T_LATCH_PIN,
+    uint32_t T_CLOCK_SPEED = 8000000
+>
 class HardSpiFastInterface {
   private:
-    // The following constants are defined without including <SPI.h> to avoid
-    // pulling in the global SPI instance into applications which don't use SPI.
-    // They may become template parameters in the future.
-
-    /** MAX7219 has a maximum clock of 16 MHz, so set this to 8 MHz. */
-    static const uint32_t kClockSpeed = 8000000;
+    // Some of the following constants are defined in <SPI.h> so unfortunately,
+    // it is not possible to avoid pulling in the global SPI instance into
+    // applications which don't use SPI.
 
     /** MSB first or LSB first */
-  #if defined(ARDUINO_ARCH_STM32)
+  #if defined(ARDUINO_ARCH_STM32) || defined(ARDUINO_ARCH_SAMD)
     static const BitOrder kBitOrder = MSBFIRST;
   #else
     static const uint8_t kBitOrder = MSBFIRST;
@@ -77,10 +69,17 @@ class HardSpiFastInterface {
     static const uint8_t kSpiMode = SPI_MODE0;
 
   public:
-    HardSpiFastInterface(T_SPI& spi) : mSpi(spi) {}
+    /**
+     * Constructor.
+     *
+     * @param spi instance of the `T_SPI` class. If the pre-installed `<SPI.h>`
+     *    is used, `T_SPI` is `SPIClass` and `spi` will be the pre-defined `SPI`
+     *    object.
+     */
+    explicit HardSpiFastInterface(T_SPI& spi) : mSpi(spi) {}
 
     /**
-     * Initialize the HardSpiInterface. The hardware SPI object must be
+     * Initialize the HardSpiFastInterface. The hardware SPI object must be
      * initialized using `SPI.begin()` as well.
      */
     void begin() const {
@@ -88,8 +87,8 @@ class HardSpiFastInterface {
       // 'SPECIAL' instead of 'OUTPUT'. This is performed by calling
       // SPI.begin(). Also, unlike other Arduino platforms, the SPIClass on
       // the ESP8266 defaults to controlling the SS/CS pin itself, instead of
-      // letting the application code control it. The setHwCs(false) let's
-      // HardSpiInterface control the CS/SS pin.
+      // letting the application code control it. The setHwCs(false) lets
+      // HardSpiFastInterface control the CS/SS pin.
       // https://www.esp8266.com/wiki/doku.php?id=esp8266_gpio_pin_allocations
       #if defined(ESP8266)
         mSpi.setHwCs(false);
@@ -98,13 +97,14 @@ class HardSpiFastInterface {
       pinModeFast(T_LATCH_PIN, OUTPUT);
     }
 
+    /** Clean up the object. */
     void end() const {
       pinModeFast(T_LATCH_PIN, INPUT);
     }
 
     /** Send 8 bits, including latching LOW and HIGH. */
     void send8(uint8_t value) const {
-      mSpi.beginTransaction(SPISettings(kClockSpeed, kBitOrder, kSpiMode));
+      mSpi.beginTransaction(SPISettings(T_CLOCK_SPEED, kBitOrder, kSpiMode));
       digitalWriteFast(T_LATCH_PIN, LOW);
       mSpi.transfer(value);
       digitalWriteFast(T_LATCH_PIN, HIGH);
@@ -113,17 +113,22 @@ class HardSpiFastInterface {
 
     /** Send 16 bits, including latching LOW and HIGH. */
     void send16(uint16_t value) const {
-      mSpi.beginTransaction(SPISettings(kClockSpeed, kBitOrder, kSpiMode));
+      mSpi.beginTransaction(SPISettings(T_CLOCK_SPEED, kBitOrder, kSpiMode));
       digitalWriteFast(T_LATCH_PIN, LOW);
       mSpi.transfer16(value);
       digitalWriteFast(T_LATCH_PIN, HIGH);
       mSpi.endTransaction();
     }
 
+    /** Send 2 bytes as 16-bit stream, including latching LOW and HIGH. */
     void send16(uint8_t msb, uint8_t lsb) const {
       uint16_t value = ((uint16_t) msb) << 8 | (uint16_t) lsb;
       send16(value);
     }
+
+    // Use default copy constructor and assignment operator.
+    HardSpiFastInterface(const HardSpiFastInterface&) = default;
+    HardSpiFastInterface& operator=(const HardSpiFastInterface&) = default;
 
   private:
     T_SPI& mSpi;

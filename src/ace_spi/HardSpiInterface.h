@@ -32,33 +32,33 @@ SOFTWARE.
 namespace ace_spi {
 
 /**
- * Hardware SPI interface to talk to one or two 74HC595 Shift Register chip(s),
- * using the predefined `SPI` global instance. This is currently not meant to be
- * general-purpose SPI interface. For different SPI configurations, it is
- * probably easiest to just copy this file, make the necessary changes, then
- * substitute the new class in places where this class is used.
+ * Hardware SPI interface to talk to SPI peripherals. It was initially created
+ * to communicate with the 74HC595 Shift Register chip, then verified to work
+ * with the MAX7219 LED controller chip. This is currently not meant to be
+ * general-purpose SPI interface. In particular, it supports only SPI MODE0, and
+ * MSBFIRST configurations.
  *
- * The maximum speed of MAX7219 is 16MHz so this class sets the SPI speed to
- * 8MHz. It's not clear if the SPI speed is worth making into a configurable
- * parameter. Such a change needs to done a bit carefully, because it should
- * be a template parameter so that `SPISettings` is a compile-time constant
- * which allows compile-time optimizations to happen.
+ * For different SPI configurations, it is probably easiest to just copy this
+ * file, make the necessary changes, then substitute the new class in places
+ * where this class is used. The maximum speed of MAX7219 is 16MHz so this class
+ * sets the default SPI speed to 8MHz.
  *
  * The ESP32 has 2 user-accessible SPI buses (HSPI and VSPI), and so does the
- * STM32F1 (SPI1 and SPI2). By default, the predefined SPI instance is used, but
+ * STM32F1 (SPI1 and SPI2). Usually, the predefined SPI instance is used, but
  * a user-defined secondary SPI instance can be passed into the constructor.
  *
  * @tparam T_SPI the class of the hardware SPI instance, usually SPIClass
+ * @tparam T_CLOCK_SPEED the SPI clock speed, default 8000000 (8 MHz)
  */
-template <typename T_SPI>
+template <
+    typename T_SPI,
+    uint32_t T_CLOCK_SPEED = 8000000
+>
 class HardSpiInterface {
   private:
-    // The following constants are defined without including <SPI.h> to avoid
-    // pulling in the global SPI instance into applications which don't use SPI.
-    // They may become template parameters in the future.
-
-    /** MAX7219 has a maximum clock of 16 MHz, so set this to 8 MHz. */
-    static const uint32_t kClockSpeed = 8000000;
+    // Some of the following constants are defined in <SPI.h> so unfortunately,
+    // it is not possible to avoid pulling in the global SPI instance into
+    // applications which don't use SPI.
 
     /** MSB first or LSB first */
   #if defined(ARDUINO_ARCH_STM32) || defined(ARDUINO_ARCH_SAMD)
@@ -71,7 +71,15 @@ class HardSpiInterface {
     static const uint8_t kSpiMode = SPI_MODE0;
 
   public:
-    HardSpiInterface(T_SPI& spi, uint8_t latchPin) :
+    /**
+     * Constructor.
+     *
+     * @param spi instance of the `T_SPI` class. If the pre-installed `<SPI.h>`
+     *    is used, `T_SPI` is `SPIClass` and `spi` will be the pre-defined `SPI`
+     *    object.
+     * @param latchPin the pin that controls the CS/SS pin of the slave device
+     */
+    explicit HardSpiInterface(T_SPI& spi, uint8_t latchPin) :
         mSpi(spi),
         mLatchPin(latchPin)
     {}
@@ -95,13 +103,14 @@ class HardSpiInterface {
       pinMode(mLatchPin, OUTPUT);
     }
 
+    /** Clean up the object. */
     void end() const {
       pinMode(mLatchPin, INPUT);
     }
 
     /** Send 8 bits, including latching LOW and HIGH. */
     void send8(uint8_t value) const {
-      mSpi.beginTransaction(SPISettings(kClockSpeed, kBitOrder, kSpiMode));
+      mSpi.beginTransaction(SPISettings(T_CLOCK_SPEED, kBitOrder, kSpiMode));
       digitalWrite(mLatchPin, LOW);
       mSpi.transfer(value);
       digitalWrite(mLatchPin, HIGH);
@@ -110,7 +119,7 @@ class HardSpiInterface {
 
     /** Send 16 bits, including latching LOW and HIGH. */
     void send16(uint16_t value) const {
-      mSpi.beginTransaction(SPISettings(kClockSpeed, kBitOrder, kSpiMode));
+      mSpi.beginTransaction(SPISettings(T_CLOCK_SPEED, kBitOrder, kSpiMode));
       digitalWrite(mLatchPin, LOW);
       mSpi.transfer16(value);
       digitalWrite(mLatchPin, HIGH);
@@ -125,6 +134,10 @@ class HardSpiInterface {
       uint16_t value = ((uint16_t) msb) << 8 | (uint16_t) lsb;
       send16(value);
     }
+
+    // Use default copy constructor and assignment operator.
+    HardSpiInterface(const HardSpiInterface&) = default;
+    HardSpiInterface& operator=(const HardSpiInterface&) = default;
 
   private:
     T_SPI& mSpi;

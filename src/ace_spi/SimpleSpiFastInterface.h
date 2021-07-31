@@ -22,12 +22,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef ACE_SPI_SOFT_SPI_FAST_INTERFACE_H
-#define ACE_SPI_SOFT_SPI_FAST_INTERFACE_H
-
-// This header file requires the digitalWriteFast library on AVR, or the
-// EpoxyMockDigitalWriteFast library on EpoxyDuino.
-#if defined(ARDUINO_ARCH_AVR) || defined(EPOXY_DUINO)
+#ifndef ACE_SPI_SIMPLE_SPI_FAST_INTERFACE_H
+#define ACE_SPI_SIMPLE_SPI_FAST_INTERFACE_H
 
 #include <stdint.h>
 #include <Arduino.h> // OUTPUT, INPUT
@@ -43,16 +39,19 @@ namespace ace_spi {
  * @tparam T_CLOCK_PIN the clock pin (CLK)
  */
 template <uint8_t T_LATCH_PIN, uint8_t T_DATA_PIN, uint8_t T_CLOCK_PIN>
-class SoftSpiFastInterface {
+class SimpleSpiFastInterface {
   public:
-    SoftSpiFastInterface() = default;
+    /** Constructor. */
+    explicit SimpleSpiFastInterface() = default;
 
+    /** Initialize the various pins. */
     void begin() const {
       pinModeFast(T_LATCH_PIN, OUTPUT);
       pinModeFast(T_DATA_PIN, OUTPUT);
       pinModeFast(T_CLOCK_PIN, OUTPUT);
     }
 
+    /** Reset the various pins. */
     void end() const {
       pinModeFast(T_LATCH_PIN, INPUT);
       pinModeFast(T_DATA_PIN, INPUT);
@@ -81,6 +80,10 @@ class SoftSpiFastInterface {
       digitalWriteFast(T_LATCH_PIN, HIGH);
     }
 
+    // Use default copy constructor and assignment operator.
+    SimpleSpiFastInterface(const SimpleSpiFastInterface&) = default;
+    SimpleSpiFastInterface& operator=(const SimpleSpiFastInterface&) = default;
+
   private:
     static void shiftOutFast(uint8_t output) {
       uint8_t mask = 0x80; // start with the MSB
@@ -98,7 +101,5 @@ class SoftSpiFastInterface {
 };
 
 } // ace_spi
-
-#endif // defined(ARDUINO_ARCH_AVR)
 
 #endif
