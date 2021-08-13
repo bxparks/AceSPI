@@ -22,6 +22,9 @@ provides the following implementations:
 * `SimpleSpiFastInterface.h`
     * Software SPI using `digitalWriteFast()` on AVR processors
 
+Currently, this library supports writing from master to slave devices. It does
+not support reading from slave devices.
+
 **Version**: 0.2 (2021-07-30)
 
 **Changelog**: [CHANGELOG.md](CHANGELOG.md)
@@ -150,12 +153,16 @@ compile-time.
 ```C++
 class XxxInterface {
   public:
-    void begin();
-    void end();
+    void begin() const;
+    void end() const;
+    void beginTransaction() const;
+    void endTransaction() const;
+    void transfer(uint8_t value) const;
+    void transfer16(uint16_t value) const;
 
-    void send8(uint8_t value);
-    void send16(uint16_t value);
-    void send16(uint8_t msb, uint8_t lsb);
+    void send8(uint8_t value) const;
+    void send16(uint16_t value) const;
+    void send16(uint8_t msb, uint8_t lsb) const;
 };
 ```
 
@@ -168,6 +175,22 @@ reduction of flash memory consumption is especially large for classes that use
 the digitalWriteFast libraries which use compile-time constants for pin numbers.
 The disadvantage is that this library is harder to use because these classes
 require the downstream classes to be implemented using C++ templates.
+
+The `beginTransaction()` takes possession of the bus, and latches the CS/SS pin
+`LOW` to enable the slave device. The `transfer(uint8_t)` and
+`transfer16(uint16_t)` correspond to the matching methods in the `SPIClass`
+which send the actual bits to the bus. The `endTransaction()` latches the CS/SS
+pin `HIGH` to mark the end of the data transfer, and releases the bus.
+
+The `send8(uint8_t)`, `send16(uint16_t)`, and `send16(uint8_t, uint8_t)` are
+convenience methods that wrap the following 3 common operations:
+
+* `beginTransaction()` which pulls the CS/SS pin LOW,
+* `transfer()` or `transfer16()` to transfer the data,
+* `endTransaction()` which pulls the CS/SS pin HIGH.
+
+These can help reduce the repetitive calls to `beginTransaction()` and
+`endTransaction()`.
 
 <a name="HardSpiInterface"></a>
 ### HardSpiInterface
@@ -182,17 +205,18 @@ template <
 >
 class HardSpiInterface {
   public:
-    explicit HardSpiInterface(T_SPI& spi, uint8_t latchPin) :
-        mSpi(spi),
-        mLatchPin(latchPin)
-    {}
+    explicit HardSpiInterface(T_SPI& spi, uint8_t latchPin);
 
-    void begin() { ... }
-    void end() { ... }
+    void begin() const;
+    void end() const;
+    void beginTransaction() const;
+    void endTransaction() const;
+    void transfer(uint8_t value) const;
+    void transfer16(uint16_t value) const;
 
-    void send8(uint8_t value) { ... }
-    void send16(uint16_t value) { ... }
-    void send16(uint8_t msb, uint8_t lsb) { ... }
+    void send8(uint8_t value) const;
+    void send16(uint16_t value) const;
+    void send16(uint8_t msb, uint8_t lsb) const;
 };
 ```
 
@@ -207,7 +231,7 @@ using ace_spi::HardSpiInterface;
 template <typename T_SPII>
 class MyClass {
   public:
-    explicit MyClass(T_SPII& spiInterface)
+    explicit MyClass(const T_SPII& spiInterface)
         : mSpiInterface(spiInterface)
     {...}
 
@@ -227,7 +251,7 @@ class MyClass {
     }
 
   private:
-    T_SPII mSpiInterface; // copied by value
+    const T_SPII mSpiInterface; // copied by value
 };
 
 const uint8_t LATCH_PIN = SS;
@@ -275,14 +299,18 @@ template <
 >
 class HardSpiFastInterface {
   public:
-    explicit HardSpiFastInterface(T_SPI& spi) : mSpi(spi) {}
+    explicit HardSpiFastInterface(T_SPI& spi);
 
-    void begin() { ... }
-    void end() { ... }
+    void begin() const;
+    void end() const;
+    void beginTransaction() const;
+    void endTransaction() const;
+    void transfer(uint8_t value) const;
+    void transfer16(uint16_t value) const;
 
-    void send8(uint8_t value) { ... }
-    void send16(uint16_t value) { ... }
-    void send16(uint8_t msb, uint8_t lsb) { ... }
+    void send8(uint8_t value) const;
+    void send16(uint16_t value) const;
+    void send16(uint8_t msb, uint8_t lsb) const;
 };
 ```
 
@@ -317,15 +345,17 @@ void setup() {
 ```
 
 The latching on the `SS` pin is performed using the `digitalWriteFast()`
-function from one of the external "digitalWriteFast" libraries.
+function from one of the external "digitalWriteFast" libraries. According to
+[MemoryBenchmark](examples/MemoryBenchmark), `HardSpiFastInterface` saves
+about 100 bytes of flash memory compared to `HardSpiInterface`.
 
 <a name="SimpleSpiInterface"></a>
 ### SimpleSpiInterface
 
-The `SimpleSpiInterface` class is a simple implementation of SPI using the Arduino
-built-in `shiftOut()` function, which uses `digitalWrite()` underneath the
-covers. Any appropriate GPIO pin can be used for software SPI, instead of being
-restricted to the hardware SPI pins.
+The `SimpleSpiInterface` class is a software "bitbanging" implementation of SPI
+using the Arduino built-in `shiftOut()` function, which uses `digitalWrite()`
+underneath the covers. Any appropriate GPIO pin can be used for software SPI,
+instead of being restricted to the hardware SPI pins.
 
 ```C++
 class SimpleSpiInterface {
@@ -334,18 +364,18 @@ class SimpleSpiInterface {
         uint8_t latchPin,
         uint8_t dataPin,
         uint8_t clockPin
-    ) :
-        mLatchPin(latchPin),
-        mDataPin(dataPin),
-        mClockPin(clockPin)
-    {}
+    );
 
-    void begin() { ... }
-    void end() { ... }
+    void begin() const;
+    void end() const;
+    void beginTransaction() const;
+    void endTransaction() const;
+    void transfer(uint8_t value) const;
+    void transfer16(uint16_t value) const;
 
-    void send8(uint8_t value) { ... }
-    void send16(uint16_t value) { ... }
-    void send16(uint8_t msb, uint8_t lsb) { ... }
+    void send8(uint8_t value) const;
+    void send16(uint16_t value) const;
+    void send16(uint8_t msb, uint8_t lsb) const;
 };
 ```
 
@@ -375,26 +405,37 @@ void setup() {
 }
 ```
 
+The amount of flash memory used by `SimpleSpiInterface` is similar to
+`HardSpiInterface`, so the only compelling reason for using `SimpleSpiInterface`
+is the ability to use any GPIO pin for the `MOSI`, `SCK` and `CS/SS` pins. The
+big advantage of `SimpleSpiInterface` comes into play when the digitalWriteFast
+library is used instead, as described below.
+
 <a name="SimpleSpiFastInterface"></a>
 ### SimpleSpiFastInterface
 
-The `SimpleSpiFastInterface` class is the same as `SimpleSpiInterface` except that
-it uses the `digitalWriteFast()` and `pinModeFast()` functions provided by one
-of the digitalWriteFast libraries mentioned above. The pin numbers need to be
-compile-time constants, so they are passed in as template parameters, like this:
+The `SimpleSpiFastInterface` class is the same as `SimpleSpiInterface` except
+that it uses the `digitalWriteFast()` and `pinModeFast()` functions provided by
+one of the digitalWriteFast libraries mentioned above. The pin numbers need to
+be compile-time constants, so they are passed in as template parameters, like
+this:
 
 ```C++
 template <uint8_t T_LATCH_PIN, uint8_t T_DATA_PIN, uint8_t T_CLOCK_PIN>
 class SimpleSpiFastInterface {
   public:
-    explicit SimpleSpiFastInterface() = default;
+    explicit SimpleSpiFastInterface();
 
-    void begin() { ... }
-    void end() { ... }
+    void begin() const;
+    void end() const;
+    void beginTransaction() const;
+    void endTransaction() const;
+    void transfer(uint8_t value) const;
+    void transfer16(uint16_t value) const;
 
-    void send8(uint8_t value) { ... }
-    void send16(uint16_t value) { ... }
-    void send16(uint8_t msb, uint8_t lsb) { ... }
+    void send8(uint8_t value) const;
+    void send16(uint16_t value) const;
+    void send16(uint8_t msb, uint8_t lsb) const;
 };
 ```
 The code to configure the client code `MyClass` looks very similar:
@@ -427,6 +468,15 @@ void setup() {
 }
 ```
 
+According to [MemoryBenchmark](examples/MemoryBenchmark), the use of a
+digitialWriteFast library eliminates the pin-to-port mapping arrays, and reduces
+the flash memory consumption by about 450 bytes on AVR processors. Only a mere
+72 bytes of flash is consumed by this implementation on an AVR. And
+[AutoBenchmark](examples/AutoBenchmark) shows that `SimpleSpiFastInterface` can
+be almost as fast as the hardware `<SPI.h>` library. On resource constrained
+applications on AVR processors, the `SimpleSpiFastInterface` is a worthy
+alternative.
+
 <a name="StoringInterfaceObjects"></a>
 ### Storing Interface Objects
 
@@ -443,14 +493,14 @@ The alternative is to save the `T_SPII` object **by reference** like this:
 template <typename T_SPII>
 class MyClass {
   public:
-    explicit MyClass(T_SPII& spiInterface)
+    explicit MyClass(const T_SPII& spiInterface)
         : mSpiInterface(spiInterface)
     {...}
 
     [...]
 
   private:
-    T_SPII& mSpiInterface; // copied by reference
+    const T_SPII& mSpiInterface; // copied by reference
 };
 ```
 
