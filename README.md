@@ -1,12 +1,7 @@
 # AceSPI
 
 Unified interface for selecting hardware or software SPI implementations on
-Arduino platforms. Uses C++ templates to achieve minimal or zero-cost runtime
-overhead for the abstraction. In more technical terms, the library provides
-compile-time polymorphism instead of runtime polymorphism to avoid the overhead
-of the `virtual` keyword.
-
-The code was initially part of the
+Arduino platforms. The code was initially part of the
 [AceSegment](https://github.com/bxparks/AceSegment) library, but was extracted
 into a separate library so that it can be shared with other projects. It
 provides the following implementations:
@@ -25,7 +20,12 @@ provides the following implementations:
 Currently, this library supports writing from master to slave devices. It does
 not support reading from slave devices.
 
-**Version**: 0.2 (2021-07-30)
+This library uses C++ templates to achieve minimal runtime overhead for the
+abstraction. In more technical terms, the library provides compile-time
+polymorphism instead of runtime polymorphism to avoid the overhead of the
+`virtual` keyword.
+
+**Version**: 0.3 (2021-08-17)
 
 **Changelog**: [CHANGELOG.md](CHANGELOG.md)
 
@@ -199,6 +199,8 @@ The `HardSpiInterface` object is a thin wrapper around the `SPI` object from
 `<SPI.h>`. It implements the unified interface described above like this:
 
 ```C++
+namespace ace_spi {
+
 template <
     typename T_SPI,
     uint32_t T_CLOCK_SPEED = 8000000
@@ -218,6 +220,8 @@ class HardSpiInterface {
     void send16(uint16_t value) const;
     void send16(uint8_t msb, uint8_t lsb) const;
 };
+
+}
 ```
 
 The calling code `MyClass` that uses `HardSpiInterface` is configured like this:
@@ -292,6 +296,8 @@ uses one of the digitalWriteFast libraries listed above, which reduces flash
 consumption on AVR processors, and makes the code run faster.
 
 ```C++
+namespace ace_spi {
+
 template <
     typename T_SPI,
     uint8_t T_LATCH_PIN,
@@ -312,6 +318,8 @@ class HardSpiFastInterface {
     void send16(uint16_t value) const;
     void send16(uint8_t msb, uint8_t lsb) const;
 };
+
+}
 ```
 
 The calling code `MyClass` that uses `HardSpiInterface` is configured like this:
@@ -358,6 +366,8 @@ underneath the covers. Any appropriate GPIO pin can be used for software SPI,
 instead of being restricted to the hardware SPI pins.
 
 ```C++
+namespace ace_spi {
+
 class SimpleSpiInterface {
   public:
     explicit SimpleSpiInterface(
@@ -377,6 +387,8 @@ class SimpleSpiInterface {
     void send16(uint16_t value) const;
     void send16(uint8_t msb, uint8_t lsb) const;
 };
+
+}
 ```
 
 We can make our `MyClass` use this interface like this:
@@ -421,6 +433,8 @@ be compile-time constants, so they are passed in as template parameters, like
 this:
 
 ```C++
+namespace ace_spi {
+
 template <uint8_t T_LATCH_PIN, uint8_t T_DATA_PIN, uint8_t T_CLOCK_PIN>
 class SimpleSpiFastInterface {
   public:
@@ -437,6 +451,8 @@ class SimpleSpiFastInterface {
     void send16(uint16_t value) const;
     void send16(uint8_t msb, uint8_t lsb) const;
 };
+
+}
 ```
 The code to configure the client code `MyClass` looks very similar:
 
