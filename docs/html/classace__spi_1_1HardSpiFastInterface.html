@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AceSPI
-   &#160;<span id="projectnumber">0.2.0</span>
+   &#160;<span id="projectnumber">0.3</span>
    </div>
    <div id="projectbrief">Unified interface for selecting hardware or software SPI implementations on Arduino platforms</div>
   </td>
@@ -92,17 +92,31 @@ Public Member Functions</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classace__spi_1_1HardSpiFastInterface.html#a04cec88f3865aad1a08bed75d1d98d87">end</a> () const</td></tr>
 <tr class="memdesc:a04cec88f3865aad1a08bed75d1d98d87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clean up the object. <br /></td></tr>
 <tr class="separator:a04cec88f3865aad1a08bed75d1d98d87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f06c2eb4b168cc443fcf59629bd99af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classace__spi_1_1HardSpiFastInterface.html#a2f06c2eb4b168cc443fcf59629bd99af">beginTransaction</a> () const</td></tr>
+<tr class="memdesc:a2f06c2eb4b168cc443fcf59629bd99af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Begin SPI transaction.  <a href="classace__spi_1_1HardSpiFastInterface.html#a2f06c2eb4b168cc443fcf59629bd99af">More...</a><br /></td></tr>
+<tr class="separator:a2f06c2eb4b168cc443fcf59629bd99af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30a7d62c9609f7bde0c5c54fb641bcc2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classace__spi_1_1HardSpiFastInterface.html#a30a7d62c9609f7bde0c5c54fb641bcc2">endTransaction</a> () const</td></tr>
+<tr class="memdesc:a30a7d62c9609f7bde0c5c54fb641bcc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">End SPI transaction.  <a href="classace__spi_1_1HardSpiFastInterface.html#a30a7d62c9609f7bde0c5c54fb641bcc2">More...</a><br /></td></tr>
+<tr class="separator:a30a7d62c9609f7bde0c5c54fb641bcc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2d6f85e95675660d20ab84b34cff790"><td class="memItemLeft" align="right" valign="top"><a id="ae2d6f85e95675660d20ab84b34cff790"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classace__spi_1_1HardSpiFastInterface.html#ae2d6f85e95675660d20ab84b34cff790">transfer</a> (uint8_t value) const</td></tr>
+<tr class="memdesc:ae2d6f85e95675660d20ab84b34cff790"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transfer 8 bits. <br /></td></tr>
+<tr class="separator:ae2d6f85e95675660d20ab84b34cff790"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af075c3f47d98779e60c95c2e00e1b7c1"><td class="memItemLeft" align="right" valign="top"><a id="af075c3f47d98779e60c95c2e00e1b7c1"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classace__spi_1_1HardSpiFastInterface.html#af075c3f47d98779e60c95c2e00e1b7c1">transfer16</a> (uint16_t value) const</td></tr>
+<tr class="memdesc:af075c3f47d98779e60c95c2e00e1b7c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transfer 16 bits. <br /></td></tr>
+<tr class="separator:af075c3f47d98779e60c95c2e00e1b7c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa812cda71236f1a5f8300c8a36f01db"><td class="memItemLeft" align="right" valign="top"><a id="aaa812cda71236f1a5f8300c8a36f01db"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classace__spi_1_1HardSpiFastInterface.html#aaa812cda71236f1a5f8300c8a36f01db">send8</a> (uint8_t value) const</td></tr>
-<tr class="memdesc:aaa812cda71236f1a5f8300c8a36f01db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send 8 bits, including latching LOW and HIGH. <br /></td></tr>
+<tr class="memdesc:aaa812cda71236f1a5f8300c8a36f01db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience method to send 8 bits a single transaction. <br /></td></tr>
 <tr class="separator:aaa812cda71236f1a5f8300c8a36f01db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae6f781ffa918d8204b76bef06ec15dbf"><td class="memItemLeft" align="right" valign="top"><a id="ae6f781ffa918d8204b76bef06ec15dbf"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classace__spi_1_1HardSpiFastInterface.html#ae6f781ffa918d8204b76bef06ec15dbf">send16</a> (uint16_t value) const</td></tr>
-<tr class="memdesc:ae6f781ffa918d8204b76bef06ec15dbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send 16 bits, including latching LOW and HIGH. <br /></td></tr>
+<tr class="memdesc:ae6f781ffa918d8204b76bef06ec15dbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience method to send 16 bits a single transaction. <br /></td></tr>
 <tr class="separator:ae6f781ffa918d8204b76bef06ec15dbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac43b909571cfc19049749ef503ed67f4"><td class="memItemLeft" align="right" valign="top"><a id="ac43b909571cfc19049749ef503ed67f4"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classace__spi_1_1HardSpiFastInterface.html#ac43b909571cfc19049749ef503ed67f4">send16</a> (uint8_t msb, uint8_t lsb) const</td></tr>
-<tr class="memdesc:ac43b909571cfc19049749ef503ed67f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send 2 bytes as 16-bit stream, including latching LOW and HIGH. <br /></td></tr>
+<tr class="memdesc:ac43b909571cfc19049749ef503ed67f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience method to send 16 bits a single transaction. <br /></td></tr>
 <tr class="separator:ac43b909571cfc19049749ef503ed67f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab12361930de39f92f6f897058ee58cd1"><td class="memItemLeft" align="right" valign="top"><a id="ab12361930de39f92f6f897058ee58cd1"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>HardSpiFastInterface</b> (const <a class="el" href="classace__spi_1_1HardSpiFastInterface.html">HardSpiFastInterface</a> &amp;)=default</td></tr>
@@ -163,7 +177,7 @@ template&lt;typename T_SPI , uint8_t T_LATCH_PIN, uint32_t T_CLOCK_SPEED = 80000
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="HardSpiFastInterface_8h_source.html#l00079">79</a> of file <a class="el" href="HardSpiFastInterface_8h_source.html">HardSpiFastInterface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="HardSpiFastInterface_8h_source.html#l00078">78</a> of file <a class="el" href="HardSpiFastInterface_8h_source.html">HardSpiFastInterface.h</a>.</p>
 
 </div>
 </div>
@@ -196,7 +210,71 @@ template&lt;typename T_SPI , uint8_t T_LATCH_PIN, uint32_t T_CLOCK_SPEED = 80000
 <p>Initialize the <a class="el" href="classace__spi_1_1HardSpiFastInterface.html" title="This class is functionally identical to HardSpiInterface except that the GPIO pins are controlled by ...">HardSpiFastInterface</a>. </p>
 <p>The hardware SPI object must be initialized using <code>SPI.begin()</code> as well. </p>
 
-<p class="definition">Definition at line <a class="el" href="HardSpiFastInterface_8h_source.html#l00085">85</a> of file <a class="el" href="HardSpiFastInterface_8h_source.html">HardSpiFastInterface.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="HardSpiFastInterface_8h_source.html#l00084">84</a> of file <a class="el" href="HardSpiFastInterface_8h_source.html">HardSpiFastInterface.h</a>.</p>
+
+</div>
+</div>
+<a id="a2f06c2eb4b168cc443fcf59629bd99af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f06c2eb4b168cc443fcf59629bd99af">&#9670;&nbsp;</a></span>beginTransaction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T_SPI , uint8_t T_LATCH_PIN, uint32_t T_CLOCK_SPEED = 8000000&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classace__spi_1_1HardSpiFastInterface.html">ace_spi::HardSpiFastInterface</a>&lt; T_SPI, T_LATCH_PIN, T_CLOCK_SPEED &gt;::beginTransaction </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Begin SPI transaction. </p>
+<p>Pull latch LOW. </p>
+
+<p class="definition">Definition at line <a class="el" href="HardSpiFastInterface_8h_source.html#l00105">105</a> of file <a class="el" href="HardSpiFastInterface_8h_source.html">HardSpiFastInterface.h</a>.</p>
+
+</div>
+</div>
+<a id="a30a7d62c9609f7bde0c5c54fb641bcc2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30a7d62c9609f7bde0c5c54fb641bcc2">&#9670;&nbsp;</a></span>endTransaction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T_SPI , uint8_t T_LATCH_PIN, uint32_t T_CLOCK_SPEED = 8000000&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classace__spi_1_1HardSpiFastInterface.html">ace_spi::HardSpiFastInterface</a>&lt; T_SPI, T_LATCH_PIN, T_CLOCK_SPEED &gt;::endTransaction </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>End SPI transaction. </p>
+<p>Pull latch HIGH. </p>
+
+<p class="definition">Definition at line <a class="el" href="HardSpiFastInterface_8h_source.html#l00111">111</a> of file <a class="el" href="HardSpiFastInterface_8h_source.html">HardSpiFastInterface.h</a>.</p>
 
 </div>
 </div>

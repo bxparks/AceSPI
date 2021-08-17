@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AceSPI
-   &#160;<span id="projectnumber">0.2.0</span>
+   &#160;<span id="projectnumber">0.3</span>
    </div>
    <div id="projectbrief">Unified interface for selecting hardware or software SPI implementations on Arduino platforms</div>
   </td>
@@ -120,56 +120,79 @@ $(function() {
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;      pinModeFast(T_CLOCK_PIN, INPUT);</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    }</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classace__spi_1_1SimpleSpiFastInterface.html#a486e705ecb2d3b216cb194dd1f94536c">   62</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classace__spi_1_1SimpleSpiFastInterface.html#a486e705ecb2d3b216cb194dd1f94536c">send8</a>(uint8_t value)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classace__spi_1_1SimpleSpiFastInterface.html#a341df1ac818f2e22f4234f97d5d3741c">   62</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classace__spi_1_1SimpleSpiFastInterface.html#a341df1ac818f2e22f4234f97d5d3741c">beginTransaction</a>()<span class="keyword"> const </span>{</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;      digitalWriteFast(T_LATCH_PIN, LOW);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;      shiftOutFast(value);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;      digitalWriteFast(T_LATCH_PIN, HIGH);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    }</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="classace__spi_1_1SimpleSpiFastInterface.html#a0f9825f3ec52d1a474f6a6515e04466d">   69</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classace__spi_1_1SimpleSpiFastInterface.html#a0f9825f3ec52d1a474f6a6515e04466d">send16</a>(uint16_t value)<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;      uint8_t msb = (value &amp; 0xff00) &gt;&gt; 8;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;      uint8_t lsb = (value &amp; 0xff);</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;      <a class="code" href="classace__spi_1_1SimpleSpiFastInterface.html#a0f9825f3ec52d1a474f6a6515e04466d">send16</a>(msb, lsb);</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    }</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="classace__spi_1_1SimpleSpiFastInterface.html#a81bf1c02b17ecaf6dbad35d3b89d81f8">   76</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classace__spi_1_1SimpleSpiFastInterface.html#a81bf1c02b17ecaf6dbad35d3b89d81f8">send16</a>(uint8_t msb, uint8_t lsb)<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;      digitalWriteFast(T_LATCH_PIN, LOW);</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;      shiftOutFast(msb);</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;      shiftOutFast(lsb);</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;      digitalWriteFast(T_LATCH_PIN, HIGH);</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    }</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="comment">// Use default copy constructor and assignment operator.</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <a class="code" href="classace__spi_1_1SimpleSpiFastInterface.html#a51376751b9eccf36ec01a319662161ae">SimpleSpiFastInterface</a>(<span class="keyword">const</span> <a class="code" href="classace__spi_1_1SimpleSpiFastInterface.html">SimpleSpiFastInterface</a>&amp;) = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <a class="code" href="classace__spi_1_1SimpleSpiFastInterface.html">SimpleSpiFastInterface</a>&amp; operator=(<span class="keyword">const</span> <a class="code" href="classace__spi_1_1SimpleSpiFastInterface.html">SimpleSpiFastInterface</a>&amp;) = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> shiftOutFast(uint8_t output) {</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;      uint8_t mask = 0x80; <span class="comment">// start with the MSB</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;      <span class="keywordflow">for</span> (uint8_t i = 0; i &lt; 8; i++)  {</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        digitalWriteFast(T_CLOCK_PIN, LOW);</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="keywordflow">if</span> (output &amp; mask) {</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;          digitalWriteFast(T_DATA_PIN, HIGH);</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;          digitalWriteFast(T_DATA_PIN, LOW);</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        }</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        digitalWriteFast(T_CLOCK_PIN, HIGH);</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        mask &gt;&gt;= 1;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;      }</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    }</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;};</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;} <span class="comment">// ace_spi</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    }</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="classace__spi_1_1SimpleSpiFastInterface.html#a14ea5ae345e4049bc130f9a15ab03e04">   67</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classace__spi_1_1SimpleSpiFastInterface.html#a14ea5ae345e4049bc130f9a15ab03e04">endTransaction</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;      digitalWriteFast(T_LATCH_PIN, HIGH);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    }</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="classace__spi_1_1SimpleSpiFastInterface.html#a587ac5c85446ec8ce1ebc551b84efc7c">   72</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classace__spi_1_1SimpleSpiFastInterface.html#a587ac5c85446ec8ce1ebc551b84efc7c">transfer</a>(uint8_t value)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;      shiftOutFast(value);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    }</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="classace__spi_1_1SimpleSpiFastInterface.html#a194beec2e57f92112f2da6c135303130">   77</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classace__spi_1_1SimpleSpiFastInterface.html#a194beec2e57f92112f2da6c135303130">transfer16</a>(uint16_t value)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;      uint8_t msb = (value &amp; 0xff00) &gt;&gt; 8;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;      uint8_t lsb = (value &amp; 0xff);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;      shiftOutFast(msb);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;      shiftOutFast(lsb);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    }</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="classace__spi_1_1SimpleSpiFastInterface.html#a486e705ecb2d3b216cb194dd1f94536c">   85</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classace__spi_1_1SimpleSpiFastInterface.html#a486e705ecb2d3b216cb194dd1f94536c">send8</a>(uint8_t value)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;      <a class="code" href="classace__spi_1_1SimpleSpiFastInterface.html#a341df1ac818f2e22f4234f97d5d3741c">beginTransaction</a>();</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;      <a class="code" href="classace__spi_1_1SimpleSpiFastInterface.html#a587ac5c85446ec8ce1ebc551b84efc7c">transfer</a>(value);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;      <a class="code" href="classace__spi_1_1SimpleSpiFastInterface.html#a14ea5ae345e4049bc130f9a15ab03e04">endTransaction</a>();</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    }</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="classace__spi_1_1SimpleSpiFastInterface.html#a0f9825f3ec52d1a474f6a6515e04466d">   92</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classace__spi_1_1SimpleSpiFastInterface.html#a0f9825f3ec52d1a474f6a6515e04466d">send16</a>(uint16_t value)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;      <a class="code" href="classace__spi_1_1SimpleSpiFastInterface.html#a341df1ac818f2e22f4234f97d5d3741c">beginTransaction</a>();</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;      <a class="code" href="classace__spi_1_1SimpleSpiFastInterface.html#a194beec2e57f92112f2da6c135303130">transfer16</a>(value);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;      <a class="code" href="classace__spi_1_1SimpleSpiFastInterface.html#a14ea5ae345e4049bc130f9a15ab03e04">endTransaction</a>();</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    }</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="classace__spi_1_1SimpleSpiFastInterface.html#a81bf1c02b17ecaf6dbad35d3b89d81f8">   99</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classace__spi_1_1SimpleSpiFastInterface.html#a81bf1c02b17ecaf6dbad35d3b89d81f8">send16</a>(uint8_t msb, uint8_t lsb)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;      <a class="code" href="classace__spi_1_1SimpleSpiFastInterface.html#a341df1ac818f2e22f4234f97d5d3741c">beginTransaction</a>();</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;      shiftOutFast(msb);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;      shiftOutFast(lsb);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;      <a class="code" href="classace__spi_1_1SimpleSpiFastInterface.html#a14ea5ae345e4049bc130f9a15ab03e04">endTransaction</a>();</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    }</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="comment">// Use default copy constructor and assignment operator.</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <a class="code" href="classace__spi_1_1SimpleSpiFastInterface.html#a51376751b9eccf36ec01a319662161ae">SimpleSpiFastInterface</a>(<span class="keyword">const</span> <a class="code" href="classace__spi_1_1SimpleSpiFastInterface.html">SimpleSpiFastInterface</a>&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <a class="code" href="classace__spi_1_1SimpleSpiFastInterface.html">SimpleSpiFastInterface</a>&amp; operator=(<span class="keyword">const</span> <a class="code" href="classace__spi_1_1SimpleSpiFastInterface.html">SimpleSpiFastInterface</a>&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> shiftOutFast(uint8_t output) {</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;      uint8_t mask = 0x80; <span class="comment">// start with the MSB</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;      <span class="keywordflow">for</span> (uint8_t i = 0; i &lt; 8; i++)  {</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        digitalWriteFast(T_CLOCK_PIN, LOW);</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <span class="keywordflow">if</span> (output &amp; mask) {</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;          digitalWriteFast(T_DATA_PIN, HIGH);</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;          digitalWriteFast(T_DATA_PIN, LOW);</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        }</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        digitalWriteFast(T_CLOCK_PIN, HIGH);</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        mask &gt;&gt;= 1;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;      }</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    }</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;};</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;} <span class="comment">// ace_spi</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclassace__spi_1_1SimpleSpiFastInterface_html"><div class="ttname"><a href="classace__spi_1_1SimpleSpiFastInterface.html">ace_spi::SimpleSpiFastInterface</a></div><div class="ttdoc">Software SPI using pinModeFast(), digitalWriteFast() and shiftOutFast() from https://github....</div><div class="ttdef"><b>Definition:</b> <a href="SimpleSpiFastInterface_8h_source.html#l00042">SimpleSpiFastInterface.h:42</a></div></div>
 <div class="ttc" id="aclassace__spi_1_1SimpleSpiFastInterface_html_a81d83b3ef4d553e650363614aeca5629"><div class="ttname"><a href="classace__spi_1_1SimpleSpiFastInterface.html#a81d83b3ef4d553e650363614aeca5629">ace_spi::SimpleSpiFastInterface::end</a></div><div class="ttdeci">void end() const</div><div class="ttdoc">Reset the various pins.</div><div class="ttdef"><b>Definition:</b> <a href="SimpleSpiFastInterface_8h_source.html#l00055">SimpleSpiFastInterface.h:55</a></div></div>
 <div class="ttc" id="aclassace__spi_1_1SimpleSpiFastInterface_html_af6b7532774f370c8beb331e517b0cfb2"><div class="ttname"><a href="classace__spi_1_1SimpleSpiFastInterface.html#af6b7532774f370c8beb331e517b0cfb2">ace_spi::SimpleSpiFastInterface::begin</a></div><div class="ttdeci">void begin() const</div><div class="ttdoc">Initialize the various pins.</div><div class="ttdef"><b>Definition:</b> <a href="SimpleSpiFastInterface_8h_source.html#l00048">SimpleSpiFastInterface.h:48</a></div></div>
 <div class="ttc" id="aclassace__spi_1_1SimpleSpiFastInterface_html_a51376751b9eccf36ec01a319662161ae"><div class="ttname"><a href="classace__spi_1_1SimpleSpiFastInterface.html#a51376751b9eccf36ec01a319662161ae">ace_spi::SimpleSpiFastInterface::SimpleSpiFastInterface</a></div><div class="ttdeci">SimpleSpiFastInterface()=default</div><div class="ttdoc">Constructor.</div></div>
-<div class="ttc" id="aclassace__spi_1_1SimpleSpiFastInterface_html_a81bf1c02b17ecaf6dbad35d3b89d81f8"><div class="ttname"><a href="classace__spi_1_1SimpleSpiFastInterface.html#a81bf1c02b17ecaf6dbad35d3b89d81f8">ace_spi::SimpleSpiFastInterface::send16</a></div><div class="ttdeci">void send16(uint8_t msb, uint8_t lsb) const</div><div class="ttdoc">Send 2 bytes as 16-bit stream, including latching LOW and HIGH.</div><div class="ttdef"><b>Definition:</b> <a href="SimpleSpiFastInterface_8h_source.html#l00076">SimpleSpiFastInterface.h:76</a></div></div>
-<div class="ttc" id="aclassace__spi_1_1SimpleSpiFastInterface_html_a0f9825f3ec52d1a474f6a6515e04466d"><div class="ttname"><a href="classace__spi_1_1SimpleSpiFastInterface.html#a0f9825f3ec52d1a474f6a6515e04466d">ace_spi::SimpleSpiFastInterface::send16</a></div><div class="ttdeci">void send16(uint16_t value) const</div><div class="ttdoc">Send 16 bits, including latching LOW and HIGH.</div><div class="ttdef"><b>Definition:</b> <a href="SimpleSpiFastInterface_8h_source.html#l00069">SimpleSpiFastInterface.h:69</a></div></div>
-<div class="ttc" id="aclassace__spi_1_1SimpleSpiFastInterface_html_a486e705ecb2d3b216cb194dd1f94536c"><div class="ttname"><a href="classace__spi_1_1SimpleSpiFastInterface.html#a486e705ecb2d3b216cb194dd1f94536c">ace_spi::SimpleSpiFastInterface::send8</a></div><div class="ttdeci">void send8(uint8_t value) const</div><div class="ttdoc">Send 8 bits, including latching LOW and HIGH.</div><div class="ttdef"><b>Definition:</b> <a href="SimpleSpiFastInterface_8h_source.html#l00062">SimpleSpiFastInterface.h:62</a></div></div>
+<div class="ttc" id="aclassace__spi_1_1SimpleSpiFastInterface_html_a14ea5ae345e4049bc130f9a15ab03e04"><div class="ttname"><a href="classace__spi_1_1SimpleSpiFastInterface.html#a14ea5ae345e4049bc130f9a15ab03e04">ace_spi::SimpleSpiFastInterface::endTransaction</a></div><div class="ttdeci">void endTransaction() const</div><div class="ttdoc">End SPI transaction.</div><div class="ttdef"><b>Definition:</b> <a href="SimpleSpiFastInterface_8h_source.html#l00067">SimpleSpiFastInterface.h:67</a></div></div>
+<div class="ttc" id="aclassace__spi_1_1SimpleSpiFastInterface_html_a81bf1c02b17ecaf6dbad35d3b89d81f8"><div class="ttname"><a href="classace__spi_1_1SimpleSpiFastInterface.html#a81bf1c02b17ecaf6dbad35d3b89d81f8">ace_spi::SimpleSpiFastInterface::send16</a></div><div class="ttdeci">void send16(uint8_t msb, uint8_t lsb) const</div><div class="ttdoc">Convenience method to send 16 bits a single transaction.</div><div class="ttdef"><b>Definition:</b> <a href="SimpleSpiFastInterface_8h_source.html#l00099">SimpleSpiFastInterface.h:99</a></div></div>
+<div class="ttc" id="aclassace__spi_1_1SimpleSpiFastInterface_html_a194beec2e57f92112f2da6c135303130"><div class="ttname"><a href="classace__spi_1_1SimpleSpiFastInterface.html#a194beec2e57f92112f2da6c135303130">ace_spi::SimpleSpiFastInterface::transfer16</a></div><div class="ttdeci">void transfer16(uint16_t value) const</div><div class="ttdoc">Transfer 16 bits.</div><div class="ttdef"><b>Definition:</b> <a href="SimpleSpiFastInterface_8h_source.html#l00077">SimpleSpiFastInterface.h:77</a></div></div>
+<div class="ttc" id="aclassace__spi_1_1SimpleSpiFastInterface_html_a341df1ac818f2e22f4234f97d5d3741c"><div class="ttname"><a href="classace__spi_1_1SimpleSpiFastInterface.html#a341df1ac818f2e22f4234f97d5d3741c">ace_spi::SimpleSpiFastInterface::beginTransaction</a></div><div class="ttdeci">void beginTransaction() const</div><div class="ttdoc">Begin SPI transaction.</div><div class="ttdef"><b>Definition:</b> <a href="SimpleSpiFastInterface_8h_source.html#l00062">SimpleSpiFastInterface.h:62</a></div></div>
+<div class="ttc" id="aclassace__spi_1_1SimpleSpiFastInterface_html_a0f9825f3ec52d1a474f6a6515e04466d"><div class="ttname"><a href="classace__spi_1_1SimpleSpiFastInterface.html#a0f9825f3ec52d1a474f6a6515e04466d">ace_spi::SimpleSpiFastInterface::send16</a></div><div class="ttdeci">void send16(uint16_t value) const</div><div class="ttdoc">Convenience method to send 16 bits a single transaction.</div><div class="ttdef"><b>Definition:</b> <a href="SimpleSpiFastInterface_8h_source.html#l00092">SimpleSpiFastInterface.h:92</a></div></div>
+<div class="ttc" id="aclassace__spi_1_1SimpleSpiFastInterface_html_a486e705ecb2d3b216cb194dd1f94536c"><div class="ttname"><a href="classace__spi_1_1SimpleSpiFastInterface.html#a486e705ecb2d3b216cb194dd1f94536c">ace_spi::SimpleSpiFastInterface::send8</a></div><div class="ttdeci">void send8(uint8_t value) const</div><div class="ttdoc">Convenience method to send 8 bits a single transaction.</div><div class="ttdef"><b>Definition:</b> <a href="SimpleSpiFastInterface_8h_source.html#l00085">SimpleSpiFastInterface.h:85</a></div></div>
+<div class="ttc" id="aclassace__spi_1_1SimpleSpiFastInterface_html_a587ac5c85446ec8ce1ebc551b84efc7c"><div class="ttname"><a href="classace__spi_1_1SimpleSpiFastInterface.html#a587ac5c85446ec8ce1ebc551b84efc7c">ace_spi::SimpleSpiFastInterface::transfer</a></div><div class="ttdeci">void transfer(uint8_t value) const</div><div class="ttdoc">Transfer 8 bits.</div><div class="ttdef"><b>Definition:</b> <a href="SimpleSpiFastInterface_8h_source.html#l00072">SimpleSpiFastInterface.h:72</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

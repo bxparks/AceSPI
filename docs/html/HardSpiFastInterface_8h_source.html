@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AceSPI
-   &#160;<span id="projectnumber">0.2.0</span>
+   &#160;<span id="projectnumber">0.3</span>
    </div>
    <div id="projectbrief">Unified interface for selecting hardware or software SPI implementations on Arduino platforms</div>
   </td>
@@ -111,80 +111,99 @@ $(function() {
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;&gt;</div>
 <div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="classace__spi_1_1HardSpiFastInterface.html">   55</a></span>&#160;<span class="keyword">class </span><a class="code" href="classace__spi_1_1HardSpiFastInterface.html">HardSpiFastInterface</a> {</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="comment">// Some of the following constants are defined in &lt;SPI.h&gt; so unfortunately,</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="comment">// it is not possible to avoid pulling in the global SPI instance into</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="comment">// applications which don&#39;t use SPI.</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">  #if defined(ARDUINO_ARCH_STM32) || defined(ARDUINO_ARCH_SAMD)</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> BitOrder kBitOrder = MSBFIRST;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">  #else</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> uint8_t kBitOrder = MSBFIRST;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor">  #endif</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> uint8_t kSpiMode = SPI_MODE0;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="classace__spi_1_1HardSpiFastInterface.html#ad370f650886b66891b18bbc1747cfc9b">   79</a></span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classace__spi_1_1HardSpiFastInterface.html#ad370f650886b66891b18bbc1747cfc9b">HardSpiFastInterface</a>(T_SPI&amp; spi) : mSpi(spi) {}</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="classace__spi_1_1HardSpiFastInterface.html#aaafc7a9b7a565dab5b135e069fdd31a9">   85</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classace__spi_1_1HardSpiFastInterface.html#aaafc7a9b7a565dab5b135e069fdd31a9">begin</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;      <span class="comment">// To use Hardware SPI on ESP8266, we must set the SCK and MOSI pins to</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;      <span class="comment">// &#39;SPECIAL&#39; instead of &#39;OUTPUT&#39;. This is performed by calling</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;      <span class="comment">// SPI.begin(). Also, unlike other Arduino platforms, the SPIClass on</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;      <span class="comment">// the ESP8266 defaults to controlling the SS/CS pin itself, instead of</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;      <span class="comment">// letting the application code control it. The setHwCs(false) lets</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;      <span class="comment">// HardSpiFastInterface control the CS/SS pin.</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;      <span class="comment">// https://www.esp8266.com/wiki/doku.php?id=esp8266_gpio_pin_allocations</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="preprocessor">      #if defined(ESP8266)</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        mSpi.setHwCs(<span class="keyword">false</span>);</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="preprocessor">      #endif</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;      pinModeFast(T_LATCH_PIN, OUTPUT);</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    }</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
-<div class="line"><a name="l00101"></a><span class="lineno"><a class="line" href="classace__spi_1_1HardSpiFastInterface.html#a04cec88f3865aad1a08bed75d1d98d87">  101</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classace__spi_1_1HardSpiFastInterface.html#a04cec88f3865aad1a08bed75d1d98d87">end</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;      pinModeFast(T_LATCH_PIN, INPUT);</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    }</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
-<div class="line"><a name="l00106"></a><span class="lineno"><a class="line" href="classace__spi_1_1HardSpiFastInterface.html#aaa812cda71236f1a5f8300c8a36f01db">  106</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classace__spi_1_1HardSpiFastInterface.html#aaa812cda71236f1a5f8300c8a36f01db">send8</a>(uint8_t value)<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;      mSpi.beginTransaction(SPISettings(T_CLOCK_SPEED, kBitOrder, kSpiMode));</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;      digitalWriteFast(T_LATCH_PIN, LOW);</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;      mSpi.transfer(value);</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;      digitalWriteFast(T_LATCH_PIN, HIGH);</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;      mSpi.endTransaction();</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    }</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
-<div class="line"><a name="l00115"></a><span class="lineno"><a class="line" href="classace__spi_1_1HardSpiFastInterface.html#ae6f781ffa918d8204b76bef06ec15dbf">  115</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classace__spi_1_1HardSpiFastInterface.html#ae6f781ffa918d8204b76bef06ec15dbf">send16</a>(uint16_t value)<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;      mSpi.beginTransaction(SPISettings(T_CLOCK_SPEED, kBitOrder, kSpiMode));</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;      digitalWriteFast(T_LATCH_PIN, LOW);</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;      mSpi.transfer16(value);</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;      digitalWriteFast(T_LATCH_PIN, HIGH);</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;      mSpi.endTransaction();</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    }</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
-<div class="line"><a name="l00124"></a><span class="lineno"><a class="line" href="classace__spi_1_1HardSpiFastInterface.html#ac43b909571cfc19049749ef503ed67f4">  124</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classace__spi_1_1HardSpiFastInterface.html#ac43b909571cfc19049749ef503ed67f4">send16</a>(uint8_t msb, uint8_t lsb)<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;      uint16_t value = ((uint16_t) msb) &lt;&lt; 8 | (uint16_t) lsb;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;      <a class="code" href="classace__spi_1_1HardSpiFastInterface.html#ae6f781ffa918d8204b76bef06ec15dbf">send16</a>(value);</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    }</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="comment">// Use default copy constructor and assignment operator.</span></div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <a class="code" href="classace__spi_1_1HardSpiFastInterface.html#ad370f650886b66891b18bbc1747cfc9b">HardSpiFastInterface</a>(<span class="keyword">const</span> <a class="code" href="classace__spi_1_1HardSpiFastInterface.html">HardSpiFastInterface</a>&amp;) = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <a class="code" href="classace__spi_1_1HardSpiFastInterface.html">HardSpiFastInterface</a>&amp; operator=(<span class="keyword">const</span> <a class="code" href="classace__spi_1_1HardSpiFastInterface.html">HardSpiFastInterface</a>&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="comment">// Some of the following constants are defined in &lt;SPI.h&gt; so it is not</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="comment">// possible to avoid the dependency on &lt;SPI.h&gt;</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">  #if defined(ARDUINO_ARCH_STM32) || defined(ARDUINO_ARCH_SAMD)</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> BitOrder kBitOrder = MSBFIRST;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">  #else</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> uint8_t kBitOrder = MSBFIRST;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">  #endif</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> uint8_t kSpiMode = SPI_MODE0;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="classace__spi_1_1HardSpiFastInterface.html#ad370f650886b66891b18bbc1747cfc9b">   78</a></span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classace__spi_1_1HardSpiFastInterface.html#ad370f650886b66891b18bbc1747cfc9b">HardSpiFastInterface</a>(T_SPI&amp; spi) : mSpi(spi) {}</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="classace__spi_1_1HardSpiFastInterface.html#aaafc7a9b7a565dab5b135e069fdd31a9">   84</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classace__spi_1_1HardSpiFastInterface.html#aaafc7a9b7a565dab5b135e069fdd31a9">begin</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;      <span class="comment">// To use Hardware SPI on ESP8266, we must set the SCK and MOSI pins to</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;      <span class="comment">// &#39;SPECIAL&#39; instead of &#39;OUTPUT&#39;. This is performed by calling</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;      <span class="comment">// SPI.begin(). Also, unlike other Arduino platforms, the SPIClass on</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;      <span class="comment">// the ESP8266 defaults to controlling the SS/CS pin itself, instead of</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;      <span class="comment">// letting the application code control it. The setHwCs(false) lets</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;      <span class="comment">// HardSpiFastInterface control the CS/SS pin.</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;      <span class="comment">// https://www.esp8266.com/wiki/doku.php?id=esp8266_gpio_pin_allocations</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="preprocessor">      #if defined(ESP8266)</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        mSpi.setHwCs(<span class="keyword">false</span>);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="preprocessor">      #endif</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;      pinModeFast(T_LATCH_PIN, OUTPUT);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    }</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno"><a class="line" href="classace__spi_1_1HardSpiFastInterface.html#a04cec88f3865aad1a08bed75d1d98d87">  100</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classace__spi_1_1HardSpiFastInterface.html#a04cec88f3865aad1a08bed75d1d98d87">end</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;      pinModeFast(T_LATCH_PIN, INPUT);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    }</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="classace__spi_1_1HardSpiFastInterface.html#a2f06c2eb4b168cc443fcf59629bd99af">  105</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classace__spi_1_1HardSpiFastInterface.html#a2f06c2eb4b168cc443fcf59629bd99af">beginTransaction</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;      mSpi.beginTransaction(SPISettings(T_CLOCK_SPEED, kBitOrder, kSpiMode));</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;      digitalWriteFast(T_LATCH_PIN, LOW);</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    }</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="classace__spi_1_1HardSpiFastInterface.html#a30a7d62c9609f7bde0c5c54fb641bcc2">  111</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classace__spi_1_1HardSpiFastInterface.html#a30a7d62c9609f7bde0c5c54fb641bcc2">endTransaction</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;      digitalWriteFast(T_LATCH_PIN, HIGH);</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;      mSpi.endTransaction();</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    }</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00117"></a><span class="lineno"><a class="line" href="classace__spi_1_1HardSpiFastInterface.html#ae2d6f85e95675660d20ab84b34cff790">  117</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classace__spi_1_1HardSpiFastInterface.html#ae2d6f85e95675660d20ab84b34cff790">transfer</a>(uint8_t value)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;      mSpi.transfer(value);</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    }</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
+<div class="line"><a name="l00122"></a><span class="lineno"><a class="line" href="classace__spi_1_1HardSpiFastInterface.html#af075c3f47d98779e60c95c2e00e1b7c1">  122</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classace__spi_1_1HardSpiFastInterface.html#af075c3f47d98779e60c95c2e00e1b7c1">transfer16</a>(uint16_t value)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;      mSpi.transfer16(value);</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    }</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
+<div class="line"><a name="l00127"></a><span class="lineno"><a class="line" href="classace__spi_1_1HardSpiFastInterface.html#aaa812cda71236f1a5f8300c8a36f01db">  127</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classace__spi_1_1HardSpiFastInterface.html#aaa812cda71236f1a5f8300c8a36f01db">send8</a>(uint8_t value)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;      <a class="code" href="classace__spi_1_1HardSpiFastInterface.html#a2f06c2eb4b168cc443fcf59629bd99af">beginTransaction</a>();</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;      <a class="code" href="classace__spi_1_1HardSpiFastInterface.html#ae2d6f85e95675660d20ab84b34cff790">transfer</a>(value);</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;      <a class="code" href="classace__spi_1_1HardSpiFastInterface.html#a30a7d62c9609f7bde0c5c54fb641bcc2">endTransaction</a>();</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    }</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;  <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    T_SPI&amp; mSpi;</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;};</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;} <span class="comment">// ace_spi</span></div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; </div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno"><a class="line" href="classace__spi_1_1HardSpiFastInterface.html#ae6f781ffa918d8204b76bef06ec15dbf">  134</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classace__spi_1_1HardSpiFastInterface.html#ae6f781ffa918d8204b76bef06ec15dbf">send16</a>(uint16_t value)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;      <a class="code" href="classace__spi_1_1HardSpiFastInterface.html#a2f06c2eb4b168cc443fcf59629bd99af">beginTransaction</a>();</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;      <a class="code" href="classace__spi_1_1HardSpiFastInterface.html#af075c3f47d98779e60c95c2e00e1b7c1">transfer16</a>(value);</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;      <a class="code" href="classace__spi_1_1HardSpiFastInterface.html#a30a7d62c9609f7bde0c5c54fb641bcc2">endTransaction</a>();</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    }</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; </div>
+<div class="line"><a name="l00141"></a><span class="lineno"><a class="line" href="classace__spi_1_1HardSpiFastInterface.html#ac43b909571cfc19049749ef503ed67f4">  141</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classace__spi_1_1HardSpiFastInterface.html#ac43b909571cfc19049749ef503ed67f4">send16</a>(uint8_t msb, uint8_t lsb)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;      <a class="code" href="classace__spi_1_1HardSpiFastInterface.html#a2f06c2eb4b168cc443fcf59629bd99af">beginTransaction</a>();</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;      uint16_t value = ((uint16_t) msb) &lt;&lt; 8 | (uint16_t) lsb;</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;      <a class="code" href="classace__spi_1_1HardSpiFastInterface.html#af075c3f47d98779e60c95c2e00e1b7c1">transfer16</a>(value);</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;      <a class="code" href="classace__spi_1_1HardSpiFastInterface.html#a30a7d62c9609f7bde0c5c54fb641bcc2">endTransaction</a>();</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    }</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160; </div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    <span class="comment">// Use default copy constructor and assignment operator.</span></div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    <a class="code" href="classace__spi_1_1HardSpiFastInterface.html#ad370f650886b66891b18bbc1747cfc9b">HardSpiFastInterface</a>(<span class="keyword">const</span> <a class="code" href="classace__spi_1_1HardSpiFastInterface.html">HardSpiFastInterface</a>&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    <a class="code" href="classace__spi_1_1HardSpiFastInterface.html">HardSpiFastInterface</a>&amp; operator=(<span class="keyword">const</span> <a class="code" href="classace__spi_1_1HardSpiFastInterface.html">HardSpiFastInterface</a>&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160; </div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    T_SPI&amp; mSpi;</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;};</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; </div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;} <span class="comment">// ace_spi</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclassace__spi_1_1HardSpiFastInterface_html_ac43b909571cfc19049749ef503ed67f4"><div class="ttname"><a href="classace__spi_1_1HardSpiFastInterface.html#ac43b909571cfc19049749ef503ed67f4">ace_spi::HardSpiFastInterface::send16</a></div><div class="ttdeci">void send16(uint8_t msb, uint8_t lsb) const</div><div class="ttdoc">Send 2 bytes as 16-bit stream, including latching LOW and HIGH.</div><div class="ttdef"><b>Definition:</b> <a href="HardSpiFastInterface_8h_source.html#l00124">HardSpiFastInterface.h:124</a></div></div>
-<div class="ttc" id="aclassace__spi_1_1HardSpiFastInterface_html_a04cec88f3865aad1a08bed75d1d98d87"><div class="ttname"><a href="classace__spi_1_1HardSpiFastInterface.html#a04cec88f3865aad1a08bed75d1d98d87">ace_spi::HardSpiFastInterface::end</a></div><div class="ttdeci">void end() const</div><div class="ttdoc">Clean up the object.</div><div class="ttdef"><b>Definition:</b> <a href="HardSpiFastInterface_8h_source.html#l00101">HardSpiFastInterface.h:101</a></div></div>
-<div class="ttc" id="aclassace__spi_1_1HardSpiFastInterface_html_ae6f781ffa918d8204b76bef06ec15dbf"><div class="ttname"><a href="classace__spi_1_1HardSpiFastInterface.html#ae6f781ffa918d8204b76bef06ec15dbf">ace_spi::HardSpiFastInterface::send16</a></div><div class="ttdeci">void send16(uint16_t value) const</div><div class="ttdoc">Send 16 bits, including latching LOW and HIGH.</div><div class="ttdef"><b>Definition:</b> <a href="HardSpiFastInterface_8h_source.html#l00115">HardSpiFastInterface.h:115</a></div></div>
+<div class="ttc" id="aclassace__spi_1_1HardSpiFastInterface_html_ac43b909571cfc19049749ef503ed67f4"><div class="ttname"><a href="classace__spi_1_1HardSpiFastInterface.html#ac43b909571cfc19049749ef503ed67f4">ace_spi::HardSpiFastInterface::send16</a></div><div class="ttdeci">void send16(uint8_t msb, uint8_t lsb) const</div><div class="ttdoc">Convenience method to send 16 bits a single transaction.</div><div class="ttdef"><b>Definition:</b> <a href="HardSpiFastInterface_8h_source.html#l00141">HardSpiFastInterface.h:141</a></div></div>
+<div class="ttc" id="aclassace__spi_1_1HardSpiFastInterface_html_a04cec88f3865aad1a08bed75d1d98d87"><div class="ttname"><a href="classace__spi_1_1HardSpiFastInterface.html#a04cec88f3865aad1a08bed75d1d98d87">ace_spi::HardSpiFastInterface::end</a></div><div class="ttdeci">void end() const</div><div class="ttdoc">Clean up the object.</div><div class="ttdef"><b>Definition:</b> <a href="HardSpiFastInterface_8h_source.html#l00100">HardSpiFastInterface.h:100</a></div></div>
+<div class="ttc" id="aclassace__spi_1_1HardSpiFastInterface_html_af075c3f47d98779e60c95c2e00e1b7c1"><div class="ttname"><a href="classace__spi_1_1HardSpiFastInterface.html#af075c3f47d98779e60c95c2e00e1b7c1">ace_spi::HardSpiFastInterface::transfer16</a></div><div class="ttdeci">void transfer16(uint16_t value) const</div><div class="ttdoc">Transfer 16 bits.</div><div class="ttdef"><b>Definition:</b> <a href="HardSpiFastInterface_8h_source.html#l00122">HardSpiFastInterface.h:122</a></div></div>
+<div class="ttc" id="aclassace__spi_1_1HardSpiFastInterface_html_ae2d6f85e95675660d20ab84b34cff790"><div class="ttname"><a href="classace__spi_1_1HardSpiFastInterface.html#ae2d6f85e95675660d20ab84b34cff790">ace_spi::HardSpiFastInterface::transfer</a></div><div class="ttdeci">void transfer(uint8_t value) const</div><div class="ttdoc">Transfer 8 bits.</div><div class="ttdef"><b>Definition:</b> <a href="HardSpiFastInterface_8h_source.html#l00117">HardSpiFastInterface.h:117</a></div></div>
+<div class="ttc" id="aclassace__spi_1_1HardSpiFastInterface_html_ae6f781ffa918d8204b76bef06ec15dbf"><div class="ttname"><a href="classace__spi_1_1HardSpiFastInterface.html#ae6f781ffa918d8204b76bef06ec15dbf">ace_spi::HardSpiFastInterface::send16</a></div><div class="ttdeci">void send16(uint16_t value) const</div><div class="ttdoc">Convenience method to send 16 bits a single transaction.</div><div class="ttdef"><b>Definition:</b> <a href="HardSpiFastInterface_8h_source.html#l00134">HardSpiFastInterface.h:134</a></div></div>
 <div class="ttc" id="aclassace__spi_1_1HardSpiFastInterface_html"><div class="ttname"><a href="classace__spi_1_1HardSpiFastInterface.html">ace_spi::HardSpiFastInterface</a></div><div class="ttdoc">This class is functionally identical to HardSpiInterface except that the GPIO pins are controlled by ...</div><div class="ttdef"><b>Definition:</b> <a href="HardSpiFastInterface_8h_source.html#l00055">HardSpiFastInterface.h:55</a></div></div>
-<div class="ttc" id="aclassace__spi_1_1HardSpiFastInterface_html_ad370f650886b66891b18bbc1747cfc9b"><div class="ttname"><a href="classace__spi_1_1HardSpiFastInterface.html#ad370f650886b66891b18bbc1747cfc9b">ace_spi::HardSpiFastInterface::HardSpiFastInterface</a></div><div class="ttdeci">HardSpiFastInterface(T_SPI &amp;spi)</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition:</b> <a href="HardSpiFastInterface_8h_source.html#l00079">HardSpiFastInterface.h:79</a></div></div>
-<div class="ttc" id="aclassace__spi_1_1HardSpiFastInterface_html_aaa812cda71236f1a5f8300c8a36f01db"><div class="ttname"><a href="classace__spi_1_1HardSpiFastInterface.html#aaa812cda71236f1a5f8300c8a36f01db">ace_spi::HardSpiFastInterface::send8</a></div><div class="ttdeci">void send8(uint8_t value) const</div><div class="ttdoc">Send 8 bits, including latching LOW and HIGH.</div><div class="ttdef"><b>Definition:</b> <a href="HardSpiFastInterface_8h_source.html#l00106">HardSpiFastInterface.h:106</a></div></div>
-<div class="ttc" id="aclassace__spi_1_1HardSpiFastInterface_html_aaafc7a9b7a565dab5b135e069fdd31a9"><div class="ttname"><a href="classace__spi_1_1HardSpiFastInterface.html#aaafc7a9b7a565dab5b135e069fdd31a9">ace_spi::HardSpiFastInterface::begin</a></div><div class="ttdeci">void begin() const</div><div class="ttdoc">Initialize the HardSpiFastInterface.</div><div class="ttdef"><b>Definition:</b> <a href="HardSpiFastInterface_8h_source.html#l00085">HardSpiFastInterface.h:85</a></div></div>
+<div class="ttc" id="aclassace__spi_1_1HardSpiFastInterface_html_a2f06c2eb4b168cc443fcf59629bd99af"><div class="ttname"><a href="classace__spi_1_1HardSpiFastInterface.html#a2f06c2eb4b168cc443fcf59629bd99af">ace_spi::HardSpiFastInterface::beginTransaction</a></div><div class="ttdeci">void beginTransaction() const</div><div class="ttdoc">Begin SPI transaction.</div><div class="ttdef"><b>Definition:</b> <a href="HardSpiFastInterface_8h_source.html#l00105">HardSpiFastInterface.h:105</a></div></div>
+<div class="ttc" id="aclassace__spi_1_1HardSpiFastInterface_html_ad370f650886b66891b18bbc1747cfc9b"><div class="ttname"><a href="classace__spi_1_1HardSpiFastInterface.html#ad370f650886b66891b18bbc1747cfc9b">ace_spi::HardSpiFastInterface::HardSpiFastInterface</a></div><div class="ttdeci">HardSpiFastInterface(T_SPI &amp;spi)</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition:</b> <a href="HardSpiFastInterface_8h_source.html#l00078">HardSpiFastInterface.h:78</a></div></div>
+<div class="ttc" id="aclassace__spi_1_1HardSpiFastInterface_html_aaa812cda71236f1a5f8300c8a36f01db"><div class="ttname"><a href="classace__spi_1_1HardSpiFastInterface.html#aaa812cda71236f1a5f8300c8a36f01db">ace_spi::HardSpiFastInterface::send8</a></div><div class="ttdeci">void send8(uint8_t value) const</div><div class="ttdoc">Convenience method to send 8 bits a single transaction.</div><div class="ttdef"><b>Definition:</b> <a href="HardSpiFastInterface_8h_source.html#l00127">HardSpiFastInterface.h:127</a></div></div>
+<div class="ttc" id="aclassace__spi_1_1HardSpiFastInterface_html_a30a7d62c9609f7bde0c5c54fb641bcc2"><div class="ttname"><a href="classace__spi_1_1HardSpiFastInterface.html#a30a7d62c9609f7bde0c5c54fb641bcc2">ace_spi::HardSpiFastInterface::endTransaction</a></div><div class="ttdeci">void endTransaction() const</div><div class="ttdoc">End SPI transaction.</div><div class="ttdef"><b>Definition:</b> <a href="HardSpiFastInterface_8h_source.html#l00111">HardSpiFastInterface.h:111</a></div></div>
+<div class="ttc" id="aclassace__spi_1_1HardSpiFastInterface_html_aaafc7a9b7a565dab5b135e069fdd31a9"><div class="ttname"><a href="classace__spi_1_1HardSpiFastInterface.html#aaafc7a9b7a565dab5b135e069fdd31a9">ace_spi::HardSpiFastInterface::begin</a></div><div class="ttdeci">void begin() const</div><div class="ttdoc">Initialize the HardSpiFastInterface.</div><div class="ttdef"><b>Definition:</b> <a href="HardSpiFastInterface_8h_source.html#l00084">HardSpiFastInterface.h:84</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">
