@@ -1,5 +1,7 @@
 # AceSPI
 
+[![Validation](https://github.com/bxparks/AceSPI/actions/workflows/validation.yml/badge.svg)](https://github.com/bxparks/AceSPI/actions/workflows/validation.yml)
+
 Unified interface for selecting hardware or software SPI implementations on
 Arduino platforms. The code was initially part of the
 [AceSegment](https://github.com/bxparks/AceSegment) library, but was extracted
