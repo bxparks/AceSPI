@@ -1,7 +1,7 @@
 # Changelog
 
 * Unreleased
-* 0.3 (2021-07-30)
+* 0.3 (2021-08-17)
     * Add `beginTransaction()`, `endTransaction()`, `transfer()`,
      and `transfer16()` for compatibility with the `SPIClass` from `<SPI.h>`.
         * Retain `send8()` and `send16()` as convenience methods that wrap
