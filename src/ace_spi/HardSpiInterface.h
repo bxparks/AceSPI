@@ -108,31 +108,48 @@ class HardSpiInterface {
       pinMode(mLatchPin, INPUT);
     }
 
-    /** Send 8 bits, including latching LOW and HIGH. */
-    void send8(uint8_t value) const {
+    /** Begin SPI transaction. Pull latch LOW. */
+    void beginTransaction() const {
       mSpi.beginTransaction(SPISettings(T_CLOCK_SPEED, kBitOrder, kSpiMode));
       digitalWrite(mLatchPin, LOW);
+    }
+
+    /** End SPI transaction. Pull latch HIGH. */
+    void endTransaction() const {
+      digitalWrite(mLatchPin, HIGH);
+      mSpi.endTransaction();
+    }
+
+    /** Transfer 8 bits. */
+    void transfer(uint8_t value) const {
       mSpi.transfer(value);
-      digitalWrite(mLatchPin, HIGH);
-      mSpi.endTransaction();
     }
 
-    /** Send 16 bits, including latching LOW and HIGH. */
-    void send16(uint16_t value) const {
-      mSpi.beginTransaction(SPISettings(T_CLOCK_SPEED, kBitOrder, kSpiMode));
-      digitalWrite(mLatchPin, LOW);
+    /** Transfer 16 bits. */
+    void transfer16(uint16_t value) const {
       mSpi.transfer16(value);
-      digitalWrite(mLatchPin, HIGH);
-      mSpi.endTransaction();
     }
 
-    /**
-     * Send two 8-bit bytes as a single 16-bit stream, including latching LOW
-     * and HIGH.
-     */
+    /** Convenience method to send 8 bits a single transaction. */
+    void send8(uint8_t value) const {
+      beginTransaction();
+      transfer(value);
+      endTransaction();
+    }
+
+    /** Convenience method to send 16 bits a single transaction. */
+    void send16(uint16_t value) const {
+      beginTransaction();
+      transfer16(value);
+      endTransaction();
+    }
+
+    /** Convenience method to send 16 bits a single transaction. */
     void send16(uint8_t msb, uint8_t lsb) const {
+      beginTransaction();
       uint16_t value = ((uint16_t) msb) << 8 | (uint16_t) lsb;
-      send16(value);
+      transfer16(value);
+      endTransaction();
     }
 
     // Use default copy constructor and assignment operator.

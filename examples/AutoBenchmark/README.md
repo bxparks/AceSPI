@@ -2,7 +2,7 @@
 
 This program determines the speed of various SPI implementations.
 
-**Version**: AceSPI v0.2
+**Version**: AceSPI v0.3
 
 **DO NOT EDIT**: This file was auto-generated using `make README.md`.
 

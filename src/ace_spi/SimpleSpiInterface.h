@@ -64,26 +64,49 @@ class SimpleSpiInterface {
       pinMode(mClockPin, INPUT);
     }
 
-    /** Send 8 bits, including latching LOW and HIGH. */
-    void send8(uint8_t value) const {
+    /** Begin SPI transaction. Pull latch LOW. */
+    void beginTransaction() const {
       digitalWrite(mLatchPin, LOW);
-      shiftOut(mDataPin, mClockPin, MSBFIRST, value);
+    }
+
+    /** End SPI transaction. Pull latch HIGH. */
+    void endTransaction() const {
       digitalWrite(mLatchPin, HIGH);
     }
 
-    /** Send 16 bits, including latching LOW and HIGH. */
-    void send16(uint16_t value) const {
+    /** Transfer 8 bits. */
+    void transfer(uint8_t value) const {
+      shiftOut(mDataPin, mClockPin, MSBFIRST, value);
+    }
+
+    /** Transfer 16 bits. */
+    void transfer16(uint16_t value) const {
       uint8_t msb = (value & 0xff00) >> 8;
       uint8_t lsb = (value & 0xff);
-      send16(msb, lsb);
-    }
-
-    /** Send 2 bytes as 16-bit stream, including latching LOW and HIGH. */
-    void send16(uint8_t msb, uint8_t lsb) const {
-      digitalWrite(mLatchPin, LOW);
       shiftOut(mDataPin, mClockPin, MSBFIRST, msb);
       shiftOut(mDataPin, mClockPin, MSBFIRST, lsb);
-      digitalWrite(mLatchPin, HIGH);
+    }
+
+    /** Convenience method to send 8 bits a single transaction. */
+    void send8(uint8_t value) const {
+      beginTransaction();
+      transfer(value);
+      endTransaction();
+    }
+
+    /** Convenience method to send 16 bits a single transaction. */
+    void send16(uint16_t value) const {
+      beginTransaction();
+      transfer16(value);
+      endTransaction();
+    }
+
+    /** Convenience method to send 16 bits a single transaction. */
+    void send16(uint8_t msb, uint8_t lsb) const {
+      beginTransaction();
+      shiftOut(mDataPin, mClockPin, MSBFIRST, msb);
+      shiftOut(mDataPin, mClockPin, MSBFIRST, lsb);
+      endTransaction();
     }
 
     // Use default copy constructor and assignment operator.

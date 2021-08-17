@@ -54,9 +54,8 @@ template <
 >
 class HardSpiFastInterface {
   private:
-    // Some of the following constants are defined in <SPI.h> so unfortunately,
-    // it is not possible to avoid pulling in the global SPI instance into
-    // applications which don't use SPI.
+    // Some of the following constants are defined in <SPI.h> so it is not
+    // possible to avoid the dependency on <SPI.h>
 
     /** MSB first or LSB first */
   #if defined(ARDUINO_ARCH_STM32) || defined(ARDUINO_ARCH_SAMD)
@@ -102,28 +101,48 @@ class HardSpiFastInterface {
       pinModeFast(T_LATCH_PIN, INPUT);
     }
 
-    /** Send 8 bits, including latching LOW and HIGH. */
-    void send8(uint8_t value) const {
+    /** Begin SPI transaction. Pull latch LOW. */
+    void beginTransaction() const {
       mSpi.beginTransaction(SPISettings(T_CLOCK_SPEED, kBitOrder, kSpiMode));
       digitalWriteFast(T_LATCH_PIN, LOW);
+    }
+
+    /** End SPI transaction. Pull latch HIGH. */
+    void endTransaction() const {
+      digitalWriteFast(T_LATCH_PIN, HIGH);
+      mSpi.endTransaction();
+    }
+
+    /** Transfer 8 bits. */
+    void transfer(uint8_t value) const {
       mSpi.transfer(value);
-      digitalWriteFast(T_LATCH_PIN, HIGH);
-      mSpi.endTransaction();
     }
 
-    /** Send 16 bits, including latching LOW and HIGH. */
-    void send16(uint16_t value) const {
-      mSpi.beginTransaction(SPISettings(T_CLOCK_SPEED, kBitOrder, kSpiMode));
-      digitalWriteFast(T_LATCH_PIN, LOW);
+    /** Transfer 16 bits. */
+    void transfer16(uint16_t value) const {
       mSpi.transfer16(value);
-      digitalWriteFast(T_LATCH_PIN, HIGH);
-      mSpi.endTransaction();
     }
 
-    /** Send 2 bytes as 16-bit stream, including latching LOW and HIGH. */
+    /** Convenience method to send 8 bits a single transaction. */
+    void send8(uint8_t value) const {
+      beginTransaction();
+      transfer(value);
+      endTransaction();
+    }
+
+    /** Convenience method to send 16 bits a single transaction. */
+    void send16(uint16_t value) const {
+      beginTransaction();
+      transfer16(value);
+      endTransaction();
+    }
+
+    /** Convenience method to send 16 bits a single transaction. */
     void send16(uint8_t msb, uint8_t lsb) const {
+      beginTransaction();
       uint16_t value = ((uint16_t) msb) << 8 | (uint16_t) lsb;
-      send16(value);
+      transfer16(value);
+      endTransaction();
     }
 
     // Use default copy constructor and assignment operator.

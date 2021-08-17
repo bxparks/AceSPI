@@ -37,8 +37,8 @@ SOFTWARE.
 #define ACE_SPI_H
 
 // Version format: xxyyzz == "xx.yy.zz"
-#define ACE_SPI_VERSION 200
-#define ACE_SPI_VERSION_STRING "0.2"
+#define ACE_SPI_VERSION 300
+#define ACE_SPI_VERSION_STRING "0.3"
 
 // Blacklist platforms using https://github.com/arduino/ArduinoCore-api due to
 // incompatibilities.
