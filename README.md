@@ -8,16 +8,19 @@ Arduino platforms. The code was initially part of the
 into a separate library so that it can be shared with other projects. It
 provides the following implementations:
 
-* `HardSpiInterface.h`
+* `HardSpiInterface`
     * Hardware SPI using `digitalWrite()` to control the latch pin.
     * Depends on `<SPI.h>`.
-* `HardSpiFastInterface.h`
+* `HardSpiFastInterface`
     * Hardware SPI using `digitalWriteFast()` to control the latch pin.
     * Depends on `<SPI.h>`.
-* `SimpleSpiInterface.h`
+* `SimpleSpiInterface`
     * Software SPI using `shiftOut()`
-* `SimpleSpiFastInterface.h`
+* `SimpleSpiFastInterface`
     * Software SPI using `digitalWriteFast()` on AVR processors
+    * Consumes only 9X less flash memory compared to `HardSpiInterface` (62
+      bytes of flash compared to 520 bytes).
+    * Faster than `HardSpiInterface` (840 kbps versus 550 kbps).
 
 Currently, this library supports writing from master to slave devices. It does
 not support reading from slave devices.
