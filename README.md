@@ -69,17 +69,16 @@ polymorphism instead of runtime polymorphism to avoid the overhead of the
 <a name="Installation"></a>
 ## Installation
 
-The latest stable release will eventually be available in the Arduino IDE
-Library Manager. Search for "AceSPI". Click install. (It is not there
-yet.)
+The latest stable release is available in the Arduino IDE Library Manager.
+Search for "AceSPI". Click install.
 
 The development version can be installed by cloning the
 [GitHub repository](https://github.com/bxparks/AceSPI), checking out the
-`develop` branch, then manually copying over the contents to the `./libraries`
-directory used by the Arduino IDE. (The result is a directory named
-`./libraries/AceSPI`.)
+default `develop` branch, then manually copying over to or symlinking from the
+`./libraries` directory used by the Arduino IDE. (The result is a directory
+or link named `./libraries/AceSPI`.)
 
-The `master` branch contains the stable release.
+The `master` branch contains the stable releases.
 
 <a name="SourceCode"></a>
 ### Source Code

@@ -6,6 +6,7 @@
      and `transfer16()` for compatibility with the `SPIClass` from `<SPI.h>`.
         * Retain `send8()` and `send16()` as convenience methods that wrap
           the repetitive calls to the above methods.
+    * First public release.
 * 0.2 (2021-07-30)
     * Add `T_CLOCK_SPEED` template parameter to `HardSpiInterface` and
       `HardSpiFastInterface`, defaulting to 8000000 (8 MHz).
