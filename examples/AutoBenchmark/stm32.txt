@@ -2,6 +2,6 @@ SIZEOF
 sizeof(HardSpiInterface): 8
 sizeof(SimpleSpiInterface): 3
 BENCHMARKS
-HardSpiInterface 320 321 325 20
-SimpleSpiInterface 310 311 318 20
+HardSpiInterface 319 322 344 20
+SimpleSpiInterface 316 318 321 20
 END

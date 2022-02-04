@@ -2,7 +2,7 @@
 
 This program determines the speed of various SPI implementations.
 
-**Version**: AceSPI v0.3
+**Version**: AceSPI v0.4
 
 **DO NOT EDIT**: This file was auto-generated using `make README.md`.
 
@@ -86,8 +86,8 @@ addition, the `digitalWriteFast` functions reduce flash memory consumption by
 ### Arduino Nano
 
 * 16MHz ATmega328P
-* Arduino IDE 1.8.13
-* Arduino AVR Boards 1.8.3
+* Arduino IDE 1.8.19, Arduino CLI 0.20.2
+* Arduino AVR Boards 1.8.4
 * `micros()` has a resolution of 4 microseconds
 
 ```
@@ -101,10 +101,10 @@ CPU:
 +-----------------------------------------+-------------------+----------+
 | Functionality                           |   min/  avg/  max | eff kbps |
 |-----------------------------------------+-------------------+----------|
-| HardSpiInterface                        |   108/  117/  124 |    547.0 |
-| HardSpiFastInterface                    |    28/   30/   36 |   2133.3 |
-| SimpleSpiInterface                      |   860/  891/  956 |     71.8 |
-| SimpleSpiFastInterface                  |    76/   76/   84 |    842.1 |
+| HardSpiInterface                        |   112/  117/  124 |    547.0 |
+| HardSpiFastInterface                    |    28/   32/   36 |   2000.0 |
+| SimpleSpiInterface                      |   860/  890/  960 |     71.9 |
+| SimpleSpiFastInterface                  |    76/   78/   84 |    820.5 |
 +-----------------------------------------+-------------------+----------+
 
 ```
@@ -112,7 +112,7 @@ CPU:
 ### SparkFun Pro Micro
 
 * 16 MHz ATmega32U4
-* Arduino IDE 1.8.13
+* Arduino IDE 1.8.19, Arduino CLI 0.20.2
 * SparkFun AVR Boards 1.1.13
 * `micros()` has a resolution of 4 microseconds
 
@@ -128,30 +128,9 @@ CPU:
 | Functionality                           |   min/  avg/  max | eff kbps |
 |-----------------------------------------+-------------------+----------|
 | HardSpiInterface                        |    88/   92/  100 |    695.7 |
-| HardSpiFastInterface                    |    28/   29/   36 |   2206.9 |
+| HardSpiFastInterface                    |    28/   28/   32 |   2285.7 |
 | SimpleSpiInterface                      |   832/  839/  844 |     76.3 |
-| SimpleSpiFastInterface                  |    68/   69/   76 |    927.5 |
-+-----------------------------------------+-------------------+----------+
-
-```
-
-### SAMD21 M0 Mini
-
-* 48 MHz ARM Cortex-M0+
-* Arduino IDE 1.8.13
-* Sparkfun SAMD Core 1.8.3
-
-```
-Sizes of Objects:
-sizeof(HardSpiInterface): 8
-sizeof(SimpleSpiInterface): 3
-
-CPU:
-+-----------------------------------------+-------------------+----------+
-| Functionality                           |   min/  avg/  max | eff kbps |
-|-----------------------------------------+-------------------+----------|
-| HardSpiInterface                        |   137/  137/  141 |    467.2 |
-| SimpleSpiInterface                      |   374/  376/  378 |    170.2 |
+| SimpleSpiFastInterface                  |    68/   69/   80 |    927.5 |
 +-----------------------------------------+-------------------+----------+
 
 ```
@@ -159,8 +138,8 @@ CPU:
 ### STM32
 
 * STM32 "Blue Pill", STM32F103C8, 72 MHz ARM Cortex-M3
-* Arduino IDE 1.8.13
-* STM32duino 2.0.0
+* Arduino IDE 1.8.19, Arduino CLI 0.20.2
+* STM32duino 2.2.0
 
 ```
 Sizes of Objects:
@@ -171,8 +150,8 @@ CPU:
 +-----------------------------------------+-------------------+----------+
 | Functionality                           |   min/  avg/  max | eff kbps |
 |-----------------------------------------+-------------------+----------|
-| HardSpiInterface                        |   320/  321/  325 |    199.4 |
-| SimpleSpiInterface                      |   310/  311/  318 |    205.8 |
+| HardSpiInterface                        |   319/  322/  344 |    198.8 |
+| SimpleSpiInterface                      |   316/  318/  321 |    201.3 |
 +-----------------------------------------+-------------------+----------+
 
 ```
@@ -180,8 +159,8 @@ CPU:
 ### ESP8266
 
 * NodeMCU 1.0 clone, 80MHz ESP8266
-* Arduino IDE 1.8.13
-* ESP8266 Boards 2.7.4
+* Arduino IDE 1.8.19, Arduino CLI 0.20.2
+* ESP8266 Boards 3.0.2
 
 ```
 Sizes of Objects:
@@ -192,8 +171,8 @@ CPU:
 +-----------------------------------------+-------------------+----------+
 | Functionality                           |   min/  avg/  max | eff kbps |
 |-----------------------------------------+-------------------+----------|
-| HardSpiInterface                        |    69/   73/  133 |    876.7 |
-| SimpleSpiInterface                      |   207/  208/  238 |    307.7 |
+| HardSpiInterface                        |    78/   81/  138 |    790.1 |
+| SimpleSpiInterface                      |   340/  341/  371 |    187.7 |
 +-----------------------------------------+-------------------+----------+
 
 ```
@@ -201,8 +180,8 @@ CPU:
 ### ESP32
 
 * ESP32-01 Dev Board, 240 MHz Tensilica LX6
-* Arduino IDE 1.8.13
-* ESP32 Boards 1.0.6
+* Arduino IDE 1.8.19, Arduino CLI 0.20.2
+* ESP32 Boards 2.0.2
 
 ```
 Sizes of Objects:
@@ -213,8 +192,8 @@ CPU:
 +-----------------------------------------+-------------------+----------+
 | Functionality                           |   min/  avg/  max | eff kbps |
 |-----------------------------------------+-------------------+----------|
-| HardSpiInterface                        |    68/   70/   90 |    914.3 |
-| SimpleSpiInterface                      |    26/   27/   34 |   2370.4 |
+| HardSpiInterface                        |    68/   70/   95 |    914.3 |
+| SimpleSpiInterface                      |    28/   28/   35 |   2285.7 |
 +-----------------------------------------+-------------------+----------+
 
 ```
@@ -222,8 +201,8 @@ CPU:
 ### Teensy 3.2
 
 * 96 MHz ARM Cortex-M4
-* Arduino IDE 1.8.13
-* Teensyduino 1.53
+* Arduino IDE 1.8.19, Arduino CLI 0.20.2
+* Teensyduino 1.56
 * Compiler options: "Faster"
 
 ```
@@ -235,8 +214,8 @@ CPU:
 +-----------------------------------------+-------------------+----------+
 | Functionality                           |   min/  avg/  max | eff kbps |
 |-----------------------------------------+-------------------+----------|
-| HardSpiInterface                        |    18/   18/   19 |   3555.6 |
-| SimpleSpiInterface                      |    65/   65/   69 |    984.6 |
+| HardSpiInterface                        |    18/   18/   21 |   3555.6 |
+| SimpleSpiInterface                      |    66/   66/   68 |    969.7 |
 +-----------------------------------------+-------------------+----------+
 
 ```
