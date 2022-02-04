@@ -84,7 +84,7 @@ $ make README.md
 **v0.2**
 
 * Initial MemoryBenchmark using the old v0.3 implementation from 2018,
-before substantional refactoring in 2021.
+before substantial refactoring in 2021.
 
 ## Results
 
