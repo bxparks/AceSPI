@@ -109,9 +109,10 @@ class SimpleSpiInterface {
       endTransaction();
     }
 
-    // Use default copy constructor and assignment operator.
+    // Use default copy constructor. Delete the assignment operator which cannot
+    // be used with constant member variables.
     SimpleSpiInterface(const SimpleSpiInterface&) = default;
-    SimpleSpiInterface& operator=(const SimpleSpiInterface&) = default;
+    SimpleSpiInterface& operator=(const SimpleSpiInterface&) = delete;
 
   private:
     uint8_t const mLatchPin;
